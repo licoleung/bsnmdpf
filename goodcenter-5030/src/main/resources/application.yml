@@ -1,0 +1,37 @@
+server:
+  port: 5030
+
+spring:
+  application:
+    name: goodcenter-5030
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://120.79.228.2:3306/goodcenter?useUnicode=true&characterEncoding=UTF8
+    username: root
+    password: a971204b
+    dbcp2:
+      min-idle: 5
+      initial-size: 5
+      max-total: 5
+      max-wait-millis: 200
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
+  instance:
+    # 使用ip地址注册到注册中心
+    prefer-ip-address: true
+    # 注册中心列表中显示的状态参数
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+# 微服务关于信息的描述
+info:
+  app.name: businessMiddlePlatform
+  company.name: www.bsnmdpf.fcprt.cn
+  build.artifactId: $project.artifactId$ # 或者${xxx}
+  build.version: $project.version$
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml

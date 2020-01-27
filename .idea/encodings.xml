@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8" addBOMForNewFiles="with NO BOM">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eurekaservice-7001" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eurekaservice-7002" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/goodcenter-5030" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ordercenter-5020" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/paycenter-5070" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/salecenter-5060" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/stockcenter-5050" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/usercenter-5010" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vipcenter" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vipcenter-5040" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
