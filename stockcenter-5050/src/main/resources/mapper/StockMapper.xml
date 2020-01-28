@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bsnmdpf.fcprt.stockcenter5050.mapper.StockMapper">
-  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.stockcenter5050.pojo.Stock">
+  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.api.pojo.Stock">
     <result column="sid" jdbcType="INTEGER" property="sid" />
     <result column="stockname" jdbcType="VARCHAR" property="stockname" />
     <result column="volumn" jdbcType="DOUBLE" property="volumn" />
@@ -76,7 +76,7 @@
     sid, stockname, volumn, usedVolumn, address, whnum, creator, createTime, modifier, 
     modifyTime, isActive
   </sql>
-  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.stockcenter5050.pojo.StockExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.StockExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -91,13 +91,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.stockcenter5050.pojo.StockExample">
+  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.StockExample">
     delete from tbl_stock
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.stockcenter5050.pojo.Stock">
+  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.api.pojo.Stock">
     insert into tbl_stock (sid, stockname, volumn, 
       usedVolumn, address, whnum, 
       creator, createTime, modifier, 
@@ -107,7 +107,7 @@
       #{creator,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, 
       #{modifytime,jdbcType=TIMESTAMP}, #{isactive,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.stockcenter5050.pojo.Stock">
+  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.api.pojo.Stock">
     insert into tbl_stock
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="sid != null">
@@ -180,7 +180,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.stockcenter5050.pojo.StockExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.StockExample" resultType="java.lang.Long">
     select count(*) from tbl_stock
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

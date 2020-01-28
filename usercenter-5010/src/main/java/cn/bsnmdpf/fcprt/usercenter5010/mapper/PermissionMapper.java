@@ -1,7 +1,7 @@
 package cn.bsnmdpf.fcprt.usercenter5010.mapper;
 
-import cn.bsnmdpf.fcprt.usercenter5010.pojo.Permission;
-import cn.bsnmdpf.fcprt.usercenter5010.pojo.PermissionExample;
+import cn.bsnmdpf.fcprt.api.pojo.Permission;
+import cn.bsnmdpf.fcprt.api.pojo.PermissionExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

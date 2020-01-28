@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bsnmdpf.fcprt.ordercenter5020.mapper.PurchaseorderMapper">
-  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.ordercenter5020.pojo.Purchaseorder">
+  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.api.pojo.Purchaseorder">
     <result column="poid" jdbcType="INTEGER" property="poid" />
     <result column="cid" jdbcType="INTEGER" property="cid" />
     <result column="companyname" jdbcType="VARCHAR" property="companyname" />
@@ -85,7 +85,7 @@
     unit, money, orderState, creator, createTime, modifier, modifyTime, approver, taudittime, 
     address
   </sql>
-  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.ordercenter5020.pojo.PurchaseorderExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.PurchaseorderExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -100,13 +100,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.ordercenter5020.pojo.PurchaseorderExample">
+  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.PurchaseorderExample">
     delete from tbl_purchaseorder
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.ordercenter5020.pojo.Purchaseorder">
+  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.api.pojo.Purchaseorder">
     insert into tbl_purchaseorder (poid, cid, companyname, 
       billcode, billdate, supplierid, 
       suppliername, material, nnum, 
@@ -122,7 +122,7 @@
       #{modifytime,jdbcType=TIMESTAMP}, #{approver,jdbcType=VARCHAR}, #{taudittime,jdbcType=TIMESTAMP}, 
       #{address,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.ordercenter5020.pojo.Purchaseorder">
+  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.api.pojo.Purchaseorder">
     insert into tbl_purchaseorder
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="poid != null">
@@ -243,7 +243,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.ordercenter5020.pojo.PurchaseorderExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.PurchaseorderExample" resultType="java.lang.Long">
     select count(*) from tbl_purchaseorder
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

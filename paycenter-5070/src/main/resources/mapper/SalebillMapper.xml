@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bsnmdpf.fcprt.paycenter5070.mapper.SalebillMapper">
-  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.paycenter5070.pojo.Salebill">
+  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.api.pojo.Salebill">
     <result column="sbid" jdbcType="VARCHAR" property="sbid" />
     <result column="billcode" jdbcType="VARCHAR" property="billcode" />
     <result column="money" jdbcType="VARCHAR" property="money" />
@@ -72,7 +72,7 @@
   <sql id="Base_Column_List">
     sbid, billcode, money, billdate, operator, isActive, account, spare
   </sql>
-  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.paycenter5070.pojo.SalebillExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.SalebillExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -87,13 +87,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.paycenter5070.pojo.SalebillExample">
+  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.SalebillExample">
     delete from tbl_salebill
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.paycenter5070.pojo.Salebill">
+  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.api.pojo.Salebill">
     insert into tbl_salebill (sbid, billcode, money, 
       billdate, operator, isActive, 
       account, spare)
@@ -101,7 +101,7 @@
       #{billdate,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, #{isactive,jdbcType=INTEGER}, 
       #{account,jdbcType=VARCHAR}, #{spare,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.paycenter5070.pojo.Salebill">
+  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.api.pojo.Salebill">
     insert into tbl_salebill
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="sbid != null">
@@ -156,7 +156,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.paycenter5070.pojo.SalebillExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.SalebillExample" resultType="java.lang.Long">
     select count(*) from tbl_salebill
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

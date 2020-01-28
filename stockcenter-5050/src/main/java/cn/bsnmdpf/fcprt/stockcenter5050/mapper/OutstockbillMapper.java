@@ -1,7 +1,7 @@
 package cn.bsnmdpf.fcprt.stockcenter5050.mapper;
 
-import cn.bsnmdpf.fcprt.stockcenter5050.pojo.Outstockbill;
-import cn.bsnmdpf.fcprt.stockcenter5050.pojo.OutstockbillExample;
+import cn.bsnmdpf.fcprt.api.pojo.Outstockbill;
+import cn.bsnmdpf.fcprt.api.pojo.OutstockbillExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

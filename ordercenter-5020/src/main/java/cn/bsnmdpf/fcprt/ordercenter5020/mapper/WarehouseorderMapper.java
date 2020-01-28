@@ -1,7 +1,7 @@
 package cn.bsnmdpf.fcprt.ordercenter5020.mapper;
 
-import cn.bsnmdpf.fcprt.ordercenter5020.pojo.Warehouseorder;
-import cn.bsnmdpf.fcprt.ordercenter5020.pojo.WarehouseorderExample;
+import cn.bsnmdpf.fcprt.api.pojo.Warehouseorder;
+import cn.bsnmdpf.fcprt.api.pojo.WarehouseorderExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

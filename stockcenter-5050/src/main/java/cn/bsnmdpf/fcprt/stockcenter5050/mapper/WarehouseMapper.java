@@ -1,7 +1,7 @@
 package cn.bsnmdpf.fcprt.stockcenter5050.mapper;
 
-import cn.bsnmdpf.fcprt.stockcenter5050.pojo.Warehouse;
-import cn.bsnmdpf.fcprt.stockcenter5050.pojo.WarehouseExample;
+import cn.bsnmdpf.fcprt.api.pojo.Warehouse;
+import cn.bsnmdpf.fcprt.api.pojo.WarehouseExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

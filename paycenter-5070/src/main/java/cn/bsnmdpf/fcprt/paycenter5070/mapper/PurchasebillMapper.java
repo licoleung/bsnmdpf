@@ -1,7 +1,7 @@
 package cn.bsnmdpf.fcprt.paycenter5070.mapper;
 
-import cn.bsnmdpf.fcprt.paycenter5070.pojo.Purchasebill;
-import cn.bsnmdpf.fcprt.paycenter5070.pojo.PurchasebillExample;
+import cn.bsnmdpf.fcprt.api.pojo.Purchasebill;
+import cn.bsnmdpf.fcprt.api.pojo.PurchasebillExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

@@ -1,7 +1,7 @@
 package cn.bsnmdpf.fcprt.goodcenter5030.mapper;
 
-import cn.bsnmdpf.fcprt.goodcenter5030.pojo.Material;
-import cn.bsnmdpf.fcprt.goodcenter5030.pojo.MaterialExample;
+import cn.bsnmdpf.fcprt.api.pojo.Material;
+import cn.bsnmdpf.fcprt.api.pojo.MaterialExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

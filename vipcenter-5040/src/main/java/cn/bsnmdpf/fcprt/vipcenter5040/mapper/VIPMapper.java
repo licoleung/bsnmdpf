@@ -1,7 +1,7 @@
 package cn.bsnmdpf.fcprt.vipcenter5040.mapper;
 
-import cn.bsnmdpf.fcprt.vipcenter5040.pojo.VIP;
-import cn.bsnmdpf.fcprt.vipcenter5040.pojo.VIPExample;
+import cn.bsnmdpf.fcprt.api.pojo.VIP;
+import cn.bsnmdpf.fcprt.api.pojo.VIPExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

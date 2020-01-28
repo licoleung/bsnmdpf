@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bsnmdpf.fcprt.stockcenter5050.mapper.OutstockbillMapper">
-  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.stockcenter5050.pojo.Outstockbill">
+  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.api.pojo.Outstockbill">
     <result column="outid" jdbcType="INTEGER" property="outid" />
     <result column="outbillcode" jdbcType="VARCHAR" property="outbillcode" />
     <result column="whid" jdbcType="INTEGER" property="whid" />
@@ -81,7 +81,7 @@
     outid, outbillcode, whid, mid, mname, outTime, outType, soid, creator, createTime, 
     modifier, modifyTime, isActive, nnum, volumn, weight
   </sql>
-  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.stockcenter5050.pojo.OutstockbillExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.OutstockbillExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -96,13 +96,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.stockcenter5050.pojo.OutstockbillExample">
+  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.OutstockbillExample">
     delete from tbl_outstockbill
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.stockcenter5050.pojo.Outstockbill">
+  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.api.pojo.Outstockbill">
     insert into tbl_outstockbill (outid, outbillcode, whid, 
       mid, mname, outTime, 
       outType, soid, creator, 
@@ -116,7 +116,7 @@
       #{isactive,jdbcType=INTEGER}, #{nnum,jdbcType=INTEGER}, #{volumn,jdbcType=DOUBLE}, 
       #{weight,jdbcType=DOUBLE})
   </insert>
-  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.stockcenter5050.pojo.Outstockbill">
+  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.api.pojo.Outstockbill">
     insert into tbl_outstockbill
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="outid != null">
@@ -219,7 +219,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.stockcenter5050.pojo.OutstockbillExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.OutstockbillExample" resultType="java.lang.Long">
     select count(*) from tbl_outstockbill
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

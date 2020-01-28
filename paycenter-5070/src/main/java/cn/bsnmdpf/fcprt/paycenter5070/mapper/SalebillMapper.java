@@ -1,7 +1,7 @@
 package cn.bsnmdpf.fcprt.paycenter5070.mapper;
 
-import cn.bsnmdpf.fcprt.paycenter5070.pojo.Salebill;
-import cn.bsnmdpf.fcprt.paycenter5070.pojo.SalebillExample;
+import cn.bsnmdpf.fcprt.api.pojo.Salebill;
+import cn.bsnmdpf.fcprt.api.pojo.SalebillExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

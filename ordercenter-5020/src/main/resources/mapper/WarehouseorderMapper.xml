@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bsnmdpf.fcprt.ordercenter5020.mapper.WarehouseorderMapper">
-  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.ordercenter5020.pojo.Warehouseorder">
+  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.api.pojo.Warehouseorder">
     <result column="whoid" jdbcType="INTEGER" property="whoid" />
     <result column="cid" jdbcType="INTEGER" property="cid" />
     <result column="billcode" jdbcType="VARCHAR" property="billcode" />
@@ -83,7 +83,7 @@
     whoid, cid, billcode, billdate, vipid, vipname, nnum, money, weight, volumn, material, 
     orderstate, creator, createTime, modifier, modifyTime, whid, warehouseName
   </sql>
-  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.ordercenter5020.pojo.WarehouseorderExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.WarehouseorderExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -98,13 +98,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.ordercenter5020.pojo.WarehouseorderExample">
+  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.WarehouseorderExample">
     delete from tbl_warehouseorder
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.ordercenter5020.pojo.Warehouseorder">
+  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.api.pojo.Warehouseorder">
     insert into tbl_warehouseorder (whoid, cid, billcode, 
       billdate, vipid, vipname, 
       nnum, money, weight, 
@@ -120,7 +120,7 @@
       #{modifytime,jdbcType=TIMESTAMP}, #{whid,jdbcType=INTEGER}, #{warehousename,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.ordercenter5020.pojo.Warehouseorder">
+  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.api.pojo.Warehouseorder">
     insert into tbl_warehouseorder
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="whoid != null">
@@ -235,7 +235,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.ordercenter5020.pojo.WarehouseorderExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.WarehouseorderExample" resultType="java.lang.Long">
     select count(*) from tbl_warehouseorder
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

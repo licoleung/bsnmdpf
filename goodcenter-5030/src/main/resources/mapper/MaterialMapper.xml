@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bsnmdpf.fcprt.goodcenter5030.mapper.MaterialMapper">
-  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.goodcenter5030.pojo.Material">
+  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.api.pojo.Material">
     <result column="mid" jdbcType="INTEGER" property="mid" />
     <result column="materialname" jdbcType="VARCHAR" property="materialname" />
     <result column="mcid" jdbcType="INTEGER" property="mcid" />
@@ -80,7 +80,7 @@
     mid, materialname, mcid, length, width, height, weight, volume, brand, specifications, 
     creator, createTime, modifier, modifyTime, isActive
   </sql>
-  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.goodcenter5030.pojo.MaterialExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.MaterialExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -95,13 +95,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.goodcenter5030.pojo.MaterialExample">
+  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.MaterialExample">
     delete from tbl_material
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.goodcenter5030.pojo.Material">
+  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.api.pojo.Material">
     insert into tbl_material (mid, materialname, mcid, 
       length, width, height, 
       weight, volume, brand, 
@@ -115,7 +115,7 @@
       #{modifier,jdbcType=VARCHAR}, #{modifytime,jdbcType=TIMESTAMP}, #{isactive,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.goodcenter5030.pojo.Material">
+  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.api.pojo.Material">
     insert into tbl_material
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="mid != null">
@@ -212,7 +212,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.goodcenter5030.pojo.MaterialExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.MaterialExample" resultType="java.lang.Long">
     select count(*) from tbl_material
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

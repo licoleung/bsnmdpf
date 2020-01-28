@@ -1,7 +1,7 @@
 package cn.bsnmdpf.fcprt.usercenter5010.mapper;
 
-import cn.bsnmdpf.fcprt.usercenter5010.pojo.Role;
-import cn.bsnmdpf.fcprt.usercenter5010.pojo.RoleExample;
+import cn.bsnmdpf.fcprt.api.pojo.Role;
+import cn.bsnmdpf.fcprt.api.pojo.RoleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

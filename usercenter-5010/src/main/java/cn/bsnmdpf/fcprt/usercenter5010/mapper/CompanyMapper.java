@@ -1,7 +1,7 @@
 package cn.bsnmdpf.fcprt.usercenter5010.mapper;
 
-import cn.bsnmdpf.fcprt.usercenter5010.pojo.Company;
-import cn.bsnmdpf.fcprt.usercenter5010.pojo.CompanyExample;
+import cn.bsnmdpf.fcprt.api.pojo.Company;
+import cn.bsnmdpf.fcprt.api.pojo.CompanyExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

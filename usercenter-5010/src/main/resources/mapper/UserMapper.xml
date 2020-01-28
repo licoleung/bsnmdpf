@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bsnmdpf.fcprt.usercenter5010.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.usercenter5010.pojo.User">
+  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.api.pojo.User">
     <result column="uid" jdbcType="INTEGER" property="uid" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -75,7 +75,7 @@
     uid, username, password, creator, modifier, createTime, modifyTime, isActive, did, 
     spare
   </sql>
-  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.usercenter5010.pojo.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -90,13 +90,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.usercenter5010.pojo.UserExample">
+  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.UserExample">
     delete from tbl_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.usercenter5010.pojo.User">
+  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.api.pojo.User">
     insert into tbl_user (uid, username, password, 
       creator, modifier, createTime, 
       modifyTime, isActive, did, 
@@ -106,7 +106,7 @@
       #{modifytime,jdbcType=TIMESTAMP}, #{isactive,jdbcType=INTEGER}, #{did,jdbcType=INTEGER}, 
       #{spare,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.usercenter5010.pojo.User">
+  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.api.pojo.User">
     insert into tbl_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uid != null">
@@ -173,7 +173,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.usercenter5010.pojo.UserExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.UserExample" resultType="java.lang.Long">
     select count(*) from tbl_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

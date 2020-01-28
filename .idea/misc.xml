@@ -13,6 +13,7 @@
         <option value="$PROJECT_DIR$/stockcenter-5050/pom.xml" />
         <option value="$PROJECT_DIR$/salecenter-5060/pom.xml" />
         <option value="$PROJECT_DIR$/paycenter-5070/pom.xml" />
+        <option value="$PROJECT_DIR$/api/pom.xml" />
       </list>
     </option>
   </component>

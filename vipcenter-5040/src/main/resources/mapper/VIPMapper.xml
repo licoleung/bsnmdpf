@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bsnmdpf.fcprt.vipcenter5040.mapper.VIPMapper">
-  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.vipcenter5040.pojo.VIP">
+  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.api.pojo.VIP">
     <result column="vipid" jdbcType="INTEGER" property="vipid" />
     <result column="vipname" jdbcType="VARCHAR" property="vipname" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
@@ -80,7 +80,7 @@
     vipid, vipname, phone, email, qq, cunsumption, cstTime, cstCycle, level, registTime, 
     balance, isStuff, isActive, bandid, spare
   </sql>
-  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.vipcenter5040.pojo.VIPExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.VIPExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -95,13 +95,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.vipcenter5040.pojo.VIPExample">
+  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.VIPExample">
     delete from tbl_vip
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.vipcenter5040.pojo.VIP">
+  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.api.pojo.VIP">
     insert into tbl_vip (vipid, vipname, phone, 
       email, qq, cunsumption, 
       cstTime, cstCycle, level, 
@@ -115,7 +115,7 @@
       #{isactive,jdbcType=INTEGER}, #{bandid,jdbcType=VARCHAR}, #{spare,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.vipcenter5040.pojo.VIP">
+  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.api.pojo.VIP">
     insert into tbl_vip
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="vipid != null">
@@ -212,7 +212,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.vipcenter5040.pojo.VIPExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.VIPExample" resultType="java.lang.Long">
     select count(*) from tbl_vip
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

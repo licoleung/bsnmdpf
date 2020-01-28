@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bsnmdpf.fcprt.stockcenter5050.mapper.WarehouseMapper">
-  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.stockcenter5050.pojo.Warehouse">
+  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.api.pojo.Warehouse">
     <result column="whid" jdbcType="INTEGER" property="whid" />
     <result column="sid" jdbcType="INTEGER" property="sid" />
     <result column="warehousename" jdbcType="VARCHAR" property="warehousename" />
@@ -79,7 +79,7 @@
     whid, sid, warehousename, volumn, usedVolumn, address, charge, chargePhone, whtype, 
     creator, createTime, modifier, modifyTime, isActive
   </sql>
-  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.stockcenter5050.pojo.WarehouseExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.WarehouseExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -94,13 +94,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.stockcenter5050.pojo.WarehouseExample">
+  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.WarehouseExample">
     delete from tbl_warehouse
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.stockcenter5050.pojo.Warehouse">
+  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.api.pojo.Warehouse">
     insert into tbl_warehouse (whid, sid, warehousename, 
       volumn, usedVolumn, address, 
       charge, chargePhone, whtype, 
@@ -112,7 +112,7 @@
       #{creator,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, 
       #{modifytime,jdbcType=TIMESTAMP}, #{isactive,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.stockcenter5050.pojo.Warehouse">
+  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.api.pojo.Warehouse">
     insert into tbl_warehouse
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="whid != null">
@@ -203,7 +203,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.stockcenter5050.pojo.WarehouseExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.WarehouseExample" resultType="java.lang.Long">
     select count(*) from tbl_warehouse
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bsnmdpf.fcprt.vipcenter5040.mapper.ScoreMapper">
-  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.vipcenter5040.pojo.Score">
+  <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.api.pojo.Score">
     <result column="scoreid" jdbcType="INTEGER" property="scoreid" />
     <result column="vipid" jdbcType="INTEGER" property="vipid" />
     <result column="getTime" jdbcType="TIMESTAMP" property="gettime" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List">
     scoreid, vipid, getTime, score
   </sql>
-  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.vipcenter5040.pojo.ScoreExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.ScoreExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -83,19 +83,19 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.vipcenter5040.pojo.ScoreExample">
+  <delete id="deleteByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.ScoreExample">
     delete from tbl_score
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.vipcenter5040.pojo.Score">
+  <insert id="insert" parameterType="cn.bsnmdpf.fcprt.api.pojo.Score">
     insert into tbl_score (scoreid, vipid, getTime, 
       score)
     values (#{scoreid,jdbcType=INTEGER}, #{vipid,jdbcType=INTEGER}, #{gettime,jdbcType=TIMESTAMP}, 
       #{score,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.vipcenter5040.pojo.Score">
+  <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.api.pojo.Score">
     insert into tbl_score
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="scoreid != null">
@@ -126,7 +126,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.vipcenter5040.pojo.ScoreExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.ScoreExample" resultType="java.lang.Long">
     select count(*) from tbl_score
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

@@ -1,7 +1,7 @@
 package cn.bsnmdpf.fcprt.vipcenter5040.mapper;
 
-import cn.bsnmdpf.fcprt.vipcenter5040.pojo.Score;
-import cn.bsnmdpf.fcprt.vipcenter5040.pojo.ScoreExample;
+import cn.bsnmdpf.fcprt.api.pojo.Score;
+import cn.bsnmdpf.fcprt.api.pojo.ScoreExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
