@@ -505,62 +505,52 @@ public class RoleExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveEqualTo(String value) {
+        public Criteria andIsactiveEqualTo(Integer value) {
             addCriterion("isActive =", value, "isactive");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveNotEqualTo(String value) {
+        public Criteria andIsactiveNotEqualTo(Integer value) {
             addCriterion("isActive <>", value, "isactive");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveGreaterThan(String value) {
+        public Criteria andIsactiveGreaterThan(Integer value) {
             addCriterion("isActive >", value, "isactive");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveGreaterThanOrEqualTo(String value) {
+        public Criteria andIsactiveGreaterThanOrEqualTo(Integer value) {
             addCriterion("isActive >=", value, "isactive");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveLessThan(String value) {
+        public Criteria andIsactiveLessThan(Integer value) {
             addCriterion("isActive <", value, "isactive");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveLessThanOrEqualTo(String value) {
+        public Criteria andIsactiveLessThanOrEqualTo(Integer value) {
             addCriterion("isActive <=", value, "isactive");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveLike(String value) {
-            addCriterion("isActive like", value, "isactive");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsactiveNotLike(String value) {
-            addCriterion("isActive not like", value, "isactive");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsactiveIn(List<String> values) {
+        public Criteria andIsactiveIn(List<Integer> values) {
             addCriterion("isActive in", values, "isactive");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveNotIn(List<String> values) {
+        public Criteria andIsactiveNotIn(List<Integer> values) {
             addCriterion("isActive not in", values, "isactive");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveBetween(String value1, String value2) {
+        public Criteria andIsactiveBetween(Integer value1, Integer value2) {
             addCriterion("isActive between", value1, value2, "isactive");
             return (Criteria) this;
         }
 
-        public Criteria andIsactiveNotBetween(String value1, String value2) {
+        public Criteria andIsactiveNotBetween(Integer value1, Integer value2) {
             addCriterion("isActive not between", value1, value2, "isactive");
             return (Criteria) this;
         }

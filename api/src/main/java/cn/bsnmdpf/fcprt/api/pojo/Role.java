@@ -15,7 +15,7 @@ public class Role {
 
     private Date modifytime;
 
-    private String isactive;
+    private Integer isactive;
 
     private String spare;
 
@@ -67,12 +67,12 @@ public class Role {
         this.modifytime = modifytime;
     }
 
-    public String getIsactive() {
+    public Integer getIsactive() {
         return isactive;
     }
 
-    public void setIsactive(String isactive) {
-        this.isactive = isactive == null ? null : isactive.trim();
+    public void setIsactive(Integer isactive) {
+        this.isactive = isactive;
     }
 
     public String getSpare() {

@@ -8,7 +8,7 @@
     <result column="modifier" jdbcType="VARCHAR" property="modifier" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="modifyTime" jdbcType="TIMESTAMP" property="modifytime" />
-    <result column="isActive" jdbcType="VARCHAR" property="isactive" />
+    <result column="isActive" jdbcType="INTEGER" property="isactive" />
     <result column="spare" jdbcType="VARCHAR" property="spare" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -99,7 +99,7 @@
       isActive, spare)
     values (#{rid,jdbcType=INTEGER}, #{rolename,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
       #{modifier,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{modifytime,jdbcType=TIMESTAMP}, 
-      #{isactive,jdbcType=VARCHAR}, #{spare,jdbcType=VARCHAR})
+      #{isactive,jdbcType=INTEGER}, #{spare,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.api.pojo.Role">
     insert into tbl_role
@@ -149,7 +149,7 @@
         #{modifytime,jdbcType=TIMESTAMP},
       </if>
       <if test="isactive != null">
-        #{isactive,jdbcType=VARCHAR},
+        #{isactive,jdbcType=INTEGER},
       </if>
       <if test="spare != null">
         #{spare,jdbcType=VARCHAR},
@@ -184,7 +184,7 @@
         modifyTime = #{record.modifytime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.isactive != null">
-        isActive = #{record.isactive,jdbcType=VARCHAR},
+        isActive = #{record.isactive,jdbcType=INTEGER},
       </if>
       <if test="record.spare != null">
         spare = #{record.spare,jdbcType=VARCHAR},
@@ -202,7 +202,7 @@
       modifier = #{record.modifier,jdbcType=VARCHAR},
       createTime = #{record.createtime,jdbcType=TIMESTAMP},
       modifyTime = #{record.modifytime,jdbcType=TIMESTAMP},
-      isActive = #{record.isactive,jdbcType=VARCHAR},
+      isActive = #{record.isactive,jdbcType=INTEGER},
       spare = #{record.spare,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

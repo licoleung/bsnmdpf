@@ -29,9 +29,9 @@ public class UserController {
      * @param uid
      * @return 用户列表
      */
-    @GetMapping("users")
-    public List<User> getUsersByParam(@RequestParam(value = "username", required = false) String username, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "did", required = false) Integer did, @RequestParam(value = "uid", required = false) Integer uid) {
-        List<User> usersByParams = userService.getUsersByParams(username, creator, modifier, isActive, did, uid);
+    @GetMapping("user")
+    public List<User> getUsersByParam(@RequestParam(value = "username", required = false) String username, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "did", required = false) Integer did, @RequestParam(value = "uid", required = false) Integer uid, @RequestParam(value = "spare", required = false) String spare) {
+        List<User> usersByParams = userService.getUsersByParams(username, creator, modifier, isActive, did, uid, spare);
         return usersByParams;
     }
 
