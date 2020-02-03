@@ -3,7 +3,6 @@ package cn.bsnmdpf.fcprt.usercenter5010.controller;
 import cn.bsnmdpf.fcprt.api.pojo.User;
 import cn.bsnmdpf.fcprt.usercenter5010.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;

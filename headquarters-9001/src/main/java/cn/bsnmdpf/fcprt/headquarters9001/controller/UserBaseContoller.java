@@ -5,7 +5,9 @@ import cn.bsnmdpf.fcprt.api.service.UserCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -25,5 +27,11 @@ public class UserBaseContoller {
         List<User> usersByParam = userCenterService.getUsersByParam(username, creator, modifier, isActive, did, uid, spare);
         model.addAttribute("userlist",usersByParam);
         return "getUserListPage";
+    }
+
+    @DeleteMapping("user/{uid}")
+    public boolean deleteUser(@PathVariable("uid") Integer uid){
+        boolean b = userCenterService.deleteUser(uid);
+        return b;
     }
 }
