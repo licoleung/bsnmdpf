@@ -1,0 +1,70 @@
+server:
+  # 服务端口号
+  port: 8001
+spring:
+  application:
+    # 服务名称 - 服务之间使用名称进行通讯
+    name: zuul-8001
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
+  instance:
+    prefer-ip-address: true
+    # 注册中心列表中显示的状态参数
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+micro-spring-server:
+  ribbon:
+    listOfServer: http://localhost:7001/,http://localhost:7002/
+ribbon:
+  eureka:
+    enabled: true
+  ConnectTimeout: 10000
+  ReadTimeout: 10000
+
+# 微服务关于信息的描述
+info:
+  app.name: businessMiddlePlatform
+  company.name: www.bsnmdpf.fcprt.cn
+  build.artifactId: $project.artifactId$ # 或者${xxx}
+  build.version: $project.version$
+  # 设置路由映射
+  # zuul会代理所有注册到eureka中的服务
+  # 给指定的服务设置映射（别名），
+  # 当前是给eureka-client-8001添加映射地址为 /service-a
+  #zuul:
+  #  routes:
+  #    micro-web-background-9002: /background/**
+  #    micro-web-reception-9001: /reception/**
+  # 取消zuul代理某个服务，多个用逗号隔开
+  #  ignored-services: "*"
+zuul:
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 60000
+  routes:
+    headquarters-9001:
+      path: /headquarters/**
+      serviceId: headquarters-9001
+#  ignored-services: headquarters-9001
+#    micro-web-background-9002:
+#      path: /background/**
+#      serviceId: micro-web-background-9002
+    # 访问静态资源
+#    visit-static:
+#      path: /headquarters/**
+#      url: http://localhost:9001/static/
+#    visit-dd:
+#      path: /handsomeLico/**
+#      url: http://localhost:9002/handsomeLico/
+

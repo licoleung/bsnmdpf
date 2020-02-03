@@ -1,8 +1,10 @@
 package cn.bsnmdpf.fcprt.api.pojo;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import java.util.Date;
 
-public class Role {
+public class Role implements GrantedAuthority {
     private Integer rid;
 
     private String rolename;
@@ -81,5 +83,10 @@ public class Role {
 
     public void setSpare(String spare) {
         this.spare = spare == null ? null : spare.trim();
+    }
+
+    @Override
+    public String getAuthority() {
+        return rolename;
     }
 }

@@ -4,6 +4,7 @@ import cn.bsnmdpf.fcprt.api.pojo.Role;
 import cn.bsnmdpf.fcprt.api.pojo.RoleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface RoleMapper {
     long countByExample(RoleExample example);
@@ -19,4 +20,7 @@ public interface RoleMapper {
     int updateByExampleSelective(@Param("record") Role record, @Param("example") RoleExample example);
 
     int updateByExample(@Param("record") Role record, @Param("example") RoleExample example);
+
+    @Select( "SELECT A.rid,A.rolename FROM tbl_role A LEFT JOIN user_role B ON A.rid=B.rid WHERE B.uid=${uid}" )
+    List<Role> getRolesByUserId(@Param("uid") Integer uid);
 }

@@ -1,8 +1,14 @@
 package cn.bsnmdpf.fcprt.api.pojo;
 
-import java.util.Date;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-public class User {
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+
+public class User implements UserDetails, Serializable {
     private Integer uid;
 
     private String username;
@@ -23,6 +29,8 @@ public class User {
 
     private String spare;
 
+    private List<Role> authorities;
+
     public Integer getUid() {
         return uid;
     }
@@ -35,8 +43,49 @@ public class User {
         return username;
     }
 
+    /**
+     * 用户账号是否没过期
+     */
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    /**
+     * 用户账号是否没被锁定
+     */
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    /**
+     * 用户密码是否没过期
+     */
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    /**
+     * 用户是否可用
+     */
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     public void setUsername(String username) {
         this.username = username == null ? null : username.trim();
+    }
+
+    @Override
+    public List<Role> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<Role> authorities) {
+        this.authorities = authorities;
     }
 
     public String getPassword() {
@@ -101,5 +150,22 @@ public class User {
 
     public void setSpare(String spare) {
         this.spare = spare == null ? null : spare.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid=" + uid +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", creator='" + creator + '\'' +
+                ", modifier='" + modifier + '\'' +
+                ", createtime=" + createtime +
+                ", modifytime=" + modifytime +
+                ", isactive=" + isactive +
+                ", did=" + did +
+                ", spare='" + spare + '\'' +
+                ", authorities=" + authorities +
+                '}';
     }
 }

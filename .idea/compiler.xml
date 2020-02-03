@@ -11,12 +11,14 @@
         <module name="eurekaservice-7001" />
         <module name="eurekaservice-7002" />
         <module name="goodcenter-5030" />
+        <module name="headquarters-9001" />
         <module name="ordercenter-5020" />
         <module name="paycenter-5070" />
         <module name="salecenter-5060" />
         <module name="stockcenter-5050" />
         <module name="usercenter-5010" />
         <module name="vipcenter-5040" />
+        <module name="zuul-8001" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -25,6 +27,8 @@
       <module name="eurekaservice-7001" target="1.8" />
       <module name="eurekaservice-7002" target="1.8" />
       <module name="goodcenter-5030" target="1.8" />
+      <module name="headquarters" target="1.8" />
+      <module name="headquarters-9001" target="1.8" />
       <module name="ordercenter" target="1.8" />
       <module name="ordercenter-5020" target="1.8" />
       <module name="paycenter-5070" target="1.8" />
@@ -33,6 +37,7 @@
       <module name="usercenter-5010" target="1.8" />
       <module name="vipcenter" target="1.8" />
       <module name="vipcenter-5040" target="1.8" />
+      <module name="zuul-8001" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -42,6 +47,8 @@
       <module name="eurekaservice-7001" options="-parameters" />
       <module name="eurekaservice-7002" options="-parameters" />
       <module name="goodcenter-5030" options="-parameters" />
+      <module name="headquarters" options="-parameters" />
+      <module name="headquarters-9001" options="-parameters" />
       <module name="ordercenter" options="-parameters" />
       <module name="ordercenter-5020" options="-parameters" />
       <module name="paycenter-5070" options="-parameters" />
@@ -50,6 +57,7 @@
       <module name="usercenter-5010" options="-parameters" />
       <module name="vipcenter" options="-parameters" />
       <module name="vipcenter-5040" options="-parameters" />
+      <module name="zuul-8001" options="-parameters" />
     </option>
   </component>
 </project>
