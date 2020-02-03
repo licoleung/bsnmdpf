@@ -1,9 +1,9 @@
 server:
-  port: 5040
+  port: 5080
 
 spring:
   application:
-    name: vipcenter-5040
+    name: vipcenter-5080
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: org.gjt.mm.mysql.Driver

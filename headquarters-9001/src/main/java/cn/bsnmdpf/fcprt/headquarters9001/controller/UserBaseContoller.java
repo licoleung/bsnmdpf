@@ -2,6 +2,7 @@ package cn.bsnmdpf.fcprt.headquarters9001.controller;
 
 import cn.bsnmdpf.fcprt.api.pojo.User;
 import cn.bsnmdpf.fcprt.api.service.UserCenterService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,9 +24,9 @@ public class UserBaseContoller {
     private UserCenterService userCenterService;
 
     @GetMapping("/user")
-    public String getUsers(Model model, @RequestParam(value = "username", required = false) String username, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "did", required = false) Integer did, @RequestParam(value = "uid", required = false) Integer uid, @RequestParam(value = "spare", required = false) String spare){
-        List<User> usersByParam = userCenterService.getUsersByParam(username, creator, modifier, isActive, did, uid, spare);
-        model.addAttribute("userlist",usersByParam);
+    public String getUsers(@RequestParam(value = "page", required = false, defaultValue = "1") int page,@RequestParam(value = "pageSize", required = false, defaultValue = "3") int pageSize,Model model, @RequestParam(value = "username", required = false) String username, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "did", required = false) Integer did, @RequestParam(value = "uid", required = false) Integer uid, @RequestParam(value = "spare", required = false) String spare){
+        PageInfo<User> usersByParam = userCenterService.getUsersByParam(pageSize, page, username, creator, modifier, isActive, did, uid, spare);
+        model.addAttribute("userlist",usersByParam.getList());
         return "getUserListPage";
     }
 

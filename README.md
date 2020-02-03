@@ -1,4 +1,5 @@
 # bsnmdpf
+V4.0  完成vipcenter的基本CRUD<br>
 V3.1  完成usercenter在api的service<br>
 V3.0  因spring security出现问题，复原了项目，添加了9001消费者及8001网关<br>
 V2.0  基本完成usercenter的增删查改，但凡是设计多表关系的仍然未处理<br>

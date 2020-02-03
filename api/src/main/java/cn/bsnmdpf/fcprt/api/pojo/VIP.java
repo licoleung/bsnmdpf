@@ -1,6 +1,7 @@
 package cn.bsnmdpf.fcprt.api.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class VIP {
     private Integer vipid;
@@ -32,6 +33,26 @@ public class VIP {
     private String bandid;
 
     private String spare;
+
+    private List<VIPTag> vipTags;
+
+    private Integer score;
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+    public List<VIPTag> getVipTags() {
+        return vipTags;
+    }
+
+    public void setVipTags(List<VIPTag> vipTags) {
+        this.vipTags = vipTags;
+    }
 
     public Integer getVipid() {
         return vipid;
@@ -151,5 +172,27 @@ public class VIP {
 
     public void setSpare(String spare) {
         this.spare = spare == null ? null : spare.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "VIP{" +
+                "vipid=" + vipid +
+                ", vipname='" + vipname + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", qq='" + qq + '\'' +
+                ", cunsumption=" + cunsumption +
+                ", csttime=" + csttime +
+                ", cstcycle='" + cstcycle + '\'' +
+                ", level=" + level +
+                ", registtime=" + registtime +
+                ", balance=" + balance +
+                ", isstuff=" + isstuff +
+                ", isactive=" + isactive +
+                ", bandid='" + bandid + '\'' +
+                ", spare='" + spare + '\'' +
+                ", vipTags=" + vipTags +
+                '}';
     }
 }

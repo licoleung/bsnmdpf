@@ -72,7 +72,7 @@ public class UserService {
             if (insert == 1) {
                 return true;
             } else {
-                throw new Exception("未知错误，请检查字段是否完整");
+                throw new Exception("未知错误，请检查User中的必填字段是否完整");
             }
         } catch (Exception e) {
             e.printStackTrace();

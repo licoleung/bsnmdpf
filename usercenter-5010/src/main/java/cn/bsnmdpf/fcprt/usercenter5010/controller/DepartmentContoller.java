@@ -2,6 +2,8 @@ package cn.bsnmdpf.fcprt.usercenter5010.controller;
 
 import cn.bsnmdpf.fcprt.api.pojo.Department;
 import cn.bsnmdpf.fcprt.usercenter5010.service.DepartmentService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +20,11 @@ public class DepartmentContoller {
     private DepartmentService departmentService;
 
     @GetMapping("department")
-    public List<Department> getDepartments(@RequestParam(value = "did", required = false)Integer did, @RequestParam(value = "deparmentname", required = false)String departmentname, @RequestParam(value = "creator", required = false)String creator, @RequestParam(value = "modifier", required = false)String modifier, @RequestParam(value = "isActive", required = false)Integer isActive, @RequestParam(value = "spare", required = false)String spare){
+    public PageInfo<Department> getDepartments(@RequestParam("pageSize") int pageSize,@RequestParam("page") int page,@RequestParam(value = "did", required = false)Integer did, @RequestParam(value = "deparmentname", required = false)String departmentname, @RequestParam(value = "creator", required = false)String creator, @RequestParam(value = "modifier", required = false)String modifier, @RequestParam(value = "isActive", required = false)Integer isActive, @RequestParam(value = "spare", required = false)String spare){
+        PageHelper.startPage(page, pageSize);
         List<Department> departments = departmentService.getDepartments(did,departmentname,creator,modifier,isActive,spare);
-        return departments;
+        PageInfo<Department> pageInfo = new PageInfo<>(departments);
+        return pageInfo;
     }
 
     @PostMapping("department")

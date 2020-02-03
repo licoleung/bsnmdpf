@@ -2,6 +2,8 @@ package cn.bsnmdpf.fcprt.usercenter5010.controller;
 
 import cn.bsnmdpf.fcprt.api.pojo.User;
 import cn.bsnmdpf.fcprt.usercenter5010.service.UserService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,9 +31,11 @@ public class UserController {
      * @return 用户列表
      */
     @GetMapping("user")
-    public List<User> getUsersByParam(@RequestParam(value = "username", required = false) String username, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "did", required = false) Integer did, @RequestParam(value = "uid", required = false) Integer uid, @RequestParam(value = "spare", required = false) String spare) {
+    public PageInfo<User> getUsersByParam(@RequestParam("pageSize") int pageSize,@RequestParam("page") int page,@RequestParam(value = "username", required = false) String username, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "did", required = false) Integer did, @RequestParam(value = "uid", required = false) Integer uid, @RequestParam(value = "spare", required = false) String spare) {
+        PageHelper.startPage(page, pageSize);
         List<User> usersByParams = userService.getUsersByParams(username, creator, modifier, isActive, did, uid, spare);
-        return usersByParams;
+        PageInfo<User> pageInfo = new PageInfo<>(usersByParams);
+        return pageInfo;
     }
 
     /**

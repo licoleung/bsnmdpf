@@ -2,6 +2,8 @@ package cn.bsnmdpf.fcprt.usercenter5010.controller;
 
 import cn.bsnmdpf.fcprt.api.pojo.Company;
 import cn.bsnmdpf.fcprt.usercenter5010.service.CompanyService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,9 +31,11 @@ public class CompanyController {
      * @return 符合条件公司列表
      */
     @GetMapping("company")
-    public List<Company> getCompanies(@RequestParam(value = "cid", required = false) Integer cid, @RequestParam(value = "companyname", required = false) String companyname, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive) {
+    public PageInfo<Company> getCompanies(@RequestParam("pageSize") int pageSize,@RequestParam("page") int page,@RequestParam(value = "cid", required = false) Integer cid, @RequestParam(value = "companyname", required = false) String companyname, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive) {
+        PageHelper.startPage(page, pageSize);
         List<Company> companies = companyService.getCompanies(cid, companyname, creator, modifier, isActive);
-        return companies;
+        PageInfo<Company> pageInfo = new PageInfo<>(companies);
+        return pageInfo;
     }
 
     /**

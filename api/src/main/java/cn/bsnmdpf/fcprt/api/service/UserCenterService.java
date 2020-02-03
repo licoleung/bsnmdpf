@@ -4,6 +4,7 @@ import cn.bsnmdpf.fcprt.api.pojo.Company;
 import cn.bsnmdpf.fcprt.api.pojo.Department;
 import cn.bsnmdpf.fcprt.api.pojo.Role;
 import cn.bsnmdpf.fcprt.api.pojo.User;
+import com.github.pagehelper.PageInfo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public interface UserCenterService {
     //UserController
 
     @GetMapping("user")
-    public List<User> getUsersByParam(@RequestParam(value = "username", required = false) String username, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "did", required = false) Integer did, @RequestParam(value = "uid", required = false) Integer uid, @RequestParam(value = "spare", required = false) String spare);
+    public PageInfo<User> getUsersByParam(@RequestParam("pageSize") int pageSize, @RequestParam("page") int page, @RequestParam(value = "username", required = false) String username, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "did", required = false) Integer did, @RequestParam(value = "uid", required = false) Integer uid, @RequestParam(value = "spare", required = false) String spare);
 
     @PostMapping("user")
     public boolean addUser(@RequestBody User user);
@@ -33,7 +34,7 @@ public interface UserCenterService {
     //CompanyController
 
     @GetMapping("company")
-    public List<Company> getCompanies(@RequestParam(value = "cid", required = false) Integer cid, @RequestParam(value = "companyname", required = false) String companyname, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive);
+    public PageInfo<Company> getCompanies(@RequestParam("pageSize") int pageSize, @RequestParam("page") int page,@RequestParam(value = "cid", required = false) Integer cid, @RequestParam(value = "companyname", required = false) String companyname, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive);
 
     @PostMapping("company")
     public boolean addCompany(@RequestBody Company company);
@@ -47,7 +48,7 @@ public interface UserCenterService {
     //RoleController
 
     @GetMapping("role")
-    public List<Role> getRoles(@RequestParam(value = "rid", required = false) Integer rid, @RequestParam(value = "rolename", required = false) String rolename, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "spare", required = false) String spare);
+    public PageInfo<Role> getRoles(@RequestParam("pageSize") int pageSize, @RequestParam("page") int page,@RequestParam(value = "rid", required = false) Integer rid, @RequestParam(value = "rolename", required = false) String rolename, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "spare", required = false) String spare);
 
     @PostMapping("role")
     public boolean addRole(@RequestBody Role role);
@@ -61,7 +62,7 @@ public interface UserCenterService {
     //DepartmentController
 
     @GetMapping("department")
-    public List<Department> getDepartments(@RequestParam(value = "did", required = false)Integer did, @RequestParam(value = "deparmentname", required = false)String departmentname, @RequestParam(value = "creator", required = false)String creator, @RequestParam(value = "modifier", required = false)String modifier, @RequestParam(value = "isActive", required = false)Integer isActive, @RequestParam(value = "spare", required = false)String spare);
+    public PageInfo<Department> getDepartments(@RequestParam("pageSize") int pageSize, @RequestParam("page") int page,@RequestParam(value = "did", required = false)Integer did, @RequestParam(value = "deparmentname", required = false)String departmentname, @RequestParam(value = "creator", required = false)String creator, @RequestParam(value = "modifier", required = false)String modifier, @RequestParam(value = "isActive", required = false)Integer isActive, @RequestParam(value = "spare", required = false)String spare);
 
     @PostMapping("department")
     public boolean addDepartment(@RequestBody Department department);

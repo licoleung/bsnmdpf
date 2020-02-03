@@ -2,6 +2,8 @@ package cn.bsnmdpf.fcprt.usercenter5010.controller;
 
 import cn.bsnmdpf.fcprt.api.pojo.Role;
 import cn.bsnmdpf.fcprt.usercenter5010.service.RoleService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,9 +32,11 @@ public class RoleController {
      * @return 符合条件的角色列表
      */
     @GetMapping("role")
-    public List<Role> getRoles(@RequestParam(value = "rid", required = false) Integer rid, @RequestParam(value = "rolename", required = false) String rolename, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "spare", required = false) String spare) {
+    public PageInfo<Role> getRoles(@RequestParam("pageSize") int pageSize, @RequestParam("page") int page,@RequestParam(value = "rid", required = false) Integer rid, @RequestParam(value = "rolename", required = false) String rolename, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "spare", required = false) String spare) {
+        PageHelper.startPage(page, pageSize);
         List<Role> roles = roleService.getRoles(rid, rolename, creator, modifier, isActive, spare);
-        return roles;
+        PageInfo<Role> pageInfo = new PageInfo<>(roles);
+        return pageInfo;
     }
 
     /**
