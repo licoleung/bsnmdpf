@@ -22,6 +22,7 @@ public class UserController {
 
     /**
      * 根据参数查询用户列表
+     *
      * @param username
      * @param creator
      * @param modifier
@@ -31,7 +32,7 @@ public class UserController {
      * @return 用户列表
      */
     @GetMapping("user")
-    public PageInfo<User> getUsersByParam(@RequestParam("pageSize") int pageSize,@RequestParam("page") int page,@RequestParam(value = "username", required = false) String username, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "did", required = false) Integer did, @RequestParam(value = "uid", required = false) Integer uid, @RequestParam(value = "spare", required = false) String spare) {
+    public PageInfo<User> getUsersByParam(@RequestParam("pageSize") int pageSize, @RequestParam("page") int page, @RequestParam(value = "username", required = false) String username, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "did", required = false) Integer did, @RequestParam(value = "uid", required = false) Integer uid, @RequestParam(value = "spare", required = false) String spare) {
         PageHelper.startPage(page, pageSize);
         List<User> usersByParams = userService.getUsersByParams(username, creator, modifier, isActive, did, uid, spare);
         PageInfo<User> pageInfo = new PageInfo<>(usersByParams);
@@ -40,6 +41,7 @@ public class UserController {
 
     /**
      * 添加用户
+     *
      * @param user
      * @return 成功返回true，失败返回false
      */
@@ -51,6 +53,7 @@ public class UserController {
 
     /**
      * 根据uid删除用户/将用户设为不可用
+     *
      * @param uid
      * @return 成功返回true，失败返回false
      */
@@ -62,6 +65,7 @@ public class UserController {
 
     /**
      * 根据uid更新user，有参则更，无参则不变
+     *
      * @param username
      * @param modifier
      * @param isActive
@@ -72,7 +76,7 @@ public class UserController {
      * @return 成功返回true，失败返回false
      */
     @PutMapping("user/{uid}")
-    public boolean updateUser(@RequestParam(value = "username", required = false) String username, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "did", required = false) Integer did, @PathVariable("uid") Integer uid, @RequestParam(value = "password",required = false) String password, @RequestParam(value = "spare", required = false) String spare) {
+    public boolean updateUser(@RequestParam(value = "username", required = false) String username, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "did", required = false) Integer did, @PathVariable("uid") Integer uid, @RequestParam(value = "password", required = false) String password, @RequestParam(value = "spare", required = false) String spare) {
         User user = new User();
         user.setUid(uid);
         user.setIsactive(isActive);

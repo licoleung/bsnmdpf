@@ -1,13 +1,17 @@
 # 食品公司业务中台
 <hr>
-<h5>vipcenter端口改为5080<h5>
+<h3>注意事项*</h3>
+<h4>1.vipcenter端口改为5080</h4>
+<h4>2.消费者调用UserCenterService的时候会存在传输pojo实体类的情况，例如添加用户、部门等，</h4>
+<h4>&nbsp;&nbsp;&nbsp;但当调用VIPCenterService的时候传输的是各个字段参数，pojo实体类的封装会在VIPCenter里面完成。</h4>
 <hr>
-V4.1  2020年2月4日 14点54分 完成vipcenter绝大部分的CRUD<br>
-V4.0  完成vipcenter的基本CRUD<br>
-V3.1  完成usercenter在api的service<br>
-V3.0  因spring security出现问题，复原了项目，添加了9001消费者及8001网关<br>
-V2.0  基本完成usercenter的增删查改，但凡是设计多表关系的仍然未处理<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改了之前的小bug，role的isActive的类型从string修改为integer<br>
-V1.2  更新user的service及controller<br>
-V1.1  新建api，将所有pojo统一管理<br>
-V1.0  2020-01-27 13:03 搭建初步框架，完成基本的数据库设计
+<h3>版本信息</h3>
+V4.2<br>  2020年2月4日 15点10分<br> ·完成vipcenter在api的service<br>·添加了注意事项<br>·在DepartmentController添加了注解<br>·在UserCenterService添加了注解<br>
+V4.1<br>  2020年2月4日 14点54分<br> ·完成vipcenter绝大部分的CRUD<br>
+V4.0<br>  2020年2月3日 23点56分<br> ·完成vipcenter的基本CRUD<br>
+V3.1<br>  ·完成usercenter在api的service<br>
+V3.0<br>  ·因spring security出现问题，复原了项目，添加了9001消费者及8001网关<br>
+V2.0<br>  ·基本完成usercenter的增删查改，但凡是设计多表关系的仍然未处理，修改了之前的小bug，role的isActive的类型从string修改为integer<br>
+V1.2<br>  ·更新user的service及controller<br>
+V1.1<br>  ·新建api，将所有pojo统一管理<br>
+V1.0<br>  2020-01-27 13:03<br> ·搭建初步框架，完成基本的数据库设计
