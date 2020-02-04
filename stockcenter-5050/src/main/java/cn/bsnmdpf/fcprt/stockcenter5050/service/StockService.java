@@ -2,6 +2,7 @@ package cn.bsnmdpf.fcprt.stockcenter5050.service;
 
 import cn.bsnmdpf.fcprt.api.pojo.Stock;
 import cn.bsnmdpf.fcprt.api.pojo.StockExample;
+import cn.bsnmdpf.fcprt.api.pojo.Warehouse;
 import cn.bsnmdpf.fcprt.stockcenter5050.mapper.StockMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class StockService {
 
     @Autowired
     private StockMapper stockMapper;
+
 
     /**
      * 根据条件查询仓库列表

@@ -1,7 +1,5 @@
 package cn.bsnmdpf.fcprt.stockcenter5050.service;
 
-import cn.bsnmdpf.fcprt.api.pojo.VIP;
-import cn.bsnmdpf.fcprt.api.pojo.VIPExample;
 import cn.bsnmdpf.fcprt.api.pojo.Warehouse;
 import cn.bsnmdpf.fcprt.api.pojo.WarehouseExample;
 import cn.bsnmdpf.fcprt.stockcenter5050.mapper.WarehouseMapper;
@@ -202,5 +200,15 @@ public class WarehouseService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * 根据sid获取warehouse，方便注入stock
+     * @param sid
+     * @return warehouse列表
+     */
+    public List<Warehouse> selectWarehouseOnlyBySid(Integer sid){
+        List<Warehouse> warehouses = warehouseMapper.selectBySid(sid);
+        return warehouses;
     }
 }

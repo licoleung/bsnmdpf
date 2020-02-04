@@ -1,6 +1,7 @@
 package cn.bsnmdpf.fcprt.api.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Stock {
     private Integer sid;
@@ -24,6 +25,16 @@ public class Stock {
     private Date modifytime;
 
     private Integer isactive;
+
+    List<Warehouse> warehouses;
+
+    public List<Warehouse> getWarehouses() {
+        return warehouses;
+    }
+
+    public void setWarehouses(List<Warehouse> warehouses) {
+        this.warehouses = warehouses;
+    }
 
     public Integer getSid() {
         return sid;
