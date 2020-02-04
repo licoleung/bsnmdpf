@@ -1,4 +1,8 @@
-# bsnmdpf
+# 食品公司业务中台
+<hr>
+<h5>vipcenter端口改为5080<h5>
+<hr>
+V4.1  完成vipcenter绝大部分的CRUD<br>
 V4.0  完成vipcenter的基本CRUD<br>
 V3.1  完成usercenter在api的service<br>
 V3.0  因spring security出现问题，复原了项目，添加了9001消费者及8001网关<br>
