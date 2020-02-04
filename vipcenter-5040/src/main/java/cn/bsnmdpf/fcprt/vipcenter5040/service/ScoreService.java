@@ -21,9 +21,10 @@ public class ScoreService {
 
     /**
      * 获取积分列表
+     *
      * @param scoreid
      * @param vipid
-     * @param lessGetTime 小于这个获取时间
+     * @param lessGetTime    小于这个获取时间
      * @param greaterGetTime 大于这个获取时间
      * @param score
      * @return
@@ -31,19 +32,19 @@ public class ScoreService {
     public List<Score> getScore(Integer scoreid, Integer vipid, Date lessGetTime, Date greaterGetTime, Integer score) {
         ScoreExample scoreExample = new ScoreExample();
         ScoreExample.Criteria criteria = scoreExample.createCriteria();
-        if(scoreid!=null){
+        if (scoreid != null) {
             criteria.andScoreidEqualTo(scoreid);
         }
-        if(vipid!=null){
+        if (vipid != null) {
             criteria.andVipidEqualTo(vipid);
         }
-        if(lessGetTime!=null){
+        if (lessGetTime != null) {
             criteria.andGettimeLessThanOrEqualTo(lessGetTime);//<=
         }
-        if(greaterGetTime!=null){
+        if (greaterGetTime != null) {
             criteria.andGettimeGreaterThanOrEqualTo(greaterGetTime);//>=
         }
-        if(score!=null){
+        if (score != null) {
             criteria.andScoreEqualTo(score);
         }
         List<Score> scores = scoreMapper.selectByExample(scoreExample);
@@ -52,21 +53,30 @@ public class ScoreService {
 
     /**
      * 删除积分记录
+     *
      * @param scoreid
      * @param vipid
      * @param lessGetTime 小于这个时间的记录
      * @return 返回成功条数
      */
-    public int deleteScoreRecord(Integer scoreid, Integer vipid, Date lessGetTime){
+    public int deleteScoreRecord(Integer scoreid, Integer vipid, Date lessGetTime) {
+        try {
+            if (scoreid == null && vipid == null && lessGetTime == null) {
+                throw new Exception("不允许无任何删除条件，此操作会删除所有积分记录");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
         ScoreExample scoreExample = new ScoreExample();
         ScoreExample.Criteria criteria = scoreExample.createCriteria();
-        if(scoreid!=null){
+        if (scoreid != null) {
             criteria.andScoreidEqualTo(scoreid);
         }
-        if(lessGetTime!=null){
+        if (lessGetTime != null) {
             criteria.andGettimeLessThanOrEqualTo(lessGetTime);//<=这个时间的记录会被删掉
         }
-        if(vipid!=null){
+        if (vipid != null) {
             criteria.andVipidEqualTo(vipid);
         }
         int i = scoreMapper.deleteByExample(scoreExample);
@@ -75,10 +85,11 @@ public class ScoreService {
 
     /**
      * 增加积分记录
+     *
      * @param score
      * @return 成功返回true，失败返回false
      */
-    public boolean addScore(Score score){
+    public boolean addScore(Score score) {
         int insert = scoreMapper.insert(score);
         try {
             if (insert == 1) {
@@ -90,5 +101,15 @@ public class ScoreService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * 每个vip总的积分
+     *
+     * @return score的list，但只含vipid及score字段
+     */
+    public List<Score> keyofvipidandvalueofscore() {
+        List<Score> scores = scoreMapper.selectScoreGroupByVIPID();
+        return scores;
     }
 }

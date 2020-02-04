@@ -28,7 +28,8 @@ public class VIPService {
      * @param qq qq号
      * @param lessCunsumption 消费金额最大值
      * @param greaterCunsumption 消费金额最小值
-     * @param cstTime 上次消费时间
+     * @param lesscstTime 最大消费次数
+     * @param greatercstTime 最小消费次数
      * @param cstCycle 消费周期
      * @param level 等级
      * @param lessRegistTime 注册时间最大值
@@ -192,5 +193,15 @@ public class VIPService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * 通过标签筛选vip
+     * @param tagnames
+     * @return 符合条件的vip列表
+     */
+    public List<VIP> selectVIPwithTagScreen(String tagnames){
+        List<VIP> vips = vipMapper.tagScreen(tagnames);
+        return vips;
     }
 }

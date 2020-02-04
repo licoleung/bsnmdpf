@@ -19,4 +19,5 @@ public interface VIPTagMapper {
     int updateByExampleSelective(@Param("record") VIPTag record, @Param("example") VIPTagExample example);
 
     int updateByExample(@Param("record") VIPTag record, @Param("example") VIPTagExample example);
+
 }

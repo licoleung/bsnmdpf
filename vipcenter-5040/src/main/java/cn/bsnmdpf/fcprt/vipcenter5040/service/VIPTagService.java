@@ -65,20 +65,33 @@ public class VIPTagService {
      * @param vtid
      * @return 成功返回true，失败返回false
      */
-    public boolean deleteTag(Integer vtid){
+    public int deleteTag(Integer vtid,Integer vipid){
+        try{
+            if(vtid==null&&vipid==null){
+                throw new Exception("不允许无任何删除条件，此操作会删除所有标签");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
         VIPTagExample vipTagExample = new VIPTagExample();
         VIPTagExample.Criteria criteria = vipTagExample.createCriteria();
-        criteria.andVtidEqualTo(vtid);
-        int i = vipTagMapper.deleteByExample(vipTagExample);
-        try {
-            if (i == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法删除，或可能找不到对应vipTagid的vipTag");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if(vtid!=null) {
+            criteria.andVtidEqualTo(vtid);
         }
+        if(vipid!=null){
+            criteria.andVipidEqualTo(vipid);
+        }
+        int i = vipTagMapper.deleteByExample(vipTagExample);
+
+        try{
+            if(i==0){
+                throw new Exception("无删除任何标签，请检查条件是否正确");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+        return i;
     }
 }
