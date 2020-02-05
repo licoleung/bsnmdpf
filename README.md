@@ -6,6 +6,7 @@
 <h4>&nbsp;&nbsp;&nbsp;但当调用VIPCenterService的时候传输的是各个字段参数，pojo实体类的封装会在VIPCenter里面完成。</h4>
 <hr>
 <h3>版本信息</h3>
+V5.3<br>  2020年2月5日 12点35分<br> ·完成WarehouseController，部分InstockbillController<br><br>
 V5.2<br>  2020年2月5日 00点50分<br> ·完成StockController，已增加List字段，已关联仓位<br><br>
 V5.1<br>  2020年2月4日 23点09分<br> ·完成stockcenter的service<br><br>
 V5.0<br>  2020年2月4日 17点21分<br> ·完成仓库和仓位的service,但仓库未关联仓位，未增加List字段<br><br>
