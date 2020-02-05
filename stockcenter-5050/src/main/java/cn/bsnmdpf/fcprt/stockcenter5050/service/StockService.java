@@ -6,6 +6,7 @@ import cn.bsnmdpf.fcprt.api.pojo.Warehouse;
 import cn.bsnmdpf.fcprt.stockcenter5050.mapper.StockMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -107,17 +108,13 @@ public class StockService {
      * @param stock
      * @return 成功返回true，失败返回false
      */
-    public boolean addStock(Stock stock) {
+    @Transactional
+    public boolean addStock(Stock stock) throws RuntimeException {
         int insert = stockMapper.insert(stock);
-        try {
-            if (insert == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，请检查Stock中的必填字段是否完整");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (insert == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，请检查Stock中的必填字段是否完整");
         }
     }
 
@@ -127,22 +124,18 @@ public class StockService {
      * @param sid
      * @return 成功返回true，失败返回false
      */
-    public boolean unableStockBySid(Integer sid) {
+    @Transactional
+    public boolean unableStockBySid(Integer sid) throws RuntimeException {
         Stock stock = new Stock();
         stock.setIsactive(0);
         StockExample stockExample = new StockExample();
         StockExample.Criteria criteria = stockExample.createCriteria();
         criteria.andSidEqualTo(sid);
         int i = stockMapper.updateByExampleSelective(stock, stockExample);
-        try {
-            if (i == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法删除/封锁，或可能找不到对应sid的stock");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (i == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法删除/封锁，或可能找不到对应sid的stock");
         }
     }
 
@@ -152,22 +145,18 @@ public class StockService {
      * @param sid
      * @return 成功返回true，失败返回false
      */
-    public boolean ableStockBySid(Integer sid) {
+    @Transactional
+    public boolean ableStockBySid(Integer sid) throws RuntimeException {
         Stock stock = new Stock();
         stock.setIsactive(1);
         StockExample stockExample = new StockExample();
         StockExample.Criteria criteria = stockExample.createCriteria();
         criteria.andSidEqualTo(sid);
         int i = stockMapper.updateByExampleSelective(stock, stockExample);
-        try {
-            if (i == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法解封，或可能找不到对应sid的stock");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (i == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法解封，或可能找不到对应sid的stock");
         }
     }
 
@@ -177,20 +166,16 @@ public class StockService {
      * @param stock
      * @return 成功返回true，失败返回false
      */
-    public boolean updateStock(Stock stock) {
+    @Transactional
+    public boolean updateStock(Stock stock) throws RuntimeException {
         StockExample stockExample = new StockExample();
         StockExample.Criteria criteria = stockExample.createCriteria();
         criteria.andSidEqualTo(stock.getSid());
         int i = stockMapper.updateByExampleSelective(stock, stockExample);
-        try {
-            if (i == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法更新，或可能找不到对应sid的stock");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (i == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法更新，或可能找不到对应sid的stock");
         }
     }
 }

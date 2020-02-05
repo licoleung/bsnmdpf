@@ -7,7 +7,6 @@ import cn.bsnmdpf.fcprt.stockcenter5050.service.WarehouseService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -17,7 +16,7 @@ import java.util.List;
  * @author LicoLeung
  * @create 2020-02-04 17:00
  */
-@Controller
+@RestController
 public class StockController {
 
     @Autowired

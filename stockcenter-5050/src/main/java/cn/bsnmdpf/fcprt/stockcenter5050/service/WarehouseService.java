@@ -5,6 +5,7 @@ import cn.bsnmdpf.fcprt.api.pojo.WarehouseExample;
 import cn.bsnmdpf.fcprt.stockcenter5050.mapper.WarehouseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -115,17 +116,13 @@ public class WarehouseService {
      * @param warehouse
      * @return 成功返回true，失败返回false
      */
-    public boolean addWarehouse(Warehouse warehouse) {
+    @Transactional
+    public boolean addWarehouse(Warehouse warehouse) throws RuntimeException {
         int insert = warehouseMapper.insert(warehouse);
-        try {
-            if (insert == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，请检查Warehouse中的必填字段是否完整");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (insert == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，请检查Warehouse中的必填字段是否完整");
         }
     }
 
@@ -135,22 +132,18 @@ public class WarehouseService {
      * @param whid
      * @return 成功返回true，失败返回false
      */
-    public boolean unableWarehouse(Integer whid) {
+    @Transactional
+    public boolean unableWarehouse(Integer whid) throws RuntimeException {
         Warehouse warehouse = new Warehouse();
         warehouse.setIsactive(0);
         WarehouseExample warehouseExample = new WarehouseExample();
         WarehouseExample.Criteria criteria = warehouseExample.createCriteria();
         criteria.andWhidEqualTo(whid);
         int i = warehouseMapper.updateByExampleSelective(warehouse, warehouseExample);
-        try {
-            if (i == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法删除，或可能找不到对应whid的warehouse");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (i == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法删除，或可能找不到对应whid的warehouse");
         }
     }
 
@@ -160,22 +153,18 @@ public class WarehouseService {
      * @param whid
      * @return 成功返回true，失败返回false
      */
-    public boolean ableWarehouse(Integer whid) {
+    @Transactional
+    public boolean ableWarehouse(Integer whid) throws RuntimeException {
         Warehouse warehouse = new Warehouse();
         warehouse.setIsactive(1);
         WarehouseExample warehouseExample = new WarehouseExample();
         WarehouseExample.Criteria criteria = warehouseExample.createCriteria();
         criteria.andWhidEqualTo(whid);
         int i = warehouseMapper.updateByExampleSelective(warehouse, warehouseExample);
-        try {
-            if (i == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法解封，或可能找不到对应whid的warehouse");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (i == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法解封，或可能找不到对应whid的warehouse");
         }
     }
 
@@ -185,30 +174,114 @@ public class WarehouseService {
      * @param warehouse
      * @return 成功返回true，失败返回false
      */
-    public boolean updateWarehouse(Warehouse warehouse) {
+    @Transactional
+    public boolean updateWarehouse(Warehouse warehouse) throws RuntimeException {
         WarehouseExample warehouseExample = new WarehouseExample();
         WarehouseExample.Criteria criteria = warehouseExample.createCriteria();
         criteria.andWhidEqualTo(warehouse.getWhid());
         int i = warehouseMapper.updateByExampleSelective(warehouse, warehouseExample);
-        try {
-            if (i == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法更新，或可能找不到对应whid的warehouse");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (i == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法更新，或可能找不到对应whid的warehouse");
         }
     }
 
     /**
      * 根据sid获取warehouse，方便注入stock
+     *
      * @param sid
      * @return warehouse列表
      */
-    public List<Warehouse> selectWarehouseOnlyBySid(Integer sid){
+    public List<Warehouse> selectWarehouseOnlyBySid(Integer sid) {
         List<Warehouse> warehouses = warehouseMapper.selectBySid(sid);
         return warehouses;
+    }
+
+    /**
+     * 减少仓位已使用容量
+     *
+     * @param whid
+     * @param updateVolumn
+     * @return
+     * @throws RuntimeException
+     */
+    @Transactional
+    public boolean decreaseVolumn(Integer whid, Double updateVolumn) throws RuntimeException {
+        WarehouseExample warehouseExample = new WarehouseExample();
+        WarehouseExample.Criteria criteria = warehouseExample.createCriteria();
+        criteria.andWhidEqualTo(whid);
+        List<Warehouse> warehouses = warehouseMapper.selectByExample(warehouseExample);
+        Warehouse warehouse = warehouses.get(0);
+        if (warehouse.getUsedvolumn() < updateVolumn) {
+            throw new RuntimeException("当前已使用容量小于减少容量");
+        }
+
+        Double realUsedVolumn = warehouse.getUsedvolumn() - updateVolumn;
+        Warehouse updatedWarehouse = new Warehouse();
+        updatedWarehouse.setUsedvolumn(realUsedVolumn);
+
+        WarehouseExample updateWarehouseExample = new WarehouseExample();
+        WarehouseExample.Criteria criteria1 = updateWarehouseExample.createCriteria();
+        criteria1.andWhidEqualTo(whid);
+
+        int i = warehouseMapper.updateByExampleSelective(updatedWarehouse, updateWarehouseExample);
+        if (i == 1)
+            return true;
+        else if (i == 0) {
+            throw new RuntimeException("未知错误，或找不到whid对应的warehouse");
+        } else {
+            throw new RuntimeException("多条记录被修改");
+        }
+    }
+
+    /**
+     * 增加仓位已使用容量
+     *
+     * @param whid
+     * @param updateVolumn
+     * @return
+     * @throws RuntimeException
+     */
+    @Transactional
+    public boolean increaseVolumn(Integer whid, Double updateVolumn) throws RuntimeException {
+        WarehouseExample warehouseExample = new WarehouseExample();
+        WarehouseExample.Criteria criteria = warehouseExample.createCriteria();
+        criteria.andWhidEqualTo(whid);
+        List<Warehouse> warehouses = warehouseMapper.selectByExample(warehouseExample);
+        Warehouse warehouse = warehouses.get(0);
+
+        Double realUsedVolumn = warehouse.getUsedvolumn() + updateVolumn;
+        if (realUsedVolumn>warehouse.getVolumn()) {
+            throw new RuntimeException("超出最大容量");
+        }
+        Warehouse updatedWarehouse = new Warehouse();
+        updatedWarehouse.setUsedvolumn(realUsedVolumn);
+
+        WarehouseExample updateWarehouseExample = new WarehouseExample();
+        WarehouseExample.Criteria criteria1 = updateWarehouseExample.createCriteria();
+        criteria1.andWhidEqualTo(whid);
+
+        int i = warehouseMapper.updateByExampleSelective(updatedWarehouse, updateWarehouseExample);
+        if (i == 1)
+            return true;
+        else if (i == 0) {
+            throw new RuntimeException("未知错误，或找不到whid对应的warehouse");
+        } else {
+            throw new RuntimeException("多条记录被修改");
+        }
+    }
+
+    /**
+     * 根据whid查询warehouse
+     * @param whid
+     * @return warehouse
+     */
+    public Warehouse getWHbyWhid(Integer whid){
+        WarehouseExample warehouseExample = new WarehouseExample();
+        WarehouseExample.Criteria criteria = warehouseExample.createCriteria();
+        criteria.andWhidEqualTo(whid);
+        List<Warehouse> warehouses = warehouseMapper.selectByExample(warehouseExample);
+        return warehouses.get(0);
     }
 }

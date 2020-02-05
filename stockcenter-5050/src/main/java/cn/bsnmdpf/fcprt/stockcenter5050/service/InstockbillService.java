@@ -5,6 +5,7 @@ import cn.bsnmdpf.fcprt.api.pojo.InstockbillExample;
 import cn.bsnmdpf.fcprt.stockcenter5050.mapper.InstockbillMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -117,17 +118,13 @@ public class InstockbillService {
      * @param instockbill 入库单
      * @return 成功返回true，失败返回false
      */
-    public boolean addInstockbill(Instockbill instockbill) {
+    @Transactional
+    public boolean addInstockbill(Instockbill instockbill) throws RuntimeException {
         int insert = instockbillMapper.insert(instockbill);
-        try {
-            if (insert == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，请检查instockbill中的必填字段是否完整");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (insert == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，请检查instockbill中的必填字段是否完整");
         }
     }
 
@@ -139,18 +136,14 @@ public class InstockbillService {
      * @param inbillcode 单据号
      * @return 返回被删除/封锁条数
      */
-    public int unableInstockbill(Integer inid, String inbillcode) {
+    @Transactional
+    public int unableInstockbill(Integer inid, String inbillcode) throws RuntimeException {
         Instockbill instockbill = new Instockbill();
         instockbill.setIsactive(0);
         InstockbillExample instockbillExample = new InstockbillExample();
         InstockbillExample.Criteria criteria = instockbillExample.createCriteria();
-        try {
-            if (inid == null && inbillcode == null) {
-                throw new Exception("不能无删除条件，请检查inid及inbillcode");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
+        if (inid == null && inbillcode == null) {
+            throw new RuntimeException("不能无删除条件，请检查inid及inbillcode");
         }
         if (inid != null) {
             criteria.andInidEqualTo(inid);
@@ -159,13 +152,8 @@ public class InstockbillService {
             criteria.andInbillcodeEqualTo(inbillcode);
         }
         int i = instockbillMapper.updateByExampleSelective(instockbill, instockbillExample);
-        try {
-            if (i == 0) {
-                throw new Exception("未知错误，无法删除/封锁，或可能找不到对应inid或inbillcode的单据");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
+        if (i == 0) {
+            throw new RuntimeException("未知错误，无法删除/封锁，或可能找不到对应inid或inbillcode的单据");
         }
         return i;
     }
@@ -179,18 +167,14 @@ public class InstockbillService {
      * @param inbillcode 单据号
      * @return 返回被删除/封锁条数
      */
-    public int ableInstockbill(Integer inid, String inbillcode) {
+    @Transactional
+    public int ableInstockbill(Integer inid, String inbillcode) throws RuntimeException {
         Instockbill instockbill = new Instockbill();
         instockbill.setIsactive(1);
         InstockbillExample instockbillExample = new InstockbillExample();
         InstockbillExample.Criteria criteria = instockbillExample.createCriteria();
-        try {
-            if (inid == null && inbillcode == null) {
-                throw new Exception("不能无恢复条件，请检查inid及inbillcode");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
+        if (inid == null && inbillcode == null) {
+            throw new RuntimeException("不能无恢复条件，请检查inid及inbillcode");
         }
         if (inid != null) {
             criteria.andInidEqualTo(inid);
@@ -199,13 +183,8 @@ public class InstockbillService {
             criteria.andInbillcodeEqualTo(inbillcode);
         }
         int i = instockbillMapper.updateByExampleSelective(instockbill, instockbillExample);
-        try {
-            if (i == 0) {
-                throw new Exception("未知错误，无法恢复/解封，或可能找不到对应inid或inbillcode的单据");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
+        if (i == 0) {
+            throw new RuntimeException("未知错误，无法恢复/解封，或可能找不到对应inid或inbillcode的单据");
         }
         return i;
     }
@@ -216,20 +195,16 @@ public class InstockbillService {
      * @param instockbill 入库单
      * @return 成功返回true，失败返回false
      */
-    public boolean updateInstockbill(Instockbill instockbill) {
+    @Transactional
+    public boolean updateInstockbill(Instockbill instockbill) throws RuntimeException {
         InstockbillExample instockbillExample = new InstockbillExample();
         InstockbillExample.Criteria criteria = instockbillExample.createCriteria();
         criteria.andInidEqualTo(instockbill.getInid());
         int i = instockbillMapper.updateByExampleSelective(instockbill, instockbillExample);
-        try {
-            if (i == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法更新，或可能找不到对应inid的instockbill");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (i == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法更新，或可能找不到对应inid的instockbill");
         }
     }
 }

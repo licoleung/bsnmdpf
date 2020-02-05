@@ -5,7 +5,6 @@ import cn.bsnmdpf.fcprt.stockcenter5050.service.WarehouseService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -15,7 +14,7 @@ import java.util.List;
  * @author LicoLeung
  * @create 2020-02-05 11:52
  */
-@Controller
+@RestController
 public class WarehouseController {
 
     @Autowired
@@ -91,6 +90,7 @@ public class WarehouseController {
      * @param isActive      是否启用
      * @return 成功返回true，失败返回false
      */
+    @PostMapping("warehouse")
     public boolean addWarehouse(@RequestParam(value = "whid", required = false) Integer whid,
                                 @RequestParam(value = "sid") Integer sid,
                                 @RequestParam(value = "warehousename") String warehousename,

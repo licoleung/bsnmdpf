@@ -5,6 +5,7 @@ import cn.bsnmdpf.fcprt.api.pojo.OutstockbillExample;
 import cn.bsnmdpf.fcprt.stockcenter5050.mapper.OutstockbillMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -117,17 +118,13 @@ public class OutstockbillService {
      * @param outstockbill 出库单
      * @return 成功返回true，失败返回false
      */
-    public boolean addOutstockbill(Outstockbill outstockbill) {
+    @Transactional
+    public boolean addOutstockbill(Outstockbill outstockbill) throws RuntimeException {
         int insert = outstockbillMapper.insert(outstockbill);
-        try {
-            if (insert == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，请检查outstockbill中的必填字段是否完整");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (insert == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，请检查outstockbill中的必填字段是否完整");
         }
     }
 
@@ -139,18 +136,14 @@ public class OutstockbillService {
      * @param outbillcode 单据号
      * @return 返回被删除/封锁条数
      */
-    public int unableOutstockbill(Integer outid, String outbillcode) {
+    @Transactional
+    public int unableOutstockbill(Integer outid, String outbillcode) throws RuntimeException {
         Outstockbill outstockbill = new Outstockbill();
         outstockbill.setIsactive(0);
         OutstockbillExample outstockbillExample = new OutstockbillExample();
         OutstockbillExample.Criteria criteria = outstockbillExample.createCriteria();
-        try {
-            if (outid == null && outbillcode == null) {
-                throw new Exception("不能无删除条件，请检查outid及outbillcode");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
+        if (outid == null && outbillcode == null) {
+            throw new RuntimeException("不能无删除条件，请检查outid及outbillcode");
         }
         if (outid != null) {
             criteria.andOutidEqualTo(outid);
@@ -159,13 +152,8 @@ public class OutstockbillService {
             criteria.andOutbillcodeEqualTo(outbillcode);
         }
         int i = outstockbillMapper.updateByExampleSelective(outstockbill, outstockbillExample);
-        try {
-            if (i == 0) {
-                throw new Exception("未知错误，无法删除/封锁，或可能找不到对应outid或outbillcode的单据");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
+        if (i == 0) {
+            throw new RuntimeException("未知错误，无法删除/封锁，或可能找不到对应outid或outbillcode的单据");
         }
         return i;
     }
@@ -179,18 +167,14 @@ public class OutstockbillService {
      * @param outbillcode 单据号
      * @return 返回被删除/封锁条数
      */
-    public int ableOutstockbill(Integer outid, String outbillcode) {
+    @Transactional
+    public int ableOutstockbill(Integer outid, String outbillcode) throws RuntimeException {
         Outstockbill outstockbill = new Outstockbill();
         outstockbill.setIsactive(1);
         OutstockbillExample outstockbillExample = new OutstockbillExample();
         OutstockbillExample.Criteria criteria = outstockbillExample.createCriteria();
-        try {
-            if (outid == null && outbillcode == null) {
-                throw new Exception("不能无恢复条件，请检查outid及outbillcode");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
+        if (outid == null && outbillcode == null) {
+            throw new RuntimeException("不能无恢复条件，请检查outid及outbillcode");
         }
         if (outid != null) {
             criteria.andOutidEqualTo(outid);
@@ -199,13 +183,8 @@ public class OutstockbillService {
             criteria.andOutbillcodeEqualTo(outbillcode);
         }
         int i = outstockbillMapper.updateByExampleSelective(outstockbill, outstockbillExample);
-        try {
-            if (i == 0) {
-                throw new Exception("未知错误，无法恢复/解封，或可能找不到对应outid或outbillcode的单据");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
+        if (i == 0) {
+            throw new RuntimeException("未知错误，无法恢复/解封，或可能找不到对应outid或outbillcode的单据");
         }
         return i;
     }
@@ -216,20 +195,16 @@ public class OutstockbillService {
      * @param outstockbill 出库单
      * @return 成功返回true，失败返回false
      */
-    public boolean updateOutstockbill(Outstockbill outstockbill) {
+    @Transactional
+    public boolean updateOutstockbill(Outstockbill outstockbill) throws RuntimeException {
         OutstockbillExample outstockbillExample = new OutstockbillExample();
         OutstockbillExample.Criteria criteria = outstockbillExample.createCriteria();
         criteria.andOutidEqualTo(outstockbill.getOutid());
         int i = outstockbillMapper.updateByExampleSelective(outstockbill, outstockbillExample);
-        try {
-            if (i == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法更新，或可能找不到对应outid的outstockbill");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (i == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法更新，或可能找不到对应outid的outstockbill");
         }
     }
 }

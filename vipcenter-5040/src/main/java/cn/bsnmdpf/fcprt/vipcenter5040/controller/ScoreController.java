@@ -5,7 +5,6 @@ import cn.bsnmdpf.fcprt.vipcenter5040.service.ScoreService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -15,7 +14,7 @@ import java.util.List;
  * @author LicoLeung
  * @create 2020-02-04 13:28
  */
-@Controller
+@RestController
 public class ScoreController {
 
     @Autowired
