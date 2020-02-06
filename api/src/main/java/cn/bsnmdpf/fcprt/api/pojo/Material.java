@@ -17,7 +17,7 @@ public class Material {
 
     private Double weight;
 
-    private String volume;
+    private Double volumn;
 
     private String brand;
 
@@ -89,12 +89,12 @@ public class Material {
         this.weight = weight;
     }
 
-    public String getVolume() {
-        return volume;
+    public Double getVolumn() {
+        return volumn;
     }
 
-    public void setVolume(String volume) {
-        this.volume = volume == null ? null : volume.trim();
+    public void setVolumn(Double volumn) {
+        this.volumn = volumn;
     }
 
     public String getBrand() {

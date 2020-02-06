@@ -535,73 +535,63 @@ public class MaterialExample {
             return (Criteria) this;
         }
 
-        public Criteria andVolumeIsNull() {
-            addCriterion("volume is null");
+        public Criteria andVolumnIsNull() {
+            addCriterion("volumn is null");
             return (Criteria) this;
         }
 
-        public Criteria andVolumeIsNotNull() {
-            addCriterion("volume is not null");
+        public Criteria andVolumnIsNotNull() {
+            addCriterion("volumn is not null");
             return (Criteria) this;
         }
 
-        public Criteria andVolumeEqualTo(String value) {
-            addCriterion("volume =", value, "volume");
+        public Criteria andVolumnEqualTo(Double value) {
+            addCriterion("volumn =", value, "volumn");
             return (Criteria) this;
         }
 
-        public Criteria andVolumeNotEqualTo(String value) {
-            addCriterion("volume <>", value, "volume");
+        public Criteria andVolumnNotEqualTo(Double value) {
+            addCriterion("volumn <>", value, "volumn");
             return (Criteria) this;
         }
 
-        public Criteria andVolumeGreaterThan(String value) {
-            addCriterion("volume >", value, "volume");
+        public Criteria andVolumnGreaterThan(Double value) {
+            addCriterion("volumn >", value, "volumn");
             return (Criteria) this;
         }
 
-        public Criteria andVolumeGreaterThanOrEqualTo(String value) {
-            addCriterion("volume >=", value, "volume");
+        public Criteria andVolumnGreaterThanOrEqualTo(Double value) {
+            addCriterion("volumn >=", value, "volumn");
             return (Criteria) this;
         }
 
-        public Criteria andVolumeLessThan(String value) {
-            addCriterion("volume <", value, "volume");
+        public Criteria andVolumnLessThan(Double value) {
+            addCriterion("volumn <", value, "volumn");
             return (Criteria) this;
         }
 
-        public Criteria andVolumeLessThanOrEqualTo(String value) {
-            addCriterion("volume <=", value, "volume");
+        public Criteria andVolumnLessThanOrEqualTo(Double value) {
+            addCriterion("volumn <=", value, "volumn");
             return (Criteria) this;
         }
 
-        public Criteria andVolumeLike(String value) {
-            addCriterion("volume like", value, "volume");
+        public Criteria andVolumnIn(List<Double> values) {
+            addCriterion("volumn in", values, "volumn");
             return (Criteria) this;
         }
 
-        public Criteria andVolumeNotLike(String value) {
-            addCriterion("volume not like", value, "volume");
+        public Criteria andVolumnNotIn(List<Double> values) {
+            addCriterion("volumn not in", values, "volumn");
             return (Criteria) this;
         }
 
-        public Criteria andVolumeIn(List<String> values) {
-            addCriterion("volume in", values, "volume");
+        public Criteria andVolumnBetween(Double value1, Double value2) {
+            addCriterion("volumn between", value1, value2, "volumn");
             return (Criteria) this;
         }
 
-        public Criteria andVolumeNotIn(List<String> values) {
-            addCriterion("volume not in", values, "volume");
-            return (Criteria) this;
-        }
-
-        public Criteria andVolumeBetween(String value1, String value2) {
-            addCriterion("volume between", value1, value2, "volume");
-            return (Criteria) this;
-        }
-
-        public Criteria andVolumeNotBetween(String value1, String value2) {
-            addCriterion("volume not between", value1, value2, "volume");
+        public Criteria andVolumnNotBetween(Double value1, Double value2) {
+            addCriterion("volumn not between", value1, value2, "volumn");
             return (Criteria) this;
         }
 
