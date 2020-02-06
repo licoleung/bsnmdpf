@@ -5,6 +5,7 @@ import cn.bsnmdpf.fcprt.api.pojo.RoleExample;
 import cn.bsnmdpf.fcprt.usercenter5010.mapper.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -63,17 +64,13 @@ public class RoleService {
      * @param role
      * @return 成功返回true，失败返回false
      */
-    public boolean addRole(Role role) {
+    @Transactional
+    public boolean addRole(Role role) throws RuntimeException {
         int insert = roleMapper.insert(role);
-        try {
-            if (insert == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，请检查字段是否完整");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (insert == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，请检查字段是否完整");
         }
     }
 
@@ -83,22 +80,18 @@ public class RoleService {
      * @param rid
      * @return 成功返回true，失败返回false
      */
-    public boolean unableRoleByRid(Integer rid) {
+    @Transactional
+    public boolean unableRoleByRid(Integer rid) throws RuntimeException {
         Role role = new Role();
         role.setIsactive(0);
         RoleExample roleExample = new RoleExample();
         RoleExample.Criteria criteria = roleExample.createCriteria();
         criteria.andRidEqualTo(rid);
         int res = roleMapper.updateByExampleSelective(role, roleExample);
-        try {
-            if (res == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法删除，或可能找不到对应rid的role");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (res == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法删除，或可能找不到对应rid的role");
         }
     }
 
@@ -108,22 +101,18 @@ public class RoleService {
      * @param rid
      * @return 成功返回true，失败返回false
      */
-    public boolean ableRoleByRid(Integer rid) {
+    @Transactional
+    public boolean ableRoleByRid(Integer rid) throws RuntimeException {
         Role role = new Role();
         role.setIsactive(1);
         RoleExample roleExample = new RoleExample();
         RoleExample.Criteria criteria = roleExample.createCriteria();
         criteria.andRidEqualTo(rid);
         int res = roleMapper.updateByExampleSelective(role, roleExample);
-        try {
-            if (res == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法解封，或可能找不到对应rid的role");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (res == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法解封，或可能找不到对应rid的role");
         }
     }
 
@@ -133,20 +122,16 @@ public class RoleService {
      * @param role
      * @return 成功返回true，失败返回false
      */
-    public boolean updateRole(Role role) {
+    @Transactional
+    public boolean updateRole(Role role) throws RuntimeException {
         RoleExample roleExample = new RoleExample();
         RoleExample.Criteria criteria = roleExample.createCriteria();
         criteria.andRidEqualTo(role.getRid());
         int res = roleMapper.updateByExampleSelective(role, roleExample);
-        try {
-            if (res == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法更新，或可能找不到对应rid的role");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (res == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法更新，或可能找不到对应rid的role");
         }
     }
 }

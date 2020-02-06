@@ -5,6 +5,7 @@ import cn.bsnmdpf.fcprt.api.pojo.VIPExample;
 import cn.bsnmdpf.fcprt.vipcenter5040.mapper.VIPMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Date;
@@ -113,17 +114,13 @@ public class VIPService {
      * @param vip
      * @return 成功返回true，失败返回false
      */
-    public boolean addVip(VIP vip) {
+    @Transactional
+    public boolean addVip(VIP vip) throws RuntimeException {
         int insert = vipMapper.insert(vip);
-        try {
-            if (insert == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，请检查VIP中的必填字段是否完整");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (insert == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，请检查VIP中的必填字段是否完整");
         }
     }
 
@@ -133,22 +130,18 @@ public class VIPService {
      * @param vipid
      * @return 成功返回true，失败返回false
      */
-    public boolean unableVIPByVIPid(Integer vipid) {
+    @Transactional
+    public boolean unableVIPByVIPid(Integer vipid) throws RuntimeException {
         VIP vip = new VIP();
         vip.setIsactive(0);
         VIPExample vipExample = new VIPExample();
         VIPExample.Criteria criteria = vipExample.createCriteria();
         criteria.andVipidEqualTo(vipid);
         int i = vipMapper.updateByExampleSelective(vip, vipExample);
-        try {
-            if (i == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法删除，或可能找不到对应vipid的vip");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (i == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法删除，或可能找不到对应vipid的vip");
         }
     }
 
@@ -158,22 +151,18 @@ public class VIPService {
      * @param vipid
      * @return 成功返回true，失败返回false
      */
-    public boolean ableVIPByVIPid(Integer vipid) {
+    @Transactional
+    public boolean ableVIPByVIPid(Integer vipid) throws RuntimeException {
         VIP vip = new VIP();
         vip.setIsactive(1);
         VIPExample vipExample = new VIPExample();
         VIPExample.Criteria criteria = vipExample.createCriteria();
         criteria.andVipidEqualTo(vipid);
         int i = vipMapper.updateByExampleSelective(vip, vipExample);
-        try {
-            if (i == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法解封，或可能找不到对应vipid的vip");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (i == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法解封，或可能找不到对应vipid的vip");
         }
     }
 
@@ -183,20 +172,16 @@ public class VIPService {
      * @param vip
      * @return 成功返回true，失败返回false
      */
-    public boolean updateVIP(VIP vip) {
+    @Transactional
+    public boolean updateVIP(VIP vip) throws RuntimeException {
         VIPExample vipExample = new VIPExample();
         VIPExample.Criteria criteria = vipExample.createCriteria();
         criteria.andVipidEqualTo(vip.getVipid());
         int i = vipMapper.updateByExampleSelective(vip, vipExample);
-        try {
-            if (i == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法更新，或可能找不到对应vipid的vip");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (i == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法更新，或可能找不到对应vipid的vip");
         }
     }
 

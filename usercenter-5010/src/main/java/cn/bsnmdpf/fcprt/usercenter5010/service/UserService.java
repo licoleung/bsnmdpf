@@ -5,6 +5,7 @@ import cn.bsnmdpf.fcprt.api.pojo.UserExample;
 import cn.bsnmdpf.fcprt.usercenter5010.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class UserService {
         if (uid != null) {
             criteria.andUidEqualTo(uid);
         }
-        if(spare!=null){
+        if (spare != null) {
             criteria.andSpareEqualTo(spare);
         }
         List<User> users = userMapper.selectByExample(userExample);
@@ -66,17 +67,13 @@ public class UserService {
      * @param user 用户
      * @return 成功返回true，失败返回false
      */
-    public boolean addUser(User user) {
+    @Transactional
+    public boolean addUser(User user) throws RuntimeException {
         int insert = userMapper.insert(user);
-        try {
-            if (insert == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，请检查User中的必填字段是否完整");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (insert == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，请检查User中的必填字段是否完整");
         }
     }
 
@@ -86,22 +83,18 @@ public class UserService {
      * @param uid 编码
      * @return 成功返回true，失败返回false
      */
-    public boolean unableUserByUid(Integer uid) {
+    @Transactional
+    public boolean unableUserByUid(Integer uid) throws RuntimeException {
         User user = new User();
         user.setIsactive(0);
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria1 = userExample.createCriteria();
         criteria1.andUidEqualTo(uid);
         int i = userMapper.updateByExampleSelective(user, userExample);
-        try {
-            if (i == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法删除，或可能找不到对应uid的user");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (i == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法删除，或可能找不到对应uid的user");
         }
     }
 
@@ -111,22 +104,18 @@ public class UserService {
      * @param uid 编码
      * @return 成功返回true，失败返回false
      */
-    public boolean ableUserByUid(Integer uid) {
+    @Transactional
+    public boolean ableUserByUid(Integer uid) throws RuntimeException {
         User user = new User();
         user.setIsactive(1);
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria1 = userExample.createCriteria();
         criteria1.andUidEqualTo(uid);
         int i = userMapper.updateByExampleSelective(user, userExample);
-        try {
-            if (i == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法解封，或可能找不到对应uid的user");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (i == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法解封，或可能找不到对应uid的user");
         }
     }
 
@@ -136,20 +125,16 @@ public class UserService {
      * @param user 用户
      * @return 成功返回true，失败返回false
      */
-    public boolean updateUser(User user) {
+    @Transactional
+    public boolean updateUser(User user) throws RuntimeException {
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria1 = userExample.createCriteria();
         criteria1.andUidEqualTo(user.getUid());
         int i = userMapper.updateByExampleSelective(user, userExample);
-        try {
-            if (i == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法更新，或可能找不到对应uid的user");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (i == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法更新，或可能找不到对应uid的user");
         }
     }
 

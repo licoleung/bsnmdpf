@@ -5,6 +5,7 @@ import cn.bsnmdpf.fcprt.api.pojo.DepartmentExample;
 import cn.bsnmdpf.fcprt.usercenter5010.mapper.DepartmentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -63,17 +64,13 @@ public class DepartmentService {
      * @param department
      * @return 成功返回true，失败返回false
      */
-    public boolean addDepartment(Department department) {
+    @Transactional
+    public boolean addDepartment(Department department) throws RuntimeException {
         int insert = departmentMapper.insert(department);
-        try {
-            if (insert == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，请检查字段是否完整");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (insert == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，请检查字段是否完整");
         }
     }
 
@@ -83,22 +80,18 @@ public class DepartmentService {
      * @param did
      * @return 成功返回true，失败返回false
      */
-    public boolean unableDepartmentByDid(Integer did) {
+    @Transactional
+    public boolean unableDepartmentByDid(Integer did) throws RuntimeException {
         Department department = new Department();
         department.setIsactive(0);
         DepartmentExample departmentExample = new DepartmentExample();
         DepartmentExample.Criteria criteria = departmentExample.createCriteria();
         criteria.andDidEqualTo(did);
         int res = departmentMapper.updateByExampleSelective(department, departmentExample);
-        try {
-            if (res == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法删除，或可能找不到对应did的department");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (res == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法删除，或可能找不到对应did的department");
         }
     }
 
@@ -108,22 +101,18 @@ public class DepartmentService {
      * @param did
      * @return 成功返回true，失败返回false
      */
-    public boolean ableDepartmentByDid(Integer did) {
+    @Transactional
+    public boolean ableDepartmentByDid(Integer did) throws RuntimeException {
         Department department = new Department();
         department.setIsactive(1);
         DepartmentExample departmentExample = new DepartmentExample();
         DepartmentExample.Criteria criteria = departmentExample.createCriteria();
         criteria.andDidEqualTo(did);
         int res = departmentMapper.updateByExampleSelective(department, departmentExample);
-        try {
-            if (res == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法解封，或可能找不到对应did的department");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (res == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法解封，或可能找不到对应did的department");
         }
     }
 
@@ -133,20 +122,16 @@ public class DepartmentService {
      * @param department
      * @return 成功返回true，失败返回false
      */
-    public boolean updateDepartment(Department department) {
+    @Transactional
+    public boolean updateDepartment(Department department) throws RuntimeException {
         DepartmentExample departmentExample = new DepartmentExample();
         DepartmentExample.Criteria criteria = departmentExample.createCriteria();
         criteria.andDidEqualTo(department.getDid());
         int res = departmentMapper.updateByExampleSelective(department, departmentExample);
-        try {
-            if (res == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，无法更新，或可能找不到对应did的department");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (res == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，无法更新，或可能找不到对应did的department");
         }
     }
 }

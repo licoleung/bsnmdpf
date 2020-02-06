@@ -5,6 +5,7 @@ import cn.bsnmdpf.fcprt.api.pojo.ScoreExample;
 import cn.bsnmdpf.fcprt.vipcenter5040.mapper.ScoreMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -59,14 +60,10 @@ public class ScoreService {
      * @param lessGetTime 小于这个时间的记录
      * @return 返回成功条数
      */
-    public int deleteScoreRecord(Integer scoreid, Integer vipid, Date lessGetTime) {
-        try {
-            if (scoreid == null && vipid == null && lessGetTime == null) {
-                throw new Exception("不允许无任何删除条件，此操作会删除所有积分记录");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
+    @Transactional
+    public int deleteScoreRecord(Integer scoreid, Integer vipid, Date lessGetTime) throws RuntimeException {
+        if (scoreid == null && vipid == null && lessGetTime == null) {
+            throw new RuntimeException("不允许无任何删除条件，此操作会删除所有积分记录");
         }
         ScoreExample scoreExample = new ScoreExample();
         ScoreExample.Criteria criteria = scoreExample.createCriteria();
@@ -89,17 +86,13 @@ public class ScoreService {
      * @param score
      * @return 成功返回true，失败返回false
      */
-    public boolean addScore(Score score) {
+    @Transactional
+    public boolean addScore(Score score) throws RuntimeException {
         int insert = scoreMapper.insert(score);
-        try {
-            if (insert == 1) {
-                return true;
-            } else {
-                throw new Exception("未知错误，请检查Score中的必填字段是否完整");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (insert == 1) {
+            return true;
+        } else {
+            throw new RuntimeException("未知错误，请检查Score中的必填字段是否完整");
         }
     }
 
