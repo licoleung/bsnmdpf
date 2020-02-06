@@ -7,7 +7,6 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 
 /**
  * @author LicoLeung
@@ -35,8 +34,8 @@ public interface VIPCenterService {
                                           @RequestParam(value = "page") int page,
                                           @RequestParam(value = "screid", required = false) Integer scoreid,
                                           @RequestParam(value = "vipid", required = false) Integer vipid,
-                                          @RequestParam(value = "lessGetTime", required = false) Date lessGetTime,
-                                          @RequestParam(value = "greaterGetTime", required = false) Date greaterGetTime,
+                                          @RequestParam(value = "lessGetTime", required = false) String lessGetTime,
+                                          @RequestParam(value = "greaterGetTime", required = false) String greaterGetTime,
                                           @RequestParam(value = "score", required = false) Integer score);
     /**
      * 删除积分记录
@@ -50,7 +49,7 @@ public interface VIPCenterService {
     @DeleteMapping("score")
     public int deleteScore(@RequestParam(value = "screid", required = false) Integer scoreid,
                            @RequestParam(value = "vipid", required = false) Integer vipid,
-                           @RequestParam(value = "lessGetTime", required = false) Date lessGetTime);
+                           @RequestParam(value = "lessGetTime", required = false) String lessGetTime);
     /**
      * 添加积分
      *
@@ -112,8 +111,8 @@ public interface VIPCenterService {
                                                @RequestParam(value ="greatercstTime",required = false) Integer greatercstTime,
                                                @RequestParam(value ="cstCycle",required = false) String cstCycle,
                                                @RequestParam(value ="level",required = false) Integer level,
-                                               @RequestParam(value ="lessRegistTime",required = false) Date lessRegistTime,
-                                               @RequestParam(value ="greaterRegistTime",required = false) Date greaterRegistTime,
+                                               @RequestParam(value ="lessRegistTime",required = false) String lessRegistTime,
+                                               @RequestParam(value ="greaterRegistTime",required = false) String greaterRegistTime,
                                                @RequestParam(value ="lessBalance",required = false) Double lessBalance,
                                                @RequestParam(value ="greaterBalance",required = false) Double greaterBalance,
                                                @RequestParam(value ="isStuff",required = false)Integer isStuff,

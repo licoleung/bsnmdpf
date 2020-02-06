@@ -1,13 +1,18 @@
 package cn.bsnmdpf.fcprt.stockcenter5050.controller;
 
+import cn.bsnmdpf.fcprt.api.pojo.OnHand;
 import cn.bsnmdpf.fcprt.api.pojo.Outstockbill;
+import cn.bsnmdpf.fcprt.api.pojo.Stock;
 import cn.bsnmdpf.fcprt.api.pojo.Warehouse;
+import cn.bsnmdpf.fcprt.stockcenter5050.service.OnHandService;
 import cn.bsnmdpf.fcprt.stockcenter5050.service.OutstockbillService;
+import cn.bsnmdpf.fcprt.stockcenter5050.service.StockService;
 import cn.bsnmdpf.fcprt.stockcenter5050.service.WarehouseService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
@@ -29,6 +34,12 @@ public class OutstockbillController {
 
     @Autowired
     private WarehouseService warehouseService;
+
+    @Autowired
+    private OnHandService onHandService;
+
+    @Autowired
+    private StockService stockService;
 
     @InitBinder
     public void initBinder(WebDataBinder binder, WebRequest request) {
@@ -112,6 +123,7 @@ public class OutstockbillController {
      * @return 成功返回true，失败返回false
      */
     @PostMapping("outstockbill")
+    @Transactional
     public boolean addOutstockbill(@RequestParam(value = "outid", required = false) Integer outid,
                                    @RequestParam(value = "outbillcode") String outbillcode,
                                    @RequestParam(value = "whid") Integer whid,
@@ -148,16 +160,43 @@ public class OutstockbillController {
             outstockbill.setIsactive(1);
         }
         outstockbill.setCreatetime(new Date());
-//在此更新现存量，现存量再去更新仓位和仓库
-//        System.out.println(whid);
-//        boolean b1 = warehouseService.decreaseVolumn(whid, volumn);
 
+        //根据仓位id获取仓库id
         Warehouse wHbyWhid = warehouseService.getWHbyWhid(whid);
         Integer sid = wHbyWhid.getSid();
 
-        boolean b = outstockbillService.addOutstockbill(outstockbill);
+        //根据mid，whid，sid获取原现存量信息
+        List<OnHand> onHands = onHandService.getOnHands(null, mid, null, whid, null, sid, null, null, null, null, null, null, null);
+        boolean update = false;
+        //if存在现存量信息则更新信息,else不存在现存量则报错
+        if(onHands!=null){
+            OnHand onHand = onHands.get(0);
+            Integer relnnum = onHand.getNnum() - nnum;
+            Double relvolumn = onHand.getVolumn() - volumn;
+            Double relweight = onHand.getWeight() - weight;
+            if(relnnum<0||relvolumn<0||relweight<0)
+                return false;
+            OnHand newOnHand = new OnHand();
+            newOnHand.setOhid(onHand.getOhid());
+            newOnHand.setNnum(relnnum);
+            newOnHand.setWeight(relweight);
+            newOnHand.setVolumn(relvolumn);
+            //更新仓位信息
+            boolean b1 = warehouseService.decreaseVolumn(whid, volumn);
 
-        return b;
+            //更新仓库信息
+            boolean b2 = stockService.decreaseVolumn(sid, volumn);
+
+            boolean b = outstockbillService.addOutstockbill(outstockbill);
+
+            update = onHandService.update(newOnHand);
+
+            return b&update&b1&b2;
+        }else{
+            throw new RuntimeException("无对应现存量信息");
+        }
+
+
     }
 
     /**

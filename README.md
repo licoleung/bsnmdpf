@@ -4,8 +4,10 @@
 <h4>1.vipcenter端口改为5080</h4>
 <h4>2.消费者调用UserCenterService的时候会存在传输pojo实体类的情况，例如添加用户、部门等，</h4>
 <h4>&nbsp;&nbsp;&nbsp;但当调用VIPCenterService的时候传输的是各个字段参数，pojo实体类的封装会在VIPCenter里面完成。</h4>
+<h4>3.所有“体积”的单词写成了“volumn”，涉及地方过多，不作修改</h4>
 <hr>
 <h3>版本信息</h3>
+V5.5<br>  2020年2月6日 15点32分<br> ·完成StockCenter，含事务管理<br>·完成VIPCenter日期的处理<br><br>
 V5.4<br>  2020年2月5日 23点18分<br> ·完成stockcenter大部分<br><br>
 V5.3<br>  2020年2月5日 12点35分<br> ·完成WarehouseController，部分InstockbillController<br><br>
 V5.2<br>  2020年2月5日 00点50分<br> ·完成StockController，已增加List字段，已关联仓位<br><br>

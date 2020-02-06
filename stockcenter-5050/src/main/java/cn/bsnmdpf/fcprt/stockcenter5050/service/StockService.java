@@ -3,6 +3,7 @@ package cn.bsnmdpf.fcprt.stockcenter5050.service;
 import cn.bsnmdpf.fcprt.api.pojo.Stock;
 import cn.bsnmdpf.fcprt.api.pojo.StockExample;
 import cn.bsnmdpf.fcprt.api.pojo.Warehouse;
+import cn.bsnmdpf.fcprt.api.pojo.WarehouseExample;
 import cn.bsnmdpf.fcprt.stockcenter5050.mapper.StockMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -176,6 +177,80 @@ public class StockService {
             return true;
         } else {
             throw new RuntimeException("未知错误，无法更新，或可能找不到对应sid的stock");
+        }
+    }
+
+    /**
+     * 减少仓库已使用容量
+     *
+     * @param sid
+     * @param updateVolumn
+     * @return 成功返回true，失败返回false
+     * @throws RuntimeException
+     */
+    @Transactional
+    public boolean decreaseVolumn(Integer sid, Double updateVolumn) throws RuntimeException {
+        StockExample stockExample = new StockExample();
+        StockExample.Criteria criteria = stockExample.createCriteria();
+        criteria.andSidEqualTo(sid);
+        List<Stock> stocks = stockMapper.selectByExample(stockExample);
+        Stock stock = stocks.get(0);
+        if (stock.getUsedvolumn() < updateVolumn) {
+            throw new RuntimeException("当前已使用容量小于减少容量");
+        }
+
+        Double realUsedVolumn = stock.getUsedvolumn() - updateVolumn;
+        Stock updated = new Stock();
+        updated.setUsedvolumn(realUsedVolumn);
+
+        StockExample updatedStockExample = new StockExample();
+        StockExample.Criteria criteria1 = updatedStockExample.createCriteria();
+        criteria1.andSidEqualTo(sid);
+
+        int i = stockMapper.updateByExampleSelective(updated, updatedStockExample);
+        if (i == 1)
+            return true;
+        else if (i == 0) {
+            throw new RuntimeException("未知错误，或找不到sid对应的stock");
+        } else {
+            throw new RuntimeException("多条记录被修改");
+        }
+    }
+
+    /**
+     * 增加仓库已使用容量
+     *
+     * @param sid
+     * @param updateVolumn
+     * @return 成功返回true，失败返回false
+     * @throws RuntimeException
+     */
+    @Transactional
+    public boolean increaseVolumn(Integer sid, Double updateVolumn) throws RuntimeException {
+        StockExample stockExample = new StockExample();
+        StockExample.Criteria criteria = stockExample.createCriteria();
+        criteria.andSidEqualTo(sid);
+        List<Stock> stocks = stockMapper.selectByExample(stockExample);
+        Stock stock = stocks.get(0);
+
+        Double realUsedVolumn = stock.getUsedvolumn() + updateVolumn;
+        if (realUsedVolumn > stock.getVolumn()) {
+            throw new RuntimeException("超出最大容量");
+        }
+        Stock updated = new Stock();
+        updated.setUsedvolumn(realUsedVolumn);
+
+        StockExample updatedStockExample = new StockExample();
+        StockExample.Criteria criteria1 = updatedStockExample.createCriteria();
+        criteria1.andSidEqualTo(sid);
+
+        int i = stockMapper.updateByExampleSelective(updated, updatedStockExample);
+        if (i == 1)
+            return true;
+        else if (i == 0) {
+            throw new RuntimeException("未知错误，或找不到sid对应的stock");
+        } else {
+            throw new RuntimeException("多条记录被修改");
         }
     }
 }

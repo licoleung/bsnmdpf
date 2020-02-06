@@ -31,7 +31,15 @@ public interface UserCenterService {
      * @return 用户列表
      */
     @GetMapping("user")
-    public PageInfo<User> getUsersByParam(@RequestParam("pageSize") int pageSize, @RequestParam("page") int page, @RequestParam(value = "username", required = false) String username, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "did", required = false) Integer did, @RequestParam(value = "uid", required = false) Integer uid, @RequestParam(value = "spare", required = false) String spare);
+    public PageInfo<User> getUsersByParam(@RequestParam("pageSize") int pageSize,
+                                          @RequestParam("page") int page,
+                                          @RequestParam(value = "username", required = false) String username,
+                                          @RequestParam(value = "creator", required = false) String creator,
+                                          @RequestParam(value = "modifier", required = false) String modifier,
+                                          @RequestParam(value = "isActive", required = false) Integer isActive,
+                                          @RequestParam(value = "did", required = false) Integer did,
+                                          @RequestParam(value = "uid", required = false) Integer uid,
+                                          @RequestParam(value = "spare", required = false) String spare);
 
     /**
      * 添加用户

@@ -1,14 +1,24 @@
 package cn.bsnmdpf.fcprt.stockcenter5050.controller;
 
 import cn.bsnmdpf.fcprt.api.pojo.Instockbill;
+import cn.bsnmdpf.fcprt.api.pojo.OnHand;
+import cn.bsnmdpf.fcprt.api.pojo.Stock;
 import cn.bsnmdpf.fcprt.api.pojo.Warehouse;
 import cn.bsnmdpf.fcprt.stockcenter5050.service.InstockbillService;
+import cn.bsnmdpf.fcprt.stockcenter5050.service.OnHandService;
+import cn.bsnmdpf.fcprt.stockcenter5050.service.StockService;
 import cn.bsnmdpf.fcprt.stockcenter5050.service.WarehouseService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +34,20 @@ public class InstockbillController {
 
     @Autowired
     private WarehouseService warehouseService;
+
+    @Autowired
+    private OnHandService onHandService;
+
+    @Autowired
+    private StockService stockService;
+
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder, WebRequest request) {
+        //转换日期 注意这里的转化要和传进来的字符串的格式一直 如2015-9-9 就应该为yyyy-MM-dd
+        DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));// CustomDateEditor为自定义日期编辑器
+    }
 
     /**
      * 根据条件查询入库单
@@ -100,6 +124,7 @@ public class InstockbillController {
      * @return 成功返回true，失败返回false
      */
     @PostMapping("instockbill")
+    @Transactional
     public boolean addInstockbill(@RequestParam(value = "inid", required = false) Integer inid,
                                   @RequestParam(value = "inbillcode") String inbillcode,
                                   @RequestParam(value = "whid") Integer whid,
@@ -112,7 +137,7 @@ public class InstockbillController {
                                   @RequestParam(value = "isActive", required = false) Integer isActive,
                                   @RequestParam(value = "nnum") Integer nnum,
                                   @RequestParam(value = "volumn") Double volumn,
-                                  @RequestParam(value = "weight") Double weight) {
+                                  @RequestParam(value = "weight") Double weight) throws RuntimeException{
         Instockbill instockbill = new Instockbill();
         if (inid != null) {
             instockbill.setInid(inid);
@@ -136,12 +161,55 @@ public class InstockbillController {
             instockbill.setIsactive(1);
         }
         instockbill.setCreatetime(new Date());
-//        Warehouse warehouse = new Warehouse();
-//        warehouse.setWhid(whid);
-//        warehouseService.updateWarehouse()
 
+        //根据仓位id获取仓库id
+        Warehouse wHbyWhid = warehouseService.getWHbyWhid(whid);
+        Integer sid = wHbyWhid.getSid();
+
+        //根据mid，whid，sid获取原现存量信息
+        List<OnHand> onHands = onHandService.getOnHands(null, mid, null, whid, null, sid, null, null, null, null, null, null, null);
+        boolean update = false;
+        //if存在现存量信息则更新信息,else不存在现存量则新增
+        if(onHands.size()!=0){
+            OnHand onHand = onHands.get(0);
+            Integer relnnum = onHand.getNnum() + nnum;
+            Double relvolumn = onHand.getVolumn() + volumn;
+            Double relweight = onHand.getWeight() + weight;
+            if(relnnum<0||relvolumn<0||relweight<0)
+                return false;
+            OnHand newOnHand = new OnHand();
+            newOnHand.setOhid(onHand.getOhid());
+            newOnHand.setNnum(relnnum);
+            newOnHand.setWeight(relweight);
+            newOnHand.setVolumn(relvolumn);
+            update = onHandService.update(newOnHand);
+        }
+        else{
+            OnHand onHand = new OnHand();
+            onHand.setMid(mid);
+            onHand.setMname(mname);
+            onHand.setVolumn(volumn);
+            onHand.setWeight(weight);
+            onHand.setNnum(nnum);
+            onHand.setSid(sid);
+            onHand.setWhid(whid);
+            onHand.setWhname(wHbyWhid.getWarehousename());
+            List<Stock> stockList = stockService.getStockList(sid, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+            String stockname = stockList.get(0).getStockname();
+            onHand.setStockname(stockname);
+            update = onHandService.addOnHand(onHand);
+        }
+
+        //更新仓位信息
+        boolean b1 = warehouseService.increaseVolumn(whid, volumn);
+
+        //更新仓库信息
+        boolean b2 = stockService.increaseVolumn(sid, volumn);
+
+        //添加入库单
         boolean b = instockbillService.addInstockbill(instockbill);
-        return b;
+
+        return b&b1&b2&update;
     }
 
     /**
