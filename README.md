@@ -7,6 +7,7 @@
 <h4>3.所有“体积”的单词写成了“volumn”，涉及地方过多，不作修改</h4>
 <hr>
 <h3>版本信息</h3>
+V5.6.1<br> 2020年2月6日 16点05分<br> ·修改了事务管理的小bug<br><br>
 V5.6<br>  2020年2月6日 15点51分<br> ·优化了VIPCenter及UserCenter的事务管理<br><br>
 V5.5<br>  2020年2月6日 15点32分<br> ·完成StockCenter，含事务管理<br>·完成VIPCenter日期的处理<br><br>
 V5.4<br>  2020年2月5日 23点18分<br> ·完成stockcenter大部分<br><br>
