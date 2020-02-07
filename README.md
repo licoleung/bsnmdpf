@@ -7,6 +7,7 @@
 <h4>3.所有“体积”的单词写成了“volumn”，涉及地方过多，不作修改</h4>
 <hr>
 <h3>版本信息</h3>
+V7.1<br> 2020年2月7日 23点13分<br> ·修改了purchaseorder中money的小bug，将String改为Double<br>·增加了PurchaseorderService，只写了add方法<br><br>
 V7.0<br> 2020年2月7日 22点50分<br> ·修改了OrderCenter的pojo<br><br>
 V6.1<br> 2020年2月7日 20点14分<br> ·完成GoodCenter<br><br>
 V6.0<br>  2020年2月6日 23点57分<br>  ·Material的修改及MaterialService的编写<br><br>

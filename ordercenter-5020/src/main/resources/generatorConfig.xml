@@ -74,34 +74,5 @@
                selectByExampleQueryId="true">
         </table>
 
-        <table schema="ordercenter" tableName="tbl_saleorder"
-               domainObjectName="Saleorder"
-               enableInsert="true"
-               enableSelectByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true"
-               selectByPrimaryKeyQueryId="true"
-               selectByExampleQueryId="true">
-        </table>
-
-
-        <table schema="ordercenter" tableName="tbl_warehouseorder"
-               domainObjectName="Warehouseorder"
-               enableInsert="true"
-               enableSelectByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true"
-               selectByPrimaryKeyQueryId="true"
-               selectByExampleQueryId="true">
-        </table>
-
     </context>
 </generatorConfiguration>

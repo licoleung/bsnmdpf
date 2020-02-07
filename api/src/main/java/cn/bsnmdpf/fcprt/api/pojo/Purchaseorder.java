@@ -25,7 +25,7 @@ public class Purchaseorder {
 
     private String unit;
 
-    private String money;
+    private Double money;
 
     private Integer orderstate;
 
@@ -131,12 +131,12 @@ public class Purchaseorder {
         this.unit = unit == null ? null : unit.trim();
     }
 
-    public String getMoney() {
+    public Double getMoney() {
         return money;
     }
 
-    public void setMoney(String money) {
-        this.money = money == null ? null : money.trim();
+    public void setMoney(Double money) {
+        this.money = money;
     }
 
     public Integer getOrderstate() {

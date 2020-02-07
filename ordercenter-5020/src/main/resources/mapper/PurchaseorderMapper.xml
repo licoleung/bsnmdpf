@@ -13,7 +13,7 @@
     <result column="material" jdbcType="VARCHAR" property="material" />
     <result column="nnum" jdbcType="INTEGER" property="nnum" />
     <result column="unit" jdbcType="VARCHAR" property="unit" />
-    <result column="money" jdbcType="VARCHAR" property="money" />
+    <result column="money" jdbcType="DOUBLE" property="money" />
     <result column="orderState" jdbcType="INTEGER" property="orderstate" />
     <result column="creator" jdbcType="VARCHAR" property="creator" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
@@ -111,17 +111,17 @@
     insert into tbl_purchaseorder (poid, cid, companyname, 
       billcode, billdate, supplierid, 
       suppliername, mid, material, 
-      nnum, unit, money, 
-      orderState, creator, createTime, 
-      modifier, modifyTime, approver, 
-      taudittime, address)
+      nnum, unit, money, orderState, 
+      creator, createTime, modifier, 
+      modifyTime, approver, taudittime, 
+      address)
     values (#{poid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{companyname,jdbcType=VARCHAR}, 
       #{billcode,jdbcType=VARCHAR}, #{billdate,jdbcType=TIMESTAMP}, #{supplierid,jdbcType=INTEGER}, 
       #{suppliername,jdbcType=VARCHAR}, #{mid,jdbcType=INTEGER}, #{material,jdbcType=VARCHAR}, 
-      #{nnum,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR}, #{money,jdbcType=VARCHAR}, 
-      #{orderstate,jdbcType=INTEGER}, #{creator,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{modifier,jdbcType=VARCHAR}, #{modifytime,jdbcType=TIMESTAMP}, #{approver,jdbcType=VARCHAR}, 
-      #{taudittime,jdbcType=TIMESTAMP}, #{address,jdbcType=VARCHAR})
+      #{nnum,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR}, #{money,jdbcType=DOUBLE}, #{orderstate,jdbcType=INTEGER}, 
+      #{creator,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, 
+      #{modifytime,jdbcType=TIMESTAMP}, #{approver,jdbcType=VARCHAR}, #{taudittime,jdbcType=TIMESTAMP}, 
+      #{address,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.api.pojo.Purchaseorder">
     insert into tbl_purchaseorder
@@ -222,7 +222,7 @@
         #{unit,jdbcType=VARCHAR},
       </if>
       <if test="money != null">
-        #{money,jdbcType=VARCHAR},
+        #{money,jdbcType=DOUBLE},
       </if>
       <if test="orderstate != null">
         #{orderstate,jdbcType=INTEGER},
@@ -293,7 +293,7 @@
         unit = #{record.unit,jdbcType=VARCHAR},
       </if>
       <if test="record.money != null">
-        money = #{record.money,jdbcType=VARCHAR},
+        money = #{record.money,jdbcType=DOUBLE},
       </if>
       <if test="record.orderstate != null">
         orderState = #{record.orderstate,jdbcType=INTEGER},
@@ -337,7 +337,7 @@
       material = #{record.material,jdbcType=VARCHAR},
       nnum = #{record.nnum,jdbcType=INTEGER},
       unit = #{record.unit,jdbcType=VARCHAR},
-      money = #{record.money,jdbcType=VARCHAR},
+      money = #{record.money,jdbcType=DOUBLE},
       orderState = #{record.orderstate,jdbcType=INTEGER},
       creator = #{record.creator,jdbcType=VARCHAR},
       createTime = #{record.createtime,jdbcType=TIMESTAMP},
