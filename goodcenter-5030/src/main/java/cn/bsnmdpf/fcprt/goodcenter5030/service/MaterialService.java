@@ -5,6 +5,7 @@ import cn.bsnmdpf.fcprt.api.pojo.MaterialExample;
 import cn.bsnmdpf.fcprt.goodcenter5030.mapper.MaterialMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -108,8 +109,9 @@ public class MaterialService {
      * @param material
      * @return 成功返回true，失败返回false
      */
-    public boolean addMaterial(Material material) {
-        int insert = materialMapper.insert(material);
+    @Transactional
+    public boolean addMaterial(Material material) throws RuntimeException{
+        int insert = materialMapper.insertSelective(material);
         if (insert == 1) {
             return true;
         } else {
@@ -123,7 +125,8 @@ public class MaterialService {
      * @param mid 物料主键
      * @return 成功返回true，失败返回false
      */
-    public boolean unableMaterial(Integer mid) {
+    @Transactional
+    public boolean unableMaterial(Integer mid) throws RuntimeException{
         Material material = new Material();
         material.setIsactive(0);
         MaterialExample materialExample = new MaterialExample();
@@ -143,7 +146,8 @@ public class MaterialService {
      * @param mid 物料主键
      * @return 成功返回true，失败返回false
      */
-    public boolean ableMaterial(Integer mid) {
+    @Transactional
+    public boolean ableMaterial(Integer mid) throws RuntimeException {
         Material material = new Material();
         material.setIsactive(1);
         MaterialExample materialExample = new MaterialExample();
@@ -163,7 +167,8 @@ public class MaterialService {
      * @param material
      * @return 成功返回true，失败返回false
      */
-    public boolean updateMaterial(Material material) {
+    @Transactional
+    public boolean updateMaterial(Material material) throws RuntimeException{
         MaterialExample materialExample = new MaterialExample();
         MaterialExample.Criteria criteria = materialExample.createCriteria();
         criteria.andMidEqualTo(material.getMcid());

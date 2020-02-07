@@ -1,6 +1,7 @@
 package cn.bsnmdpf.fcprt.api.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Material {
     private Integer mid;
@@ -32,6 +33,16 @@ public class Material {
     private Date modifytime;
 
     private Integer isactive;
+
+    private List<Materialtag> materialtags;
+
+    public List<Materialtag> getMaterialtags() {
+        return materialtags;
+    }
+
+    public void setMaterialtags(List<Materialtag> materialtags) {
+        this.materialtags = materialtags;
+    }
 
     public Integer getMid() {
         return mid;
