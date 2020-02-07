@@ -1,8 +1,9 @@
 package cn.bsnmdpf.fcprt.ordercenter5020.mapper;
 
+import java.util.List;
+
 import cn.bsnmdpf.fcprt.api.pojo.Saleorder;
 import cn.bsnmdpf.fcprt.api.pojo.SaleorderExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface SaleorderMapper {

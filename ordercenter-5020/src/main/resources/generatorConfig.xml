@@ -60,7 +60,7 @@
         <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample
             是否生成 example类 -->
 
-        <table schema="usercenter" tableName="tbl_purchaseorder"
+        <table schema="ordercenter" tableName="tbl_purchaseorder"
                domainObjectName="Purchaseorder"
                enableInsert="true"
                enableSelectByPrimaryKey="true"
@@ -74,7 +74,7 @@
                selectByExampleQueryId="true">
         </table>
 
-        <table schema="usercenter" tableName="tbl_saleorder"
+        <table schema="ordercenter" tableName="tbl_saleorder"
                domainObjectName="Saleorder"
                enableInsert="true"
                enableSelectByPrimaryKey="true"
@@ -89,7 +89,7 @@
         </table>
 
 
-        <table schema="usercenter" tableName="tbl_warehouseorder"
+        <table schema="ordercenter" tableName="tbl_warehouseorder"
                domainObjectName="Warehouseorder"
                enableInsert="true"
                enableSelectByPrimaryKey="true"

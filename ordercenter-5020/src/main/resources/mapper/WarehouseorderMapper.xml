@@ -12,6 +12,7 @@
     <result column="money" jdbcType="DOUBLE" property="money" />
     <result column="weight" jdbcType="DOUBLE" property="weight" />
     <result column="volumn" jdbcType="DOUBLE" property="volumn" />
+    <result column="mid" jdbcType="INTEGER" property="mid" />
     <result column="material" jdbcType="VARCHAR" property="material" />
     <result column="orderstate" jdbcType="VARCHAR" property="orderstate" />
     <result column="creator" jdbcType="VARCHAR" property="creator" />
@@ -80,8 +81,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    whoid, cid, billcode, billdate, vipid, vipname, nnum, money, weight, volumn, material, 
-    orderstate, creator, createTime, modifier, modifyTime, whid, warehouseName
+    whoid, cid, billcode, billdate, vipid, vipname, nnum, money, weight, volumn, mid, 
+    material, orderstate, creator, createTime, modifier, modifyTime, whid, warehouseName
   </sql>
   <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.WarehouseorderExample" resultMap="BaseResultMap">
     select
@@ -108,17 +109,17 @@
     insert into tbl_warehouseorder (whoid, cid, billcode, 
       billdate, vipid, vipname, 
       nnum, money, weight, 
-      volumn, material, orderstate, 
-      creator, createTime, modifier, 
-      modifyTime, whid, warehouseName
-      )
+      volumn, mid, material, 
+      orderstate, creator, createTime, 
+      modifier, modifyTime, whid, 
+      warehouseName)
     values (#{whoid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{billcode,jdbcType=VARCHAR}, 
       #{billdate,jdbcType=TIMESTAMP}, #{vipid,jdbcType=INTEGER}, #{vipname,jdbcType=VARCHAR}, 
       #{nnum,jdbcType=INTEGER}, #{money,jdbcType=DOUBLE}, #{weight,jdbcType=DOUBLE}, 
-      #{volumn,jdbcType=DOUBLE}, #{material,jdbcType=VARCHAR}, #{orderstate,jdbcType=VARCHAR}, 
-      #{creator,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, 
-      #{modifytime,jdbcType=TIMESTAMP}, #{whid,jdbcType=INTEGER}, #{warehousename,jdbcType=VARCHAR}
-      )
+      #{volumn,jdbcType=DOUBLE}, #{mid,jdbcType=INTEGER}, #{material,jdbcType=VARCHAR}, 
+      #{orderstate,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{modifier,jdbcType=VARCHAR}, #{modifytime,jdbcType=TIMESTAMP}, #{whid,jdbcType=INTEGER}, 
+      #{warehousename,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.api.pojo.Warehouseorder">
     insert into tbl_warehouseorder
@@ -152,6 +153,9 @@
       </if>
       <if test="volumn != null">
         volumn,
+      </if>
+      <if test="mid != null">
+        mid,
       </if>
       <if test="material != null">
         material,
@@ -208,6 +212,9 @@
       </if>
       <if test="volumn != null">
         #{volumn,jdbcType=DOUBLE},
+      </if>
+      <if test="mid != null">
+        #{mid,jdbcType=INTEGER},
       </if>
       <if test="material != null">
         #{material,jdbcType=VARCHAR},
@@ -274,6 +281,9 @@
       <if test="record.volumn != null">
         volumn = #{record.volumn,jdbcType=DOUBLE},
       </if>
+      <if test="record.mid != null">
+        mid = #{record.mid,jdbcType=INTEGER},
+      </if>
       <if test="record.material != null">
         material = #{record.material,jdbcType=VARCHAR},
       </if>
@@ -315,6 +325,7 @@
       money = #{record.money,jdbcType=DOUBLE},
       weight = #{record.weight,jdbcType=DOUBLE},
       volumn = #{record.volumn,jdbcType=DOUBLE},
+      mid = #{record.mid,jdbcType=INTEGER},
       material = #{record.material,jdbcType=VARCHAR},
       orderstate = #{record.orderstate,jdbcType=VARCHAR},
       creator = #{record.creator,jdbcType=VARCHAR},

@@ -17,6 +17,8 @@ public class Purchaseorder {
 
     private String suppliername;
 
+    private Integer mid;
+
     private String material;
 
     private Integer nnum;
@@ -95,6 +97,14 @@ public class Purchaseorder {
 
     public void setSuppliername(String suppliername) {
         this.suppliername = suppliername == null ? null : suppliername.trim();
+    }
+
+    public Integer getMid() {
+        return mid;
+    }
+
+    public void setMid(Integer mid) {
+        this.mid = mid;
     }
 
     public String getMaterial() {

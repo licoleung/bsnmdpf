@@ -17,6 +17,8 @@ public class Saleorder {
 
     private String vipname;
 
+    private Integer mid;
+
     private String material;
 
     private Integer nnum;
@@ -95,6 +97,14 @@ public class Saleorder {
 
     public void setVipname(String vipname) {
         this.vipname = vipname == null ? null : vipname.trim();
+    }
+
+    public Integer getMid() {
+        return mid;
+    }
+
+    public void setMid(Integer mid) {
+        this.mid = mid;
     }
 
     public String getMaterial() {

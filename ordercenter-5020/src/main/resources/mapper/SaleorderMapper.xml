@@ -9,6 +9,7 @@
     <result column="billdate" jdbcType="TIMESTAMP" property="billdate" />
     <result column="vipid" jdbcType="INTEGER" property="vipid" />
     <result column="vipname" jdbcType="VARCHAR" property="vipname" />
+    <result column="mid" jdbcType="INTEGER" property="mid" />
     <result column="material" jdbcType="VARCHAR" property="material" />
     <result column="nnum" jdbcType="INTEGER" property="nnum" />
     <result column="unit" jdbcType="VARCHAR" property="unit" />
@@ -81,8 +82,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    soid, cid, companyname, billcode, billdate, vipid, vipname, material, nnum, unit, 
-    money, orderState, creator, createTime, modifier, modifyTime, approver, taudittime, 
+    soid, cid, companyname, billcode, billdate, vipid, vipname, mid, material, nnum, 
+    unit, money, orderState, creator, createTime, modifier, modifyTime, approver, taudittime, 
     address
   </sql>
   <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.SaleorderExample" resultMap="BaseResultMap">
@@ -109,15 +110,15 @@
   <insert id="insert" parameterType="cn.bsnmdpf.fcprt.api.pojo.Saleorder">
     insert into tbl_saleorder (soid, cid, companyname, 
       billcode, billdate, vipid, 
-      vipname, material, nnum, 
-      unit, money, orderState, 
+      vipname, mid, material, 
+      nnum, unit, money, orderState, 
       creator, createTime, modifier, 
       modifyTime, approver, taudittime, 
       address)
     values (#{soid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{companyname,jdbcType=VARCHAR}, 
       #{billcode,jdbcType=VARCHAR}, #{billdate,jdbcType=TIMESTAMP}, #{vipid,jdbcType=INTEGER}, 
-      #{vipname,jdbcType=VARCHAR}, #{material,jdbcType=VARCHAR}, #{nnum,jdbcType=INTEGER}, 
-      #{unit,jdbcType=VARCHAR}, #{money,jdbcType=DOUBLE}, #{orderstate,jdbcType=INTEGER}, 
+      #{vipname,jdbcType=VARCHAR}, #{mid,jdbcType=INTEGER}, #{material,jdbcType=VARCHAR}, 
+      #{nnum,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR}, #{money,jdbcType=DOUBLE}, #{orderstate,jdbcType=INTEGER}, 
       #{creator,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, 
       #{modifytime,jdbcType=TIMESTAMP}, #{approver,jdbcType=VARCHAR}, #{taudittime,jdbcType=TIMESTAMP}, 
       #{address,jdbcType=VARCHAR})
@@ -145,6 +146,9 @@
       </if>
       <if test="vipname != null">
         vipname,
+      </if>
+      <if test="mid != null">
+        mid,
       </if>
       <if test="material != null">
         material,
@@ -204,6 +208,9 @@
       </if>
       <if test="vipname != null">
         #{vipname,jdbcType=VARCHAR},
+      </if>
+      <if test="mid != null">
+        #{mid,jdbcType=INTEGER},
       </if>
       <if test="material != null">
         #{material,jdbcType=VARCHAR},
@@ -273,6 +280,9 @@
       <if test="record.vipname != null">
         vipname = #{record.vipname,jdbcType=VARCHAR},
       </if>
+      <if test="record.mid != null">
+        mid = #{record.mid,jdbcType=INTEGER},
+      </if>
       <if test="record.material != null">
         material = #{record.material,jdbcType=VARCHAR},
       </if>
@@ -323,6 +333,7 @@
       billdate = #{record.billdate,jdbcType=TIMESTAMP},
       vipid = #{record.vipid,jdbcType=INTEGER},
       vipname = #{record.vipname,jdbcType=VARCHAR},
+      mid = #{record.mid,jdbcType=INTEGER},
       material = #{record.material,jdbcType=VARCHAR},
       nnum = #{record.nnum,jdbcType=INTEGER},
       unit = #{record.unit,jdbcType=VARCHAR},

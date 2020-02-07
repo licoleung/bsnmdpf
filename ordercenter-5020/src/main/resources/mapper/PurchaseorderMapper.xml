@@ -9,6 +9,7 @@
     <result column="billdate" jdbcType="TIMESTAMP" property="billdate" />
     <result column="supplierid" jdbcType="INTEGER" property="supplierid" />
     <result column="suppliername" jdbcType="VARCHAR" property="suppliername" />
+    <result column="mid" jdbcType="INTEGER" property="mid" />
     <result column="material" jdbcType="VARCHAR" property="material" />
     <result column="nnum" jdbcType="INTEGER" property="nnum" />
     <result column="unit" jdbcType="VARCHAR" property="unit" />
@@ -81,9 +82,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    poid, cid, companyname, billcode, billdate, supplierid, suppliername, material, nnum, 
-    unit, money, orderState, creator, createTime, modifier, modifyTime, approver, taudittime, 
-    address
+    poid, cid, companyname, billcode, billdate, supplierid, suppliername, mid, material, 
+    nnum, unit, money, orderState, creator, createTime, modifier, modifyTime, approver, 
+    taudittime, address
   </sql>
   <select id="selectByExample" parameterType="cn.bsnmdpf.fcprt.api.pojo.PurchaseorderExample" resultMap="BaseResultMap">
     select
@@ -109,18 +110,18 @@
   <insert id="insert" parameterType="cn.bsnmdpf.fcprt.api.pojo.Purchaseorder">
     insert into tbl_purchaseorder (poid, cid, companyname, 
       billcode, billdate, supplierid, 
-      suppliername, material, nnum, 
-      unit, money, orderState, 
-      creator, createTime, modifier, 
-      modifyTime, approver, taudittime, 
-      address)
+      suppliername, mid, material, 
+      nnum, unit, money, 
+      orderState, creator, createTime, 
+      modifier, modifyTime, approver, 
+      taudittime, address)
     values (#{poid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{companyname,jdbcType=VARCHAR}, 
       #{billcode,jdbcType=VARCHAR}, #{billdate,jdbcType=TIMESTAMP}, #{supplierid,jdbcType=INTEGER}, 
-      #{suppliername,jdbcType=VARCHAR}, #{material,jdbcType=VARCHAR}, #{nnum,jdbcType=INTEGER}, 
-      #{unit,jdbcType=VARCHAR}, #{money,jdbcType=VARCHAR}, #{orderstate,jdbcType=INTEGER}, 
-      #{creator,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, 
-      #{modifytime,jdbcType=TIMESTAMP}, #{approver,jdbcType=VARCHAR}, #{taudittime,jdbcType=TIMESTAMP}, 
-      #{address,jdbcType=VARCHAR})
+      #{suppliername,jdbcType=VARCHAR}, #{mid,jdbcType=INTEGER}, #{material,jdbcType=VARCHAR}, 
+      #{nnum,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR}, #{money,jdbcType=VARCHAR}, 
+      #{orderstate,jdbcType=INTEGER}, #{creator,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{modifier,jdbcType=VARCHAR}, #{modifytime,jdbcType=TIMESTAMP}, #{approver,jdbcType=VARCHAR}, 
+      #{taudittime,jdbcType=TIMESTAMP}, #{address,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.bsnmdpf.fcprt.api.pojo.Purchaseorder">
     insert into tbl_purchaseorder
@@ -145,6 +146,9 @@
       </if>
       <if test="suppliername != null">
         suppliername,
+      </if>
+      <if test="mid != null">
+        mid,
       </if>
       <if test="material != null">
         material,
@@ -204,6 +208,9 @@
       </if>
       <if test="suppliername != null">
         #{suppliername,jdbcType=VARCHAR},
+      </if>
+      <if test="mid != null">
+        #{mid,jdbcType=INTEGER},
       </if>
       <if test="material != null">
         #{material,jdbcType=VARCHAR},
@@ -273,6 +280,9 @@
       <if test="record.suppliername != null">
         suppliername = #{record.suppliername,jdbcType=VARCHAR},
       </if>
+      <if test="record.mid != null">
+        mid = #{record.mid,jdbcType=INTEGER},
+      </if>
       <if test="record.material != null">
         material = #{record.material,jdbcType=VARCHAR},
       </if>
@@ -323,6 +333,7 @@
       billdate = #{record.billdate,jdbcType=TIMESTAMP},
       supplierid = #{record.supplierid,jdbcType=INTEGER},
       suppliername = #{record.suppliername,jdbcType=VARCHAR},
+      mid = #{record.mid,jdbcType=INTEGER},
       material = #{record.material,jdbcType=VARCHAR},
       nnum = #{record.nnum,jdbcType=INTEGER},
       unit = #{record.unit,jdbcType=VARCHAR},

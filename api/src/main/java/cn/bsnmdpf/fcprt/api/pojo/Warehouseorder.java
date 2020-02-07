@@ -23,6 +23,8 @@ public class Warehouseorder {
 
     private Double volumn;
 
+    private Integer mid;
+
     private String material;
 
     private String orderstate;
@@ -117,6 +119,14 @@ public class Warehouseorder {
 
     public void setVolumn(Double volumn) {
         this.volumn = volumn;
+    }
+
+    public Integer getMid() {
+        return mid;
+    }
+
+    public void setMid(Integer mid) {
+        this.mid = mid;
     }
 
     public String getMaterial() {
