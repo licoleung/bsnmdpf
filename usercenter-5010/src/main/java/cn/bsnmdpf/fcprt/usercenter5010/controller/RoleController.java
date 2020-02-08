@@ -32,7 +32,14 @@ public class RoleController {
      * @return 符合条件的角色列表
      */
     @GetMapping("role")
-    public PageInfo<Role> getRoles(@RequestParam("pageSize") int pageSize, @RequestParam("page") int page,@RequestParam(value = "rid", required = false) Integer rid, @RequestParam(value = "rolename", required = false) String rolename, @RequestParam(value = "creator", required = false) String creator, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "spare", required = false) String spare) {
+    public PageInfo<Role> getRoles(@RequestParam("pageSize") int pageSize,
+                                   @RequestParam("page") int page,
+                                   @RequestParam(value = "rid", required = false) Integer rid,
+                                   @RequestParam(value = "rolename", required = false) String rolename,
+                                   @RequestParam(value = "creator", required = false) String creator,
+                                   @RequestParam(value = "modifier", required = false) String modifier,
+                                   @RequestParam(value = "isActive", required = false) Integer isActive,
+                                   @RequestParam(value = "spare", required = false) String spare) {
         PageHelper.startPage(page, pageSize);
         List<Role> roles = roleService.getRoles(rid, rolename, creator, modifier, isActive, spare);
         PageInfo<Role> pageInfo = new PageInfo<>(roles);

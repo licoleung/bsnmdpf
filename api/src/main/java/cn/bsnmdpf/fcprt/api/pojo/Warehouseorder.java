@@ -7,6 +7,8 @@ public class Warehouseorder {
 
     private Integer cid;
 
+    private String companyname;
+
     private String billcode;
 
     private Date billdate;
@@ -27,7 +29,7 @@ public class Warehouseorder {
 
     private String material;
 
-    private String orderstate;
+    private Integer orderstate;
 
     private String creator;
 
@@ -40,6 +42,10 @@ public class Warehouseorder {
     private Integer whid;
 
     private String warehousename;
+
+    private Integer sid;
+
+    private String stockname;
 
     public Integer getWhoid() {
         return whoid;
@@ -55,6 +61,14 @@ public class Warehouseorder {
 
     public void setCid(Integer cid) {
         this.cid = cid;
+    }
+
+    public String getCompanyname() {
+        return companyname;
+    }
+
+    public void setCompanyname(String companyname) {
+        this.companyname = companyname == null ? null : companyname.trim();
     }
 
     public String getBillcode() {
@@ -137,12 +151,12 @@ public class Warehouseorder {
         this.material = material == null ? null : material.trim();
     }
 
-    public String getOrderstate() {
+    public Integer getOrderstate() {
         return orderstate;
     }
 
-    public void setOrderstate(String orderstate) {
-        this.orderstate = orderstate == null ? null : orderstate.trim();
+    public void setOrderstate(Integer orderstate) {
+        this.orderstate = orderstate;
     }
 
     public String getCreator() {
@@ -191,5 +205,21 @@ public class Warehouseorder {
 
     public void setWarehousename(String warehousename) {
         this.warehousename = warehousename == null ? null : warehousename.trim();
+    }
+
+    public Integer getSid() {
+        return sid;
+    }
+
+    public void setSid(Integer sid) {
+        this.sid = sid;
+    }
+
+    public String getStockname() {
+        return stockname;
+    }
+
+    public void setStockname(String stockname) {
+        this.stockname = stockname == null ? null : stockname.trim();
     }
 }

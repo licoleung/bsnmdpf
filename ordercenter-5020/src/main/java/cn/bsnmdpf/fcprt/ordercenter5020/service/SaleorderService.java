@@ -1,8 +1,8 @@
 package cn.bsnmdpf.fcprt.ordercenter5020.service;
 
-import cn.bsnmdpf.fcprt.api.pojo.Purchaseorder;
-import cn.bsnmdpf.fcprt.api.pojo.PurchaseorderExample;
-import cn.bsnmdpf.fcprt.ordercenter5020.mapper.PurchaseorderMapper;
+import cn.bsnmdpf.fcprt.api.pojo.Saleorder;
+import cn.bsnmdpf.fcprt.api.pojo.SaleorderExample;
+import cn.bsnmdpf.fcprt.ordercenter5020.mapper.SaleorderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,25 +12,25 @@ import java.util.List;
 
 /**
  * @author LicoLeung
- * @create 2020-02-07 22:21
+ * @create 2020-02-08 18:04
  */
 @Service
-public class PurchaseorderService {
+public class SaleorderService {
 
     @Autowired
-    private PurchaseorderMapper purchaseorderMapper;
+    private SaleorderMapper saleorderMapper;
 
     /**
-     * 根据条件获取购买订单列表
+     * 根据条件获取销售订单列表
      *
-     * @param poid               购买订单主键
+     * @param soid               销售订单主键
      * @param cid                公司主键
      * @param companyname        公司名称
      * @param billcode           单据号
      * @param lessBilldate       最大单据日期
      * @param greaterBilldate    最小单据日期
-     * @param supplierid         供应商id
-     * @param suppliername       供应商名称
+     * @param vipid              vip id
+     * @param vipname            vip姓名
      * @param mid                物料编码
      * @param material           物料名称
      * @param nnum               数量
@@ -47,18 +47,19 @@ public class PurchaseorderService {
      * @param lessTaudittime     最大审批时间
      * @param greaterTaudittime  最小审批时间
      * @param address            地址
-     * @return
+     * @return 符合条件的销售订单列表
      */
-    public List<Purchaseorder> getPurchaseorders(Integer poid, Integer cid, String companyname, String billcode,
-                                                 Date lessBilldate, Date greaterBilldate, Integer supplierid,
-                                                 String suppliername, Integer mid, String material, Integer nnum,
-                                                 String unit, Double money, Integer orderState, String creator, Date lessCreateTime,
-                                                 Date greaterCreateTime, String modifier, Date lessModifyTime, Date greaterModifiyTime,
-                                                 String approver, Date lessTaudittime, Date greaterTaudittime, String address) {
-        PurchaseorderExample purchaseorderExample = new PurchaseorderExample();
-        PurchaseorderExample.Criteria criteria = purchaseorderExample.createCriteria();
-        if (poid != null) {
-            criteria.andPoidEqualTo(poid);
+    public List<Saleorder> getSaleorders(Integer soid, Integer cid, String companyname, String billcode,
+                                         Date lessBilldate, Date greaterBilldate, Integer vipid,
+                                         String vipname, Integer mid, String material, Integer nnum,
+                                         String unit, Double money, Integer orderState, String creator, Date lessCreateTime,
+                                         Date greaterCreateTime, String modifier, Date lessModifyTime, Date greaterModifiyTime,
+                                         String approver, Date lessTaudittime, Date greaterTaudittime, String address) {
+        SaleorderExample saleorderExample = new SaleorderExample();
+        SaleorderExample.Criteria criteria = saleorderExample.createCriteria();
+
+        if (soid != null) {
+            criteria.andSoidEqualTo(soid);
         }
         if (cid != null) {
             criteria.andCidEqualTo(cid);
@@ -75,11 +76,11 @@ public class PurchaseorderService {
         if (greaterBilldate != null) {
             criteria.andBilldateGreaterThanOrEqualTo(greaterBilldate);
         }
-        if (supplierid != null) {
-            criteria.andSupplieridEqualTo(supplierid);
+        if (vipid != null) {
+            criteria.andVipidEqualTo(vipid);
         }
-        if (suppliername != null) {
-            criteria.andSuppliernameLike("%" + suppliername + "%");
+        if (vipname != null) {
+            criteria.andVipnameLike("%" + vipname + "%");
         }
         if (mid != null) {
             criteria.andMidEqualTo(mid);
@@ -130,20 +131,20 @@ public class PurchaseorderService {
         if (address != null) {
             criteria.andAddressLike("%" + address + "%");
         }
-        List<Purchaseorder> purchaseorders = purchaseorderMapper.selectByExample(purchaseorderExample);
-        return purchaseorders;
+        List<Saleorder> saleorders = saleorderMapper.selectByExample(saleorderExample);
+        return saleorders;
     }
 
     /**
-     * 添加购买订单
+     * 添加销售订单
      *
-     * @param purchaseorder 购买订单
+     * @param saleorder 销售订单
      * @return 成功返回true，失败返回false
      * @throws RuntimeException
      */
     @Transactional
-    public boolean addPurchaseorder(Purchaseorder purchaseorder) throws RuntimeException {
-        int i = purchaseorderMapper.insertSelective(purchaseorder);
+    public boolean addSaleorder(Saleorder saleorder) throws RuntimeException {
+        int i = saleorderMapper.insertSelective(saleorder);
         if (i == 1) {
             return true;
         } else {
@@ -152,22 +153,22 @@ public class PurchaseorderService {
     }
 
     /**
-     * 更新购买订单
+     * 更新销售订单
      *
-     * @param purchaseorder 购买订单
+     * @param saleorder 销售订单
      * @return 成功返回true，失败返回false
      * @throws RuntimeException
      */
     @Transactional
-    public boolean updatePurchaseorder(Purchaseorder purchaseorder) throws RuntimeException {
-        PurchaseorderExample purchaseorderExample = new PurchaseorderExample();
-        PurchaseorderExample.Criteria criteria = purchaseorderExample.createCriteria();
-        criteria.andPoidEqualTo(purchaseorder.getPoid());
-        int i = purchaseorderMapper.updateByExampleSelective(purchaseorder, purchaseorderExample);
+    public boolean updateSaleorder(Saleorder saleorder) throws RuntimeException {
+        SaleorderExample saleorderExample = new SaleorderExample();
+        SaleorderExample.Criteria criteria = saleorderExample.createCriteria();
+        criteria.andSoidEqualTo(saleorder.getSoid());
+        int i = saleorderMapper.updateByExampleSelective(saleorder, saleorderExample);
         if (i == 1) {
             return true;
         } else {
-            throw new RuntimeException("未知错误，无法更新，或可能找不到对应poid的购买订单");
+            throw new RuntimeException("未知错误，无法更新，或可能找不到对应soid的销售订单");
         }
     }
 
@@ -175,23 +176,23 @@ public class PurchaseorderService {
      * 设置订单状态
      * 若想删除或废弃订单，则将订单状态设置为0
      *
-     * @param poid       购买订单主键
+     * @param soid       购买订单主键
      * @param orderState 订单状态（0：封锁，1：未审批，2：已审批）
      * @return 成功返回true，失败返回false
      * @throws RuntimeException
      */
     @Transactional
-    public boolean setState(Integer poid, Integer orderState) throws RuntimeException {
-        PurchaseorderExample purchaseorderExample = new PurchaseorderExample();
-        PurchaseorderExample.Criteria criteria = purchaseorderExample.createCriteria();
-        criteria.andPoidEqualTo(poid);
-        Purchaseorder purchaseorder = new Purchaseorder();
-        purchaseorder.setOrderstate(orderState);
-        int i = purchaseorderMapper.updateByExampleSelective(purchaseorder, purchaseorderExample);
+    public boolean setState(Integer soid, Integer orderState) throws RuntimeException {
+        SaleorderExample saleorderExample = new SaleorderExample();
+        SaleorderExample.Criteria criteria = saleorderExample.createCriteria();
+        criteria.andSoidEqualTo(soid);
+        Saleorder saleorder = new Saleorder();
+        saleorder.setOrderstate(orderState);
+        int i = saleorderMapper.updateByExampleSelective(saleorder, saleorderExample);
         if (i == 1) {
             return true;
         } else {
-            throw new RuntimeException("未知错误，无法更改订单状态，或可能找不到对应poid的购买订单");
+            throw new RuntimeException("未知错误，无法更改订单状态，或可能找不到对应soid的销售订单");
         }
     }
 }
