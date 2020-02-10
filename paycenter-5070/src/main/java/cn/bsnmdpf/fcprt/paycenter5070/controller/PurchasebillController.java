@@ -1,7 +1,7 @@
 package cn.bsnmdpf.fcprt.paycenter5070.controller;
 
-import cn.bsnmdpf.fcprt.api.pojo.Salebill;
-import cn.bsnmdpf.fcprt.paycenter5070.service.SalebillService;
+import cn.bsnmdpf.fcprt.api.pojo.Purchasebill;
+import cn.bsnmdpf.fcprt.paycenter5070.service.PurchasebillService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +17,13 @@ import java.util.List;
 
 /**
  * @author LicoLeung
- * @create 2020-02-10 13:40
+ * @create 2020-02-10 20:19
  */
 @RestController
-public class SalebillController {
+public class PurchasebillController {
 
     @Autowired
-    private SalebillService salebillService;
+    private PurchasebillService purchasebil1Service;
 
     @InitBinder
     public void initBinder(WebDataBinder binder, WebRequest request) {
@@ -33,7 +33,7 @@ public class SalebillController {
     }
 
     /**
-     * 添加销售单据
+     * 添加购买单据
      *
      * @param trade_no     交易号
      * @param out_trade_no 订单号
@@ -41,21 +41,22 @@ public class SalebillController {
      * @param operator     操作人
      * @return 成功返回true，失败返回false
      */
-    @PostMapping("salebill")
-    public boolean addSalebill(@RequestParam("trade_no") String trade_no,
+    @PostMapping("purchasebil1")
+    public boolean addPurchasebill(@RequestParam("trade_no") String trade_no,
                                @RequestParam("out_trade_no") String out_trade_no,
                                @RequestParam("money") Double money,
                                @RequestParam("operator") String operator) {
-        boolean b = salebillService.addSalebill(trade_no, out_trade_no, money, operator);
+        boolean b = purchasebil1Service.addPurchasebill(trade_no, out_trade_no, money, operator);
         return b;
     }
 
+
     /**
-     * 查询销售单据
+     * 查询购买单据
      *
      * @param pageSize        页面大小
      * @param page            页码
-     * @param sbid            交易号
+     * @param pbid            交易号
      * @param billcode        订单号
      * @param lessMoney       最大金额
      * @param greaterMoney    最小金额
@@ -65,37 +66,38 @@ public class SalebillController {
      * @param isActive        是否启用
      * @param account         账号
      * @param spare           备用
-     * @return 符合条件得销售单据列表
+     * @return 符合条件得购买单据列表
      */
-    @GetMapping("salebill")
-    public PageInfo<Salebill> getSalebill(@RequestParam(value = "pageSize") int pageSize,
-                                          @RequestParam(value = "page") int page,
-                                          @RequestParam("sbid") String sbid,
-                                          @RequestParam("billcode") String billcode,
-                                          @RequestParam("lessMoney") Double lessMoney,
-                                          @RequestParam("greaterMoney") Double greaterMoney,
-                                          @RequestParam("lessBilldate") Date lessBilldate,
-                                          @RequestParam("greaterBilldate") Date greaterBilldate,
-                                          @RequestParam("operator") String operator,
-                                          @RequestParam("isActive") Integer isActive,
-                                          @RequestParam("account") String account,
-                                          @RequestParam("spare") String spare) {
+    @GetMapping("purchasebil1")
+    public PageInfo<Purchasebill> getPurchasebill(@RequestParam(value = "pageSize") int pageSize,
+                                              @RequestParam(value = "page") int page,
+                                              @RequestParam("sbid") String pbid,
+                                              @RequestParam("billcode") String billcode,
+                                              @RequestParam("lessMoney") Double lessMoney,
+                                              @RequestParam("greaterMoney") Double greaterMoney,
+                                              @RequestParam("lessBilldate") Date lessBilldate,
+                                              @RequestParam("greaterBilldate") Date greaterBilldate,
+                                              @RequestParam("operator") String operator,
+                                              @RequestParam("isActive") Integer isActive,
+                                              @RequestParam("account") String account,
+                                              @RequestParam("spare") String spare) {
         PageHelper.startPage(page, pageSize);
-        List<Salebill> salebills = salebillService.getSalebills(sbid, billcode, lessMoney, greaterMoney, lessBilldate, greaterBilldate,
+        List<Purchasebill> purchasebills = purchasebil1Service.getPurchasebills(pbid, billcode, lessMoney, greaterMoney, lessBilldate, greaterBilldate,
                 operator, isActive, account, spare);
-        PageInfo<Salebill> pageInfo = new PageInfo<>(salebills);
+        PageInfo<Purchasebill> pageInfo = new PageInfo<>(purchasebills);
         return pageInfo;
     }
 
+
     /**
-     * 删除/封锁销售单据
+     * 删除/封锁购买单据
      *
-     * @param sbid 交易号
+     * @param pbid 交易号
      * @return 成功返回true，失败返回false
      */
-    @DeleteMapping("salebill/{sbid}")
-    public boolean deleteSalebill(@PathVariable("sbid") String sbid) {
-        boolean b = salebillService.unableSalebills(sbid);
+    @DeleteMapping("purchasebil1/{pbid}")
+    public boolean deletePurchasebill(@PathVariable("pbid") String pbid) {
+        boolean b = purchasebil1Service.unablePurchasebills(pbid);
         return b;
     }
 }

@@ -3,13 +3,10 @@ package cn.bsnmdpf.fcprt.api.service;
 import cn.bsnmdpf.fcprt.api.pojo.Purchaseorder;
 import cn.bsnmdpf.fcprt.api.pojo.Saleorder;
 import cn.bsnmdpf.fcprt.api.pojo.Warehouseorder;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
 
 /**
  * @author LicoLeung
@@ -58,8 +55,8 @@ public interface OrderCenterService {
                                                      @RequestParam("cid") Integer cid,
                                                      @RequestParam("companyname") String companyname,
                                                      @RequestParam("billcode") String billcode,
-                                                     @RequestParam("lessBilldate") Date lessBilldate,
-                                                     @RequestParam("greaterBilldate") Date greaterBilldate,
+                                                     @RequestParam("lessBilldate") String lessBilldate,
+                                                     @RequestParam("greaterBilldate") String greaterBilldate,
                                                      @RequestParam("supplierid") Integer supplierid,
                                                      @RequestParam("suppliername") String suppliername,
                                                      @RequestParam("mid") Integer mid,
@@ -69,14 +66,14 @@ public interface OrderCenterService {
                                                      @RequestParam("money") Double money,
                                                      @RequestParam("orderState") Integer orderState,
                                                      @RequestParam("creator") String creator,
-                                                     @RequestParam("lessCreateTime") Date lessCreateTime,
-                                                     @RequestParam("greaterCreateTime") Date greaterCreateTime,
+                                                     @RequestParam("lessCreateTime") String lessCreateTime,
+                                                     @RequestParam("greaterCreateTime") String greaterCreateTime,
                                                      @RequestParam("modifier") String modifier,
-                                                     @RequestParam("lessModifyTime") Date lessModifyTime,
-                                                     @RequestParam("greaterModifyTime") Date greaterModifiyTime,
+                                                     @RequestParam("lessModifyTime") String lessModifyTime,
+                                                     @RequestParam("greaterModifyTime") String greaterModifiyTime,
                                                      @RequestParam("approver") String approver,
-                                                     @RequestParam("lessTaudittime") Date lessTaudittime,
-                                                     @RequestParam("greaterTaudittime") Date greaterTaudittime,
+                                                     @RequestParam("lessTaudittime") String lessTaudittime,
+                                                     @RequestParam("greaterTaudittime") String greaterTaudittime,
                                                      @RequestParam("address") String address);
 
     /**
@@ -106,7 +103,7 @@ public interface OrderCenterService {
                                     @RequestParam("cid") Integer cid,
                                     @RequestParam("companyname") String companyname,
                                     @RequestParam("billcode") String billcode,
-                                    @RequestParam("billdate") Date billdate,
+                                    @RequestParam("billdate") String billdate,
                                     @RequestParam(value = "supplierid", required = false) Integer supplierid,
                                     @RequestParam("suppliername") String suppliername,
                                     @RequestParam(value = "mid", required = false) Integer mid,
@@ -117,7 +114,7 @@ public interface OrderCenterService {
                                     @RequestParam("orderState") Integer orderState,
                                     @RequestParam("creator") String creator,
                                     @RequestParam(value = "approver", required = false) String approver,
-                                    @RequestParam(value = "taudittime", required = false) Date taudittime,
+                                    @RequestParam(value = "taudittime", required = false) String taudittime,
                                     @RequestParam("address") String address);
 
     /**
@@ -147,7 +144,7 @@ public interface OrderCenterService {
                                        @RequestParam(value = "cid", required = false) Integer cid,
                                        @RequestParam(value = "companyname", required = false) String companyname,
                                        @RequestParam(value = "billcode", required = false) String billcode,
-                                       @RequestParam(value = "billdate", required = false) Date billdate,
+                                       @RequestParam(value = "billdate", required = false) String billdate,
                                        @RequestParam(value = "supplierid", required = false) Integer supplierid,
                                        @RequestParam(value = "suppliername", required = false) String suppliername,
                                        @RequestParam(value = "mid", required = false) Integer mid,
@@ -158,7 +155,7 @@ public interface OrderCenterService {
                                        @RequestParam(value = "orderState", required = false) Integer orderState,
                                        @RequestParam("modifier") String modifier,
                                        @RequestParam(value = "approver", required = false) String approver,
-                                       @RequestParam(value = "taudittime", required = false) Date taudittime,
+                                       @RequestParam(value = "taudittime", required = false) String taudittime,
                                        @RequestParam(value = "address", required = false) String address);
 
 
@@ -235,8 +232,8 @@ public interface OrderCenterService {
                                              @RequestParam("cid") Integer cid,
                                              @RequestParam("companyname") String companyname,
                                              @RequestParam("billcode") String billcode,
-                                             @RequestParam("lessBilldate") Date lessBilldate,
-                                             @RequestParam("greaterBilldate") Date greaterBilldate,
+                                             @RequestParam("lessBilldate") String lessBilldate,
+                                             @RequestParam("greaterBilldate") String greaterBilldate,
                                              @RequestParam("vipid") Integer vipid,
                                              @RequestParam("vipname") String vipname,
                                              @RequestParam("mid") Integer mid,
@@ -246,14 +243,14 @@ public interface OrderCenterService {
                                              @RequestParam("money") Double money,
                                              @RequestParam("orderState") Integer orderState,
                                              @RequestParam("creator") String creator,
-                                             @RequestParam("lessCreateTime") Date lessCreateTime,
-                                             @RequestParam("greaterCreateTime") Date greaterCreateTime,
+                                             @RequestParam("lessCreateTime") String lessCreateTime,
+                                             @RequestParam("greaterCreateTime") String greaterCreateTime,
                                              @RequestParam("modifier") String modifier,
-                                             @RequestParam("lessModifyTime") Date lessModifyTime,
-                                             @RequestParam("greaterModifyTime") Date greaterModifiyTime,
+                                             @RequestParam("lessModifyTime") String lessModifyTime,
+                                             @RequestParam("greaterModifyTime") String greaterModifiyTime,
                                              @RequestParam("approver") String approver,
-                                             @RequestParam("lessTaudittime") Date lessTaudittime,
-                                             @RequestParam("greaterTaudittime") Date greaterTaudittime,
+                                             @RequestParam("lessTaudittime") String lessTaudittime,
+                                             @RequestParam("greaterTaudittime") String greaterTaudittime,
                                              @RequestParam("address") String address);
 
     /**
@@ -283,7 +280,7 @@ public interface OrderCenterService {
                                 @RequestParam("cid") Integer cid,
                                 @RequestParam("companyname") String companyname,
                                 @RequestParam("billcode") String billcode,
-                                @RequestParam("billdate") Date billdate,
+                                @RequestParam("billdate") String billdate,
                                 @RequestParam(value = "vipid", required = false) Integer vipid,
                                 @RequestParam("vipname") String vipname,
                                 @RequestParam(value = "mid", required = false) Integer mid,
@@ -294,7 +291,7 @@ public interface OrderCenterService {
                                 @RequestParam("orderState") Integer orderState,
                                 @RequestParam("creator") String creator,
                                 @RequestParam(value = "approver", required = false) String approver,
-                                @RequestParam(value = "taudittime", required = false) Date taudittime,
+                                @RequestParam(value = "taudittime", required = false) String taudittime,
                                 @RequestParam("address") String address);
 
     /**
@@ -324,7 +321,7 @@ public interface OrderCenterService {
                                    @RequestParam(value = "cid", required = false) Integer cid,
                                    @RequestParam(value = "companyname", required = false) String companyname,
                                    @RequestParam(value = "billcode", required = false) String billcode,
-                                   @RequestParam(value = "billdate", required = false) Date billdate,
+                                   @RequestParam(value = "billdate", required = false) String billdate,
                                    @RequestParam(value = "vipid", required = false) Integer vipid,
                                    @RequestParam(value = "vipname", required = false) String vipname,
                                    @RequestParam(value = "mid", required = false) Integer mid,
@@ -335,7 +332,7 @@ public interface OrderCenterService {
                                    @RequestParam(value = "orderState", required = false) Integer orderState,
                                    @RequestParam("modifier") String modifier,
                                    @RequestParam(value = "approver", required = false) String approver,
-                                   @RequestParam(value = "taudittime", required = false) Date taudittime,
+                                   @RequestParam(value = "taudittime", required = false) String taudittime,
                                    @RequestParam(value = "address", required = false) String address);
 
 
@@ -409,8 +406,8 @@ public interface OrderCenterService {
                                                       @RequestParam("cid") Integer cid,
                                                       @RequestParam("companyname") String companyname,
                                                       @RequestParam("billcode") String billcode,
-                                                      @RequestParam("lessBilldate") Date lessBilldate,
-                                                      @RequestParam("greaterBilldate") Date greaterBilldate,
+                                                      @RequestParam("lessBilldate") String lessBilldate,
+                                                      @RequestParam("greaterBilldate") String greaterBilldate,
                                                       @RequestParam("vipid") Integer vipid,
                                                       @RequestParam("vipname") String vipname,
                                                       @RequestParam("mid") Integer mid,
@@ -421,11 +418,11 @@ public interface OrderCenterService {
                                                       @RequestParam("volumn") Double volumn,
                                                       @RequestParam("orderState") Integer orderState,
                                                       @RequestParam("creator") String creator,
-                                                      @RequestParam("lessCreateTime") Date lessCreateTime,
-                                                      @RequestParam("greaterCreateTime") Date greaterCreateTime,
+                                                      @RequestParam("lessCreateTime") String lessCreateTime,
+                                                      @RequestParam("greaterCreateTime") String greaterCreateTime,
                                                       @RequestParam("modifier") String modifier,
-                                                      @RequestParam("lessModifyTime") Date lessModifyTime,
-                                                      @RequestParam("greaterModifyTime") Date greaterModifiyTime,
+                                                      @RequestParam("lessModifyTime") String lessModifyTime,
+                                                      @RequestParam("greaterModifyTime") String greaterModifiyTime,
                                                       @RequestParam("whid") Integer whid,
                                                       @RequestParam("warehouseName") String warehouseName,
                                                       @RequestParam("sid") Integer sid,
@@ -460,7 +457,7 @@ public interface OrderCenterService {
                                      @RequestParam("cid") Integer cid,
                                      @RequestParam("companyname") String companyname,
                                      @RequestParam("billcode") String billcode,
-                                     @RequestParam("billdate") Date billdate,
+                                     @RequestParam("billdate") String billdate,
                                      @RequestParam(value = "vipid", required = false) Integer vipid,
                                      @RequestParam("vipname") String vipname,
                                      @RequestParam(value = "mid", required = false) Integer mid,
@@ -504,7 +501,7 @@ public interface OrderCenterService {
                                         @RequestParam(value = "cid", required = false) Integer cid,
                                         @RequestParam(value = "companyname", required = false) String companyname,
                                         @RequestParam(value = "billcode", required = false) String billcode,
-                                        @RequestParam(value = "billdate", required = false) Date billdate,
+                                        @RequestParam(value = "billdate", required = false) String billdate,
                                         @RequestParam(value = "vipid", required = false) Integer vipid,
                                         @RequestParam(value = "vipname", required = false) String vipname,
                                         @RequestParam(value = "mid", required = false) Integer mid,

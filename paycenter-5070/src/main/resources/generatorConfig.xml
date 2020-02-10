@@ -60,21 +60,21 @@
         <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample
             是否生成 example类 -->
 
-        <table schema="usercenter" tableName="tbl_purchasebill"
-               domainObjectName="Purchasebill"
-               enableInsert="true"
-               enableSelectByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true"
-               selectByPrimaryKeyQueryId="true"
-               selectByExampleQueryId="true">
-        </table>
+        <!--<table schema="paycenter" tableName="tbl_purchasebill"-->
+               <!--domainObjectName="Purchasebill"-->
+               <!--enableInsert="true"-->
+               <!--enableSelectByPrimaryKey="true"-->
+               <!--enableSelectByExample="true"-->
+               <!--enableUpdateByPrimaryKey="true"-->
+               <!--enableDeleteByPrimaryKey="true"-->
+               <!--enableDeleteByExample="true"-->
+               <!--enableCountByExample="true"-->
+               <!--enableUpdateByExample="true"-->
+               <!--selectByPrimaryKeyQueryId="true"-->
+               <!--selectByExampleQueryId="true">-->
+        <!--</table>-->
 
-        <table schema="usercenter" tableName="tbl_salebill"
+        <table schema="paycenter" tableName="tbl_salebill"
                domainObjectName="Salebill"
                enableInsert="true"
                enableSelectByPrimaryKey="true"
