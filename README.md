@@ -7,6 +7,7 @@
 <h4>3.所有“体积”的单词写成了“volumn”，涉及地方过多，不作修改</h4>
 <hr>
 <h3>版本信息</h3>
+V8.1<br> 2020年2月10日 15点02分<br> ·基本完成对支付的处理，简单接入了支付宝，缺少对SalebillController的进一步编写<br><br>
 V8.0<br> 2020年2月9日 23点41分<br> ·正在完善paycenter<br>·修改了eureka相关配置<br><br>
 V7.3<br> 2020年2月9日 16点49分<br> ·完成OrderCenter<br><br>
 V7.2<br> 2020年2月9日 01点21分<br> ·完成了orderCenter中的service，以及PurchaseorderController<br><br>

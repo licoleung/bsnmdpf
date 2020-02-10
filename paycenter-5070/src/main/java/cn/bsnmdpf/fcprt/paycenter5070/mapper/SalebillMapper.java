@@ -1,8 +1,9 @@
 package cn.bsnmdpf.fcprt.paycenter5070.mapper;
 
+import java.util.List;
+
 import cn.bsnmdpf.fcprt.api.pojo.Salebill;
 import cn.bsnmdpf.fcprt.api.pojo.SalebillExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface SalebillMapper {

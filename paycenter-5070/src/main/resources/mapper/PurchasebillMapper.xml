@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="cn.bsnmdpf.fcprt.api.pojo.Purchasebill">
     <result column="pbid" jdbcType="VARCHAR" property="pbid" />
     <result column="billcode" jdbcType="VARCHAR" property="billcode" />
-    <result column="money" jdbcType="VARCHAR" property="money" />
+    <result column="money" jdbcType="DOUBLE" property="money" />
     <result column="billdate" jdbcType="TIMESTAMP" property="billdate" />
     <result column="operator" jdbcType="VARCHAR" property="operator" />
     <result column="isActive" jdbcType="INTEGER" property="isactive" />
@@ -97,7 +97,7 @@
     insert into tbl_purchasebill (pbid, billcode, money, 
       billdate, operator, isActive, 
       account, spare)
-    values (#{pbid,jdbcType=VARCHAR}, #{billcode,jdbcType=VARCHAR}, #{money,jdbcType=VARCHAR}, 
+    values (#{pbid,jdbcType=VARCHAR}, #{billcode,jdbcType=VARCHAR}, #{money,jdbcType=DOUBLE}, 
       #{billdate,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, #{isactive,jdbcType=INTEGER}, 
       #{account,jdbcType=VARCHAR}, #{spare,jdbcType=VARCHAR})
   </insert>
@@ -137,7 +137,7 @@
         #{billcode,jdbcType=VARCHAR},
       </if>
       <if test="money != null">
-        #{money,jdbcType=VARCHAR},
+        #{money,jdbcType=DOUBLE},
       </if>
       <if test="billdate != null">
         #{billdate,jdbcType=TIMESTAMP},
@@ -172,7 +172,7 @@
         billcode = #{record.billcode,jdbcType=VARCHAR},
       </if>
       <if test="record.money != null">
-        money = #{record.money,jdbcType=VARCHAR},
+        money = #{record.money,jdbcType=DOUBLE},
       </if>
       <if test="record.billdate != null">
         billdate = #{record.billdate,jdbcType=TIMESTAMP},
@@ -198,7 +198,7 @@
     update tbl_purchasebill
     set pbid = #{record.pbid,jdbcType=VARCHAR},
       billcode = #{record.billcode,jdbcType=VARCHAR},
-      money = #{record.money,jdbcType=VARCHAR},
+      money = #{record.money,jdbcType=DOUBLE},
       billdate = #{record.billdate,jdbcType=TIMESTAMP},
       operator = #{record.operator,jdbcType=VARCHAR},
       isActive = #{record.isactive,jdbcType=INTEGER},

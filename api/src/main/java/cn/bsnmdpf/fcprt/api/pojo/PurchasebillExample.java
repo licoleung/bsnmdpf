@@ -255,62 +255,52 @@ public class PurchasebillExample {
             return (Criteria) this;
         }
 
-        public Criteria andMoneyEqualTo(String value) {
+        public Criteria andMoneyEqualTo(Double value) {
             addCriterion("money =", value, "money");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyNotEqualTo(String value) {
+        public Criteria andMoneyNotEqualTo(Double value) {
             addCriterion("money <>", value, "money");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyGreaterThan(String value) {
+        public Criteria andMoneyGreaterThan(Double value) {
             addCriterion("money >", value, "money");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyGreaterThanOrEqualTo(String value) {
+        public Criteria andMoneyGreaterThanOrEqualTo(Double value) {
             addCriterion("money >=", value, "money");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyLessThan(String value) {
+        public Criteria andMoneyLessThan(Double value) {
             addCriterion("money <", value, "money");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyLessThanOrEqualTo(String value) {
+        public Criteria andMoneyLessThanOrEqualTo(Double value) {
             addCriterion("money <=", value, "money");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyLike(String value) {
-            addCriterion("money like", value, "money");
-            return (Criteria) this;
-        }
-
-        public Criteria andMoneyNotLike(String value) {
-            addCriterion("money not like", value, "money");
-            return (Criteria) this;
-        }
-
-        public Criteria andMoneyIn(List<String> values) {
+        public Criteria andMoneyIn(List<Double> values) {
             addCriterion("money in", values, "money");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyNotIn(List<String> values) {
+        public Criteria andMoneyNotIn(List<Double> values) {
             addCriterion("money not in", values, "money");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyBetween(String value1, String value2) {
+        public Criteria andMoneyBetween(Double value1, Double value2) {
             addCriterion("money between", value1, value2, "money");
             return (Criteria) this;
         }
 
-        public Criteria andMoneyNotBetween(String value1, String value2) {
+        public Criteria andMoneyNotBetween(Double value1, Double value2) {
             addCriterion("money not between", value1, value2, "money");
             return (Criteria) this;
         }

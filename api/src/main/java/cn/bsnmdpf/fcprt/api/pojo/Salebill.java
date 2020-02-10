@@ -7,7 +7,7 @@ public class Salebill {
 
     private String billcode;
 
-    private String money;
+    private Double money;
 
     private Date billdate;
 
@@ -35,12 +35,12 @@ public class Salebill {
         this.billcode = billcode == null ? null : billcode.trim();
     }
 
-    public String getMoney() {
+    public Double getMoney() {
         return money;
     }
 
-    public void setMoney(String money) {
-        this.money = money == null ? null : money.trim();
+    public void setMoney(Double money) {
+        this.money = money;
     }
 
     public Date getBilldate() {

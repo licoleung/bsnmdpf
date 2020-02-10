@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class StockBaseController {
 
 
     @GetMapping("instockbill")
+    @ResponseBody
     public List<Instockbill> getInstockbills(@RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
                                              @RequestParam(value = "page", defaultValue = "1") int page,
                                              @RequestParam(value = "inid", required = false) Integer inid,
