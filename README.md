@@ -7,6 +7,7 @@
 <h4>3.所有“体积”的单词写成了“volumn”，涉及地方过多，不作修改</h4>
 <hr>
 <h3>版本信息</h3>
+V9.1<br> 2020年2月12日 20点06分<br> ·修改了SaleCenter小bug，无添加required=false<br><br>
 V9.0<br> 2020年2月12日 15点19分<br> ·完成SaleCenter<br><br>
 V8.2<br> 2020年2月10日 20点27分<br> ·完成PayCenter<br><br>
 V8.1<br> 2020年2月10日 15点02分<br> ·基本完成对支付的处理，简单接入了支付宝，缺少对SalebillController的进一步编写<br><br>

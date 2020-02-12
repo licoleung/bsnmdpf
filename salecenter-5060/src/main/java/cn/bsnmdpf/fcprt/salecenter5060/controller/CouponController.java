@@ -21,24 +21,24 @@ public class CouponController {
     private CouponService couponService;
 
     @GetMapping("coupon")
-    public PageInfo<Coupon> getCoupons(@RequestParam("pageSize") int pageSize,
-                                       @RequestParam("page") int page,
-                                       @RequestParam("cpid") Integer cpid,
-                                       @RequestParam("couponname") String couponname,
-                                       @RequestParam("mid") Integer mid,
-                                       @RequestParam("mname") String mname,
-                                       @RequestParam("mtag") String mtag,
-                                       @RequestParam("nnum") Integer nnum,
-                                       @RequestParam("descMonet") Double descMoney,
-                                       @RequestParam("needMoney") Double needMoney,
-                                       @RequestParam("lessCreateTime") Date lessCreateTime,
-                                       @RequestParam("greaterCreateTime") Date greaterCreateTime,
-                                       @RequestParam("lessBeginTime") Date lessBeginTime,
-                                       @RequestParam("greaterBeginTime") Date greaterBeginTime,
-                                       @RequestParam("lessEndTime") Date lessEndTime,
-                                       @RequestParam("greaterEndTime") Date greaterEndTime,
-                                       @RequestParam("isActive") Integer isActive,
-                                       @RequestParam("creator") String creator){
+    public PageInfo<Coupon> getCoupons(@RequestParam(value = "pageSize",required = false) int pageSize,
+                                       @RequestParam(value = "page",required = false) int page,
+                                       @RequestParam(value = "cpid",required = false) Integer cpid,
+                                       @RequestParam(value = "couponname",required = false) String couponname,
+                                       @RequestParam(value = "mid",required = false) Integer mid,
+                                       @RequestParam(value = "mname",required = false) String mname,
+                                       @RequestParam(value = "mtag",required = false) String mtag,
+                                       @RequestParam(value = "nnum",required = false) Integer nnum,
+                                       @RequestParam(value = "descMonet",required = false) Double descMoney,
+                                       @RequestParam(value = "needMoney",required = false) Double needMoney,
+                                       @RequestParam(value = "lessCreateTime",required = false) Date lessCreateTime,
+                                       @RequestParam(value = "greaterCreateTime",required = false) Date greaterCreateTime,
+                                       @RequestParam(value = "lessBeginTime",required = false) Date lessBeginTime,
+                                       @RequestParam(value = "greaterBeginTime",required = false) Date greaterBeginTime,
+                                       @RequestParam(value = "lessEndTime",required = false) Date lessEndTime,
+                                       @RequestParam(value = "greaterEndTime",required = false) Date greaterEndTime,
+                                       @RequestParam(value = "isActive",required = false) Integer isActive,
+                                       @RequestParam(value = "creator",required = false) String creator){
         PageHelper.startPage(page,pageSize);
         List<Coupon> coupons = couponService.getCoupons(cpid, couponname, mid, mname, mtag, nnum, descMoney, needMoney,
                 lessCreateTime, greaterCreateTime, lessBeginTime, greaterBeginTime, lessEndTime, greaterEndTime, isActive, creator);
