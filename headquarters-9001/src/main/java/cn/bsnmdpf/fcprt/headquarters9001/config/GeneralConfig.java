@@ -13,8 +13,9 @@ public class GeneralConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("/login");
-        registry.addViewController("/").setViewName("/payPage");
+        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/").setViewName("index");
+        registry.addViewController("/welcome1").setViewName("welcome1");
     }
 
 }

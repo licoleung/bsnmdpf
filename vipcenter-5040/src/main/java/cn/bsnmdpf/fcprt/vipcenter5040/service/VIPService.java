@@ -93,7 +93,7 @@ public class VIPService {
             criteria.andBalanceGreaterThanOrEqualTo(greaterBalance);
         }
         if (isStuff != null) {
-            criteria.andIsstuffEqualTo(isActive);
+            criteria.andIsstuffEqualTo(isStuff);
         }
         if (isActive != null) {
             criteria.andIsactiveEqualTo(isActive);
