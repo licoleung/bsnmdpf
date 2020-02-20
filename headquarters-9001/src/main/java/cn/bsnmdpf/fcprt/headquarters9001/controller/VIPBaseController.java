@@ -2,7 +2,6 @@ package cn.bsnmdpf.fcprt.headquarters9001.controller;
 
 import cn.bsnmdpf.fcprt.api.pojo.VIP;
 import cn.bsnmdpf.fcprt.api.service.VIPCenterService;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -137,9 +137,6 @@
                     <table class="layui-table layui-form">
                         <thead>
                         <tr>
-                            <th>
-                                <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
-                            </th>
                             <th>ID</th>
                             <th>用户名</th>
                             <th>手机</th>
@@ -159,9 +156,6 @@
                         </thead>
                         <tbody th:each="user:${viplist}">
                         <tr>
-                            <td>
-                                <input type="checkbox" name="id" value="1" lay-skin="primary">
-                            </td>
                             <td class="td-id">[[${user.vipid}]]</td>
                             <td th:text="${user.vipname}">小明</td>
                             <td th:text="${user.phone}">13000000000</td>

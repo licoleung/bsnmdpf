@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableEurekaClient
-@MapperScan(value = "cn.bsnmdpf.fcprt.ordercenter5010.mapper")
+@MapperScan(value = "cn.bsnmdpf.fcprt.ordercenter5020.mapper")
 @EnableTransactionManagement
 public class Ordercenter5020Application {
 

@@ -8,6 +8,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 
+
 /**
  * @author LicoLeung
  * @create 2020-02-09 16:39
@@ -51,30 +52,30 @@ public interface OrderCenterService {
     @GetMapping("purchaseorder")
     public PageInfo<Purchaseorder> getPurchaseorders(@RequestParam("pageSize") int pageSize,
                                                      @RequestParam("page") int page,
-                                                     @RequestParam("poid") Integer poid,
-                                                     @RequestParam("cid") Integer cid,
-                                                     @RequestParam("companyname") String companyname,
-                                                     @RequestParam("billcode") String billcode,
-                                                     @RequestParam("lessBilldate") String lessBilldate,
-                                                     @RequestParam("greaterBilldate") String greaterBilldate,
-                                                     @RequestParam("supplierid") Integer supplierid,
-                                                     @RequestParam("suppliername") String suppliername,
-                                                     @RequestParam("mid") Integer mid,
-                                                     @RequestParam("material") String material,
-                                                     @RequestParam("nnum") Integer nnum,
-                                                     @RequestParam("unit") String unit,
-                                                     @RequestParam("money") Double money,
-                                                     @RequestParam("orderState") Integer orderState,
-                                                     @RequestParam("creator") String creator,
-                                                     @RequestParam("lessCreateTime") String lessCreateTime,
-                                                     @RequestParam("greaterCreateTime") String greaterCreateTime,
-                                                     @RequestParam("modifier") String modifier,
-                                                     @RequestParam("lessModifyTime") String lessModifyTime,
-                                                     @RequestParam("greaterModifyTime") String greaterModifiyTime,
-                                                     @RequestParam("approver") String approver,
-                                                     @RequestParam("lessTaudittime") String lessTaudittime,
-                                                     @RequestParam("greaterTaudittime") String greaterTaudittime,
-                                                     @RequestParam("address") String address);
+                                                     @RequestParam(value = "poid",required = false) Integer poid,
+                                                     @RequestParam(value = "cid",required = false) Integer cid,
+                                                     @RequestParam(value = "companyname",required = false) String companyname,
+                                                     @RequestParam(value = "billcode",required = false) String billcode,
+                                                     @RequestParam(value = "lessBilldate",required = false) String lessBilldate,
+                                                     @RequestParam(value = "greaterBilldate",required = false) String greaterBilldate,
+                                                     @RequestParam(value = "supplierid",required = false) Integer supplierid,
+                                                     @RequestParam(value = "suppliername",required = false) String suppliername,
+                                                     @RequestParam(value = "mid",required = false) Integer mid,
+                                                     @RequestParam(value = "material",required = false) String material,
+                                                     @RequestParam(value = "nnum",required = false) Integer nnum,
+                                                     @RequestParam(value = "unit",required = false) String unit,
+                                                     @RequestParam(value = "money",required = false) Double money,
+                                                     @RequestParam(value = "orderState",required = false) Integer orderState,
+                                                     @RequestParam(value = "creator",required = false) String creator,
+                                                     @RequestParam(value = "lessCreateTime",required = false) String lessCreateTime,
+                                                     @RequestParam(value = "greaterCreateTime",required = false) String greaterCreateTime,
+                                                     @RequestParam(value = "modifier",required = false) String modifier,
+                                                     @RequestParam(value = "lessModifyTime",required = false) String lessModifyTime,
+                                                     @RequestParam(value = "greaterModifyTime",required = false) String greaterModifiyTime,
+                                                     @RequestParam(value = "approver",required = false) String approver,
+                                                     @RequestParam(value = "lessTaudittime",required = false) String lessTaudittime,
+                                                     @RequestParam(value = "greaterTaudittime",required = false) String greaterTaudittime,
+                                                     @RequestParam(value = "address",required = false) String address);
 
     /**
      * 添加购买订单

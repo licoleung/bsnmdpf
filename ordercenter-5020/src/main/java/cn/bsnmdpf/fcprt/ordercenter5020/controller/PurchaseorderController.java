@@ -28,7 +28,7 @@ public class PurchaseorderController {
     @InitBinder
     public void initBinder(WebDataBinder binder, WebRequest request) {
         //转换日期 注意这里的转化要和传进来的字符串的格式一直 如2015-9-9 就应该为yyyy-MM-dd
-        DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));// CustomDateEditor为自定义日期编辑器
     }
 
@@ -67,30 +67,30 @@ public class PurchaseorderController {
     @GetMapping("purchaseorder")
     public PageInfo<Purchaseorder> getPurchaseorders(@RequestParam("pageSize") int pageSize,
                                                      @RequestParam("page") int page,
-                                                     @RequestParam("poid") Integer poid,
-                                                     @RequestParam("cid") Integer cid,
-                                                     @RequestParam("companyname") String companyname,
-                                                     @RequestParam("billcode") String billcode,
-                                                     @RequestParam("lessBilldate") Date lessBilldate,
-                                                     @RequestParam("greaterBilldate") Date greaterBilldate,
-                                                     @RequestParam("supplierid") Integer supplierid,
-                                                     @RequestParam("suppliername") String suppliername,
-                                                     @RequestParam("mid") Integer mid,
-                                                     @RequestParam("material") String material,
-                                                     @RequestParam("nnum") Integer nnum,
-                                                     @RequestParam("unit") String unit,
-                                                     @RequestParam("money") Double money,
-                                                     @RequestParam("orderState") Integer orderState,
-                                                     @RequestParam("creator") String creator,
-                                                     @RequestParam("lessCreateTime") Date lessCreateTime,
-                                                     @RequestParam("greaterCreateTime") Date greaterCreateTime,
-                                                     @RequestParam("modifier") String modifier,
-                                                     @RequestParam("lessModifyTime") Date lessModifyTime,
-                                                     @RequestParam("greaterModifyTime") Date greaterModifiyTime,
-                                                     @RequestParam("approver") String approver,
-                                                     @RequestParam("lessTaudittime") Date lessTaudittime,
-                                                     @RequestParam("greaterTaudittime") Date greaterTaudittime,
-                                                     @RequestParam("address") String address) {
+                                                     @RequestParam(value = "poid",required = false) Integer poid,
+                                                     @RequestParam(value = "cid",required = false) Integer cid,
+                                                     @RequestParam(value = "companyname",required = false) String companyname,
+                                                     @RequestParam(value = "billcode",required = false) String billcode,
+                                                     @RequestParam(value = "lessBilldate",required = false) Date lessBilldate,
+                                                     @RequestParam(value = "greaterBilldate",required = false) Date greaterBilldate,
+                                                     @RequestParam(value = "supplierid",required = false) Integer supplierid,
+                                                     @RequestParam(value = "suppliername",required = false) String suppliername,
+                                                     @RequestParam(value = "mid",required = false) Integer mid,
+                                                     @RequestParam(value = "material",required = false) String material,
+                                                     @RequestParam(value = "nnum",required = false) Integer nnum,
+                                                     @RequestParam(value = "unit",required = false) String unit,
+                                                     @RequestParam(value = "money",required = false) Double money,
+                                                     @RequestParam(value = "orderState",required = false) Integer orderState,
+                                                     @RequestParam(value = "creator",required = false) String creator,
+                                                     @RequestParam(value = "lessCreateTime",required = false) Date lessCreateTime,
+                                                     @RequestParam(value = "greaterCreateTime",required = false) Date greaterCreateTime,
+                                                     @RequestParam(value = "modifier",required = false) String modifier,
+                                                     @RequestParam(value = "lessModifyTime",required = false) Date lessModifyTime,
+                                                     @RequestParam(value = "greaterModifyTime",required = false) Date greaterModifiyTime,
+                                                     @RequestParam(value = "approver",required = false) String approver,
+                                                     @RequestParam(value = "lessTaudittime",required = false) Date lessTaudittime,
+                                                     @RequestParam(value = "greaterTaudittime",required = false) Date greaterTaudittime,
+                                                     @RequestParam(value = "address",required = false) String address) {
         PageHelper.startPage(page, pageSize);
         List<Purchaseorder> purchaseorders = purchaseorderService.getPurchaseorders(poid, cid, companyname, billcode, lessBilldate, greaterBilldate, supplierid,
                 suppliername, mid, material, nnum, unit, money, orderState, creator, lessCreateTime, greaterCreateTime,
@@ -134,7 +134,7 @@ public class PurchaseorderController {
                                     @RequestParam("nnum") Integer nnum,
                                     @RequestParam("unit") String unit,
                                     @RequestParam("money") Double money,
-                                    @RequestParam("orderState") Integer orderState,
+                                    @RequestParam(value = "orderState",required = false,defaultValue = "1") Integer orderState,
                                     @RequestParam("creator") String creator,
                                     @RequestParam(value = "approver", required = false) String approver,
                                     @RequestParam(value = "taudittime", required = false) Date taudittime,
