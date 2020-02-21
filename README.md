@@ -7,7 +7,8 @@
 <h4>3.所有“体积”的单词写成了“volumn”，涉及地方过多，不作修改</h4>
 <hr>
 <h3>版本信息</h3>
-V10.1<br> 2020年2月20日 01点25分<br> ·增加了OrderBaseController<br>·增加了purchase-order列表页面<br>·修改vip页面、修改vipBaseController<br>·修改ordercenter之前缺少的requestparam(required=false)<br><br>
+V10.2<br> 2020年2月22日 00点41分<br> ·完善了OrderBaseController及相关页面<br><br>
+V10.1<br> 2020年2月21日 01点25分<br> ·增加了OrderBaseController<br>·增加了purchase-order列表页面<br>·修改vip页面、修改vipBaseController<br>·修改ordercenter之前缺少的requestparam(required=false)<br><br>
 V10.0<br> 2020年2月19日 15点47分<br> ·增加了VIPBaseController<br>·增加了首页、vip列表页面、修改vip页面<br><br>
 V9.1<br> 2020年2月12日 20点06分<br> ·修改了SaleCenter小bug，无添加required=false<br><br>
 V9.0<br> 2020年2月12日 15点19分<br> ·完成SaleCenter<br><br>

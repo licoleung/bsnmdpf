@@ -22,7 +22,7 @@
         <div class="layui-form-item">
             <label for="L_id" class="layui-form-label">订单主键</label>
             <div class="layui-input-inline">
-                <input type="text" id="L_id" name="vipid" class="layui-input" th:value="${order.poid}"
+                <input type="text" id="L_id" name="vipid" class="layui-input" th:value="${order.soid}"
                        readonly="readonly"/>
             </div>
 
@@ -53,12 +53,12 @@
             <div class="layui-form-item">
                 <label for="L_sid" class="layui-form-label">供应商主键</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_sid" class="layui-input" th:value="${order.supplierid}"
+                    <input type="text" id="L_sid" class="layui-input" th:value="${order.vipid}"
                            readonly="readonly">
                 </div>
                 <label for="L_suppliername" class="layui-form-label">供应商名称</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_suppliername" class="layui-input" th:value="${order.suppliername}"
+                    <input type="text" id="L_suppliername" class="layui-input" th:value="${order.vipname}"
                            readonly="readonly"></div>
             </div>
 
@@ -152,6 +152,11 @@
                            th:value="${#dates.format(order.taudittime, 'yyyy-MM-dd')}"
                            readonly="readonly"></div>
             </div>
+            <form class="layui-form" action="approve" method="get">
+                <input type="hidden" th:value="${order.soid}" name="oid"/>
+                <input type="hidden" name="flag" th:value="2"/>
+                <button class="layui-btn" type="submit">审批</button>
+            </form>
         </div>
     </div>
 </body>

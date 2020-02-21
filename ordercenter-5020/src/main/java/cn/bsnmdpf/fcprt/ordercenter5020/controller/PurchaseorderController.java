@@ -234,6 +234,11 @@ public class PurchaseorderController {
      */
     @DeleteMapping("purchaseorder/{poid}")
     public boolean deletePurchaseorder(@PathVariable("poid") Integer poid) {
+        Purchaseorder purchaseorder = new Purchaseorder();
+        purchaseorder.setPoid(poid);
+        purchaseorder.setModifytime(new Date());
+        purchaseorder.setModifier("me");
+        boolean b2 = purchaseorderService.updatePurchaseorder(purchaseorder);
         boolean b = purchaseorderService.setState(poid, 0);
         return b;
     }
@@ -247,6 +252,11 @@ public class PurchaseorderController {
      */
     @PutMapping("approvePurchaseorder/{poid}")
     public boolean approvePurchaseorder(@PathVariable("poid") Integer poid) {
+        Purchaseorder purchaseorder = new Purchaseorder();
+        purchaseorder.setPoid(poid);
+        purchaseorder.setTaudittime(new Date());
+        purchaseorder.setApprover("me");
+        boolean b2 = purchaseorderService.updatePurchaseorder(purchaseorder);
         boolean b = purchaseorderService.setState(poid, 2);
         return b;
     }
@@ -260,6 +270,11 @@ public class PurchaseorderController {
      */
     @PutMapping("recoverPurchaseorder/{poid}")
     public boolean recoverPurchaseorder(@PathVariable("poid") Integer poid) {
+        Purchaseorder purchaseorder = new Purchaseorder();
+        purchaseorder.setPoid(poid);
+        purchaseorder.setModifytime(new Date());
+        purchaseorder.setModifier("me");
+        boolean b2 = purchaseorderService.updatePurchaseorder(purchaseorder);
         boolean b = purchaseorderService.setState(poid, 1);
         return b;
     }

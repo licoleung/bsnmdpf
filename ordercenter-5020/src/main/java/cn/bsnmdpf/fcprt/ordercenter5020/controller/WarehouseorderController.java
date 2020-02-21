@@ -1,5 +1,6 @@
 package cn.bsnmdpf.fcprt.ordercenter5020.controller;
 
+import cn.bsnmdpf.fcprt.api.pojo.Saleorder;
 import cn.bsnmdpf.fcprt.api.pojo.Warehouseorder;
 import cn.bsnmdpf.fcprt.ordercenter5020.service.WarehouseorderService;
 import com.github.pagehelper.PageHelper;
@@ -66,31 +67,31 @@ public class WarehouseorderController {
     @GetMapping("warehouseorder")
     public PageInfo<Warehouseorder> getWarehouseorder(@RequestParam("pageSize") int pageSize,
                                                       @RequestParam("page") int page,
-                                                      @RequestParam("whoid") Integer whoid,
-                                                      @RequestParam("cid") Integer cid,
-                                                      @RequestParam("companyname") String companyname,
-                                                      @RequestParam("billcode") String billcode,
-                                                      @RequestParam("lessBilldate") Date lessBilldate,
-                                                      @RequestParam("greaterBilldate") Date greaterBilldate,
-                                                      @RequestParam("vipid") Integer vipid,
-                                                      @RequestParam("vipname") String vipname,
-                                                      @RequestParam("mid") Integer mid,
-                                                      @RequestParam("material") String material,
-                                                      @RequestParam("nnum") Integer nnum,
-                                                      @RequestParam("money") Double money,
-                                                      @RequestParam("weight") Double weight,
-                                                      @RequestParam("volumn") Double volumn,
-                                                      @RequestParam("orderState") Integer orderState,
-                                                      @RequestParam("creator") String creator,
-                                                      @RequestParam("lessCreateTime") Date lessCreateTime,
-                                                      @RequestParam("greaterCreateTime") Date greaterCreateTime,
-                                                      @RequestParam("modifier") String modifier,
-                                                      @RequestParam("lessModifyTime") Date lessModifyTime,
-                                                      @RequestParam("greaterModifyTime") Date greaterModifiyTime,
-                                                      @RequestParam("whid") Integer whid,
-                                                      @RequestParam("warehouseName") String warehouseName,
-                                                      @RequestParam("sid") Integer sid,
-                                                      @RequestParam("stockName") String stockName) {
+                                                      @RequestParam(value = "whoid",required = false) Integer whoid,
+                                                      @RequestParam(value = "cid",required = false) Integer cid,
+                                                      @RequestParam(value = "companyname",required = false) String companyname,
+                                                      @RequestParam(value = "billcode",required = false) String billcode,
+                                                      @RequestParam(value = "lessBilldate",required = false) Date lessBilldate,
+                                                      @RequestParam(value = "greaterBilldate",required = false) Date greaterBilldate,
+                                                      @RequestParam(value = "vipid",required = false) Integer vipid,
+                                                      @RequestParam(value = "vipname",required = false) String vipname,
+                                                      @RequestParam(value = "mid",required = false) Integer mid,
+                                                      @RequestParam(value = "material",required = false) String material,
+                                                      @RequestParam(value = "nnum",required = false) Integer nnum,
+                                                      @RequestParam(value = "money",required = false) Double money,
+                                                      @RequestParam(value = "weight",required = false) Double weight,
+                                                      @RequestParam(value = "volumn",required = false) Double volumn,
+                                                      @RequestParam(value = "orderState",required = false) Integer orderState,
+                                                      @RequestParam(value = "creator",required = false) String creator,
+                                                      @RequestParam(value = "lessCreateTime",required = false) Date lessCreateTime,
+                                                      @RequestParam(value = "greaterCreateTime",required = false) Date greaterCreateTime,
+                                                      @RequestParam(value = "modifier",required = false) String modifier,
+                                                      @RequestParam(value = "lessModifyTime",required = false) Date lessModifyTime,
+                                                      @RequestParam(value = "greaterModifyTime",required = false) Date greaterModifiyTime,
+                                                      @RequestParam(value = "whid",required = false) Integer whid,
+                                                      @RequestParam(value = "warehouseName",required = false) String warehouseName,
+                                                      @RequestParam(value = "sid",required = false) Integer sid,
+                                                      @RequestParam(value = "stockName",required = false) String stockName) {
         PageHelper.startPage(page, pageSize);
         List<Warehouseorder> warehouseorders = warehouseorderService.getWarehouseorders(whoid, cid, companyname, billcode, lessBilldate, greaterBilldate, vipid,
                 vipname, mid, material, nnum, weight, volumn, money, orderState, creator, lessCreateTime, greaterCreateTime,
@@ -246,20 +247,12 @@ public class WarehouseorderController {
      */
     @DeleteMapping("warehouseorder/{whoid}")
     public boolean deleteWarehouseorder(@PathVariable("whoid") Integer whoid) {
+        Warehouseorder warehouseorder = new Warehouseorder();
+        warehouseorder.setWhoid(whoid);
+        warehouseorder.setModifytime(new Date());
+        warehouseorder.setModifier("me");
+        boolean b2 = warehouseorderService.updateWarehouseorder(warehouseorder);
         boolean b = warehouseorderService.setState(whoid, 0);
-        return b;
-    }
-
-    /**
-     * 审批存储订单
-     * 将存储订单的订单状态设置为2（已审批）
-     *
-     * @param whoid
-     * @return 成功返回true，失败返回false
-     */
-    @PutMapping("approveWarehouseorder/{whoid}")
-    public boolean approveWarehouseorder(@PathVariable("whoid") Integer whoid) {
-        boolean b = warehouseorderService.setState(whoid, 2);
         return b;
     }
 
@@ -272,6 +265,11 @@ public class WarehouseorderController {
      */
     @PutMapping("recoverWarehouseorder/{whoid}")
     public boolean recoverWarehouseorder(@PathVariable("whoid") Integer whoid) {
+        Warehouseorder warehouseorder = new Warehouseorder();
+        warehouseorder.setWhoid(whoid);
+        warehouseorder.setModifytime(new Date());
+        warehouseorder.setModifier("me");
+        boolean b2 = warehouseorderService.updateWarehouseorder(warehouseorder);
         boolean b = warehouseorderService.setState(whoid, 1);
         return b;
     }

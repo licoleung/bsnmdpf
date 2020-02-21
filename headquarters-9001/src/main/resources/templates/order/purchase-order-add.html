@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="x-admin-sm">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.2</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" href="/headquarters/css/font.css">
+    <link rel="stylesheet" href="/headquarters/css/xadmin.css">
+    <script src="/headquarters/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/headquarters/js/xadmin.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]--></head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <form class="layui-form" action="purchaseorder" method="post">
+                <div class="layui-form-item">
+                    <label for="L_email" class="layui-form-label"><span class="x-red">*</span>公司主键</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_email" class="layui-input" name="cid">
+                    </div>
+                    <label for="L_cname" class="layui-form-label"><span class="x-red">*</span>公司名称</label>
+                    <div class="layui-input-inline">
+                        <input name="companyname" type="text" id="L_cname" class="layui-input"></div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label for="L_billcode" class="layui-form-label"><span class="x-red">*</span>单据号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_billcode" class="layui-input" name="billcode">
+                    </div>
+                    <label class="layui-form-label"><span class="x-red">*</span>单据日期</label>
+                    <div class="layui-inline layui-show-xs-block">
+                        <input class="layui-input" autocomplete="off" name="billdate" id="start"></div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label for="L_sid" class="layui-form-label">供应商主键</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_sid" class="layui-input" name="supplierid">
+                    </div>
+                    <label for="L_suppliername" class="layui-form-label"><span class="x-red">*</span>供应商名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_suppliername" class="layui-input" name="suppliername"></div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label for="L_mid" class="layui-form-label">物料编码</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_mid" class="layui-input" name="mid">
+                    </div>
+                    <label for="L_material" class="layui-form-label"><span class="x-red">*</span>物料名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_material" class="layui-input" name="material"></div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label for="L_nnum" class="layui-form-label"><span class="x-red">*</span>数量</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_nnum" class="layui-input" name="nnum">
+                    </div>
+                    <label for="L_unit" class="layui-form-label"><span class="x-red">*</span>单位</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_unit" class="layui-input" name="unit"></div>
+                    <label for="L_money" class="layui-form-label"><span class="x-red">*</span>金额</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_money" class="layui-input" name="money"></div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label for="xxx" class="layui-form-label"><span class="x-red">*</span>创建人</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="xxx" class="layui-input" name="creator" th:value="me"
+                               readonly="readonly">
+                    </div>
+                    <label for="L_address" class="layui-form-label"><span class="x-red">*</span>地址</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_address" class="layui-input" name="address">
+                    </div>
+                </div>
+                <button class="layui-btn" type="submit">添加</button>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    layui.use(['laydate', 'form'], function () {
+        var laydate = layui.laydate;
+        var form = layui.form;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start' //指定元素
+        });
+
+    });
+</script>
+</html>

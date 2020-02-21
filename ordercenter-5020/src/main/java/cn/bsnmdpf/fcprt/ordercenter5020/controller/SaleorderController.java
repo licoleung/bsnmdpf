@@ -1,5 +1,6 @@
 package cn.bsnmdpf.fcprt.ordercenter5020.controller;
 
+import cn.bsnmdpf.fcprt.api.pojo.Purchaseorder;
 import cn.bsnmdpf.fcprt.api.pojo.Saleorder;
 import cn.bsnmdpf.fcprt.ordercenter5020.service.SaleorderService;
 import com.github.pagehelper.PageHelper;
@@ -65,31 +66,31 @@ public class SaleorderController {
      */
     @GetMapping("saleorder")
     public PageInfo<Saleorder> getSaleorders(@RequestParam("pageSize") int pageSize,
-                                                 @RequestParam("page") int page,
-                                                 @RequestParam("soid") Integer soid,
-                                                 @RequestParam("cid") Integer cid,
-                                                 @RequestParam("companyname") String companyname,
-                                                 @RequestParam("billcode") String billcode,
-                                                 @RequestParam("lessBilldate") Date lessBilldate,
-                                                 @RequestParam("greaterBilldate") Date greaterBilldate,
-                                                 @RequestParam("vipid") Integer vipid,
-                                                 @RequestParam("vipname") String vipname,
-                                                 @RequestParam("mid") Integer mid,
-                                                 @RequestParam("material") String material,
-                                                 @RequestParam("nnum") Integer nnum,
-                                                 @RequestParam("unit") String unit,
-                                                 @RequestParam("money") Double money,
-                                                 @RequestParam("orderState") Integer orderState,
-                                                 @RequestParam("creator") String creator,
-                                                 @RequestParam("lessCreateTime") Date lessCreateTime,
-                                                 @RequestParam("greaterCreateTime") Date greaterCreateTime,
-                                                 @RequestParam("modifier") String modifier,
-                                                 @RequestParam("lessModifyTime") Date lessModifyTime,
-                                                 @RequestParam("greaterModifyTime") Date greaterModifiyTime,
-                                                 @RequestParam("approver") String approver,
-                                                 @RequestParam("lessTaudittime") Date lessTaudittime,
-                                                 @RequestParam("greaterTaudittime") Date greaterTaudittime,
-                                                 @RequestParam("address") String address) {
+                                             @RequestParam("page") int page,
+                                             @RequestParam(value = "soid",required = false) Integer soid,
+                                             @RequestParam(value = "cid",required = false) Integer cid,
+                                             @RequestParam(value = "companyname",required = false) String companyname,
+                                             @RequestParam(value = "billcode",required = false) String billcode,
+                                             @RequestParam(value = "lessBilldate",required = false) Date lessBilldate,
+                                             @RequestParam(value = "greaterBilldate",required = false) Date greaterBilldate,
+                                             @RequestParam(value = "vipid",required = false) Integer vipid,
+                                             @RequestParam(value = "vipname",required = false) String vipname,
+                                             @RequestParam(value = "mid",required = false) Integer mid,
+                                             @RequestParam(value = "material",required = false) String material,
+                                             @RequestParam(value = "nnum",required = false) Integer nnum,
+                                             @RequestParam(value = "unit",required = false) String unit,
+                                             @RequestParam(value = "money",required = false) Double money,
+                                             @RequestParam(value = "orderState",required = false) Integer orderState,
+                                             @RequestParam(value = "creator",required = false) String creator,
+                                             @RequestParam(value = "lessCreateTime",required = false) Date lessCreateTime,
+                                             @RequestParam(value = "greaterCreateTime",required = false) Date greaterCreateTime,
+                                             @RequestParam(value = "modifier",required = false) String modifier,
+                                             @RequestParam(value = "lessModifyTime",required = false) Date lessModifyTime,
+                                             @RequestParam(value = "greaterModifyTime",required = false) Date greaterModifiyTime,
+                                             @RequestParam(value = "approver",required = false) String approver,
+                                             @RequestParam(value = "lessTaudittime",required = false) Date lessTaudittime,
+                                             @RequestParam(value = "greaterTaudittime",required = false) Date greaterTaudittime,
+                                             @RequestParam(value = "address",required = false) String address) {
         PageHelper.startPage(page, pageSize);
         List<Saleorder> saleorders = saleorderService.getSaleorders(soid, cid, companyname, billcode, lessBilldate, greaterBilldate, vipid,
                 vipname, mid, material, nnum, unit, money, orderState, creator, lessCreateTime, greaterCreateTime,
@@ -183,7 +184,7 @@ public class SaleorderController {
      * @param address     地址
      * @return 成功返回true，失败返回false
      */
-    @PutMapping("saleorder/{poid}")
+    @PutMapping("saleorder/{soid}")
     public boolean updateSaleorder(@PathVariable(value = "soid") Integer soid,
                                        @RequestParam(value = "cid", required = false) Integer cid,
                                        @RequestParam(value = "companyname", required = false) String companyname,
@@ -234,6 +235,11 @@ public class SaleorderController {
      */
     @DeleteMapping("saleorder/{soid}")
     public boolean deleteSaleorder(@PathVariable("soid") Integer soid) {
+        Saleorder saleorder = new Saleorder();
+        saleorder.setSoid(soid);
+        saleorder.setModifytime(new Date());
+        saleorder.setModifier("me");
+        boolean b2 = saleorderService.updateSaleorder(saleorder);
         boolean b = saleorderService.setState(soid, 0);
         return b;
     }
@@ -247,6 +253,11 @@ public class SaleorderController {
      */
     @PutMapping("approveSaleorder/{soid}")
     public boolean approveSaleorder(@PathVariable("soid") Integer soid) {
+        Saleorder saleorder = new Saleorder();
+        saleorder.setSoid(soid);
+        saleorder.setTaudittime(new Date());
+        saleorder.setApprover("me");
+        boolean b2 = saleorderService.updateSaleorder(saleorder);
         boolean b = saleorderService.setState(soid, 2);
         return b;
     }
@@ -260,6 +271,11 @@ public class SaleorderController {
      */
     @PutMapping("recoverSaleorder/{soid}")
     public boolean recoverSaleorder(@PathVariable("soid") Integer soid) {
+        Saleorder saleorder = new Saleorder();
+        saleorder.setSoid(soid);
+        saleorder.setModifytime(new Date());
+        saleorder.setModifier("me");
+        boolean b2 = saleorderService.updateSaleorder(saleorder);
         boolean b = saleorderService.setState(soid, 1);
         return b;
     }
