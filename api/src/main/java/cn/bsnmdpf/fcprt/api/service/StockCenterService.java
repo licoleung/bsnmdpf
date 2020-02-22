@@ -3,10 +3,8 @@ package cn.bsnmdpf.fcprt.api.service;
 import cn.bsnmdpf.fcprt.api.pojo.*;
 import com.github.pagehelper.PageInfo;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 
 
 /**
@@ -91,7 +89,7 @@ public interface StockCenterService {
                                   @RequestParam(value = "whid") Integer whid,
                                   @RequestParam(value = "mid") Integer mid,
                                   @RequestParam(value = "mname") String mname,
-                                  @RequestParam(value = "inTime") Date inTime,
+                                  @RequestParam(value = "inTime") String inTime,
                                   @RequestParam(value = "inType") String inType,
                                   @RequestParam(value = "poid", required = false) Integer poid,
                                   @RequestParam(value = "creator") String creator,
@@ -148,7 +146,7 @@ public interface StockCenterService {
                                      @RequestParam(value = "whid", required = false) Integer whid,
                                      @RequestParam(value = "mid", required = false) Integer mid,
                                      @RequestParam(value = "mname", required = false) String mname,
-                                     @RequestParam(value = "inTime", required = false) Date inTime,
+                                     @RequestParam(value = "inTime", required = false) String inTime,
                                      @RequestParam(value = "inType", required = false) String inType,
                                      @RequestParam(value = "poid", required = false) Integer poid,
                                      @RequestParam(value = "modifier") String modifier,
@@ -287,16 +285,16 @@ public interface StockCenterService {
                                                    @RequestParam(value = "whid", required = false) Integer whid,
                                                    @RequestParam(value = "mid", required = false) Integer mid,
                                                    @RequestParam(value = "mname", required = false) String mname,
-                                                   @RequestParam(value = "lessOutTime", required = false) Date lessOutTime,
-                                                   @RequestParam(value = "greaterOutTime", required = false) Date greaterOutTime,
+                                                   @RequestParam(value = "lessOutTime", required = false) String lessOutTime,
+                                                   @RequestParam(value = "greaterOutTime", required = false) String greaterOutTime,
                                                    @RequestParam(value = "outType", required = false) String outType,
                                                    @RequestParam(value = "soid", required = false) Integer soid,
                                                    @RequestParam(value = "creator", required = false) String creator,
-                                                   @RequestParam(value = "lessCreateTime", required = false) Date lessCreateTime,
-                                                   @RequestParam(value = "greaterCreateTime", required = false) Date greaterCreateTime,
+                                                   @RequestParam(value = "lessCreateTime", required = false) String lessCreateTime,
+                                                   @RequestParam(value = "greaterCreateTime", required = false) String greaterCreateTime,
                                                    @RequestParam(value = "modifier", required = false) String modifier,
-                                                   @RequestParam(value = "lessModifyTime", required = false) Date lessModifyTime,
-                                                   @RequestParam(value = "greaterModifyTime", required = false) Date greaterModifiyTime,
+                                                   @RequestParam(value = "lessModifyTime", required = false) String lessModifyTime,
+                                                   @RequestParam(value = "greaterModifyTime", required = false) String greaterModifiyTime,
                                                    @RequestParam(value = "isActive", required = false) Integer isActive,
                                                    @RequestParam(value = "nnum", required = false) Integer nnum,
                                                    @RequestParam(value = "volumn", required = false) Double volumn,
@@ -326,7 +324,7 @@ public interface StockCenterService {
                                    @RequestParam(value = "whid") Integer whid,
                                    @RequestParam(value = "mid") Integer mid,
                                    @RequestParam(value = "mname") String mname,
-                                   @RequestParam(value = "outTime") Date outTime,
+                                   @RequestParam(value = "outTime") String outTime,
                                    @RequestParam(value = "outType") String outType,
                                    @RequestParam(value = "soid", required = false) Integer soid,
                                    @RequestParam(value = "creator") String creator,
@@ -367,7 +365,7 @@ public interface StockCenterService {
                                       @RequestParam(value = "whid", required = false) Integer whid,
                                       @RequestParam(value = "mid", required = false) Integer mid,
                                       @RequestParam(value = "mname", required = false) String mname,
-                                      @RequestParam(value = "outTime", required = false) Date outTime,
+                                      @RequestParam(value = "outTime", required = false) String outTime,
                                       @RequestParam(value = "outType", required = false) String outType,
                                       @RequestParam(value = "soid", required = false) Integer soid,
                                       @RequestParam(value = "modifier") String modifier,
@@ -410,11 +408,11 @@ public interface StockCenterService {
                                      @RequestParam(value = "lessWhnum", required = false) Integer lessWhnum,
                                      @RequestParam(value = "greaterWhnum", required = false) Integer greaterWhnum,
                                      @RequestParam(value = "creator", required = false) String creator,
-                                     @RequestParam(value = "lessCreateTime", required = false) Date lessCreateTime,
-                                     @RequestParam(value = "greaterCreateTime", required = false) Date greaterCreateTime,
+                                     @RequestParam(value = "lessCreateTime", required = false) String lessCreateTime,
+                                     @RequestParam(value = "greaterCreateTime", required = false) String greaterCreateTime,
                                      @RequestParam(value = "modifier", required = false) String modifier,
-                                     @RequestParam(value = "lessModifyTime", required = false) Date lessModifyTime,
-                                     @RequestParam(value = "greaterModifyTime", required = false) Date greaterModifiyTime,
+                                     @RequestParam(value = "lessModifyTime", required = false) String lessModifyTime,
+                                     @RequestParam(value = "greaterModifyTime", required = false) String greaterModifiyTime,
                                      @RequestParam(value = "isActive", required = false) Integer isActive);
     /**
      * 添加仓库
@@ -518,11 +516,11 @@ public interface StockCenterService {
                                             @RequestParam(value = "chargePhone", required = false) String chargePhone,
                                             @RequestParam(value = "whtype", required = false) String whtype,
                                             @RequestParam(value = "creator", required = false) String creator,
-                                            @RequestParam(value = "lessCreateTime", required = false) Date lessCreateTime,
-                                            @RequestParam(value = "greaterCreateTime", required = false) Date greaterCreateTime,
+                                            @RequestParam(value = "lessCreateTime", required = false) String lessCreateTime,
+                                            @RequestParam(value = "greaterCreateTime", required = false) String greaterCreateTime,
                                             @RequestParam(value = "modifier", required = false) String modifier,
-                                            @RequestParam(value = "lessModifyTime", required = false) Date lessModifyTime,
-                                            @RequestParam(value = "greaterModifyTime", required = false) Date greaterModifiyTime,
+                                            @RequestParam(value = "lessModifyTime", required = false) String lessModifyTime,
+                                            @RequestParam(value = "greaterModifyTime", required = false) String greaterModifiyTime,
                                             @RequestParam(value = "isActive", required = false) Integer isActive);
     /***
      * 添加仓位

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="x-admin-sm">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.2</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" href="/headquarters/css/font.css">
+    <link rel="stylesheet" href="/headquarters/css/xadmin.css">
+    <script src="/headquarters/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/headquarters/js/xadmin.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]--></head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <label for="L_id" class="layui-form-label">入库单主键</label>
+            <div class="layui-input-inline">
+                <input type="text" id="L_id" name="vipid" class="layui-input" th:value="${outbill.outid}"
+                       readonly="readonly"/>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="L_billcode" class="layui-form-label">入库单号</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_billcode" class="layui-input" th:value="${outbill.outbillcode}"
+                           readonly="readonly">
+                </div>
+                <label for="L_billdate" class="layui-form-label">入库日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_billdate" class="layui-input"
+                           th:value="${#dates.format(outbill.outtime, 'yyyy-MM-dd')}"
+                           readonly="readonly"></div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="L_sid" class="layui-form-label">仓位主键</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_sid" class="layui-input" th:value="${outbill.whid}"
+                           readonly="readonly">
+                </div>
+                <label for="L_suppliername" class="layui-form-label">入库类型</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_suppliername" class="layui-input" th:value="${outbill.outtype}"
+                           readonly="readonly"></div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="L_mid" class="layui-form-label">物料编码</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_mid" class="layui-input" th:value="${outbill.mid}" readonly="readonly">
+                </div>
+                <label for="L_material" class="layui-form-label">物料名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_material" class="layui-input" th:value="${outbill.mname}"
+                           readonly="readonly"></div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="L_nnum" class="layui-form-label">数量</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_nnum" class="layui-input" th:value="${outbill.nnum}" readonly="readonly">
+                </div>
+                <label for="L_unit" class="layui-form-label">体积</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_unit" class="layui-input" th:value="${outbill.volumn}"
+                           readonly="readonly"></div>
+                <label for="L_money" class="layui-form-label">重量</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_money" class="layui-input" th:value="${outbill.weight}"
+                           readonly="readonly"></div>
+            </div>
+
+            <div class="layui-form-item">
+                <span th:if="${outbill.isactive}==1">
+                <label for="L_orderstate" class="layui-form-label">订单状态</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_orderstate" class="layui-input" th:value="启用"
+                           readonly="readonly"></div>
+                </span>
+                <span th:if="${outbill.isactive}==0">
+                <label for="L_orderstate1" class="layui-form-label">订单状态</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_orderstate1" class="layui-input" th:value="停用"
+                           readonly="readonly"></div>
+                </span>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="L_creator" class="layui-form-label">创建人</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_creator" class="layui-input" th:value="${outbill.creator}"
+                           readonly="readonly">
+                </div>
+                <label for="L_createtime" class="layui-form-label">创建时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_createtime" class="layui-input"
+                           th:value="${#dates.format(outbill.createtime, 'yyyy-MM-dd')}"
+                           readonly="readonly"></div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="L_modifier" class="layui-form-label">最后修改人</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_modifier" class="layui-input" th:value="${outbill.modifier}"
+                           readonly="readonly">
+                </div>
+                <label for="L_modifytime" class="layui-form-label">最后修改时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_modifytime" class="layui-input"
+                           th:value="${#dates.format(outbill.modifytime, 'yyyy-MM-dd')}"
+                           readonly="readonly"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

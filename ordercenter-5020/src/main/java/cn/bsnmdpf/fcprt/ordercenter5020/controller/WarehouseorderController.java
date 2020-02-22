@@ -125,7 +125,7 @@ public class WarehouseorderController {
      * @return 成功返回true，失败返回false
      */
     @PostMapping("warehouseorder")
-    public boolean addWarehouseorder(@RequestParam("whoid") Integer whoid,
+    public boolean addWarehouseorder(@RequestParam(value = "whoid",required = false) Integer whoid,
                                      @RequestParam("cid") Integer cid,
                                      @RequestParam("companyname") String companyname,
                                      @RequestParam("billcode") String billcode,
