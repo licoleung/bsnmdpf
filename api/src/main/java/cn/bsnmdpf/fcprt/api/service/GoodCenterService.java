@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * @author LicoLeung
  * @create 2020-02-07 20:10
  */
-@FeignClient(value = "goodcenter-5050")
+@FeignClient(value = "goodcenter-5030")
 public interface GoodCenterService {
 
     //MaterialController
