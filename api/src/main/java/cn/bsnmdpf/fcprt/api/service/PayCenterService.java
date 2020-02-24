@@ -41,16 +41,16 @@ public interface PayCenterService {
     @GetMapping("salebill")
     public PageInfo<Salebill> getSalebill(@RequestParam(value = "pageSize") int pageSize,
                                           @RequestParam(value = "page") int page,
-                                          @RequestParam("sbid") String sbid,
-                                          @RequestParam("billcode") String billcode,
-                                          @RequestParam("lessMoney") Double lessMoney,
-                                          @RequestParam("greaterMoney") Double greaterMoney,
-                                          @RequestParam("lessBilldate") String lessBilldate,
-                                          @RequestParam("greaterBilldate") String greaterBilldate,
-                                          @RequestParam("operator") String operator,
-                                          @RequestParam("isActive") Integer isActive,
-                                          @RequestParam("account") String account,
-                                          @RequestParam("spare") String spare);
+                                          @RequestParam(value = "sbid",required = false) String sbid,
+                                          @RequestParam(value = "billcode",required = false) String billcode,
+                                          @RequestParam(value = "lessMoney",required = false) Double lessMoney,
+                                          @RequestParam(value = "greaterMoney",required = false) Double greaterMoney,
+                                          @RequestParam(value = "lessBilldate",required = false) String lessBilldate,
+                                          @RequestParam(value = "greaterBilldate",required = false) String greaterBilldate,
+                                          @RequestParam(value = "operator",required = false) String operator,
+                                          @RequestParam(value = "isActive",required = false) Integer isActive,
+                                          @RequestParam(value = "account",required = false) String account,
+                                          @RequestParam(value = "spare",required = false) String spare);
 
     /**
      * 删除/封锁销售单据
@@ -72,7 +72,7 @@ public interface PayCenterService {
      * @param operator     操作人
      * @return 成功返回true，失败返回false
      */
-    @PostMapping("purchasebil1")
+    @PostMapping("purchasebill")
     public boolean addPurchasebill(@RequestParam("trade_no") String trade_no,
                                    @RequestParam("out_trade_no") String out_trade_no,
                                    @RequestParam("money") Double money,
@@ -96,19 +96,19 @@ public interface PayCenterService {
      * @param spare           备用
      * @return 符合条件得购买单据列表
      */
-    @GetMapping("purchasebil1")
+    @GetMapping("purchasebill")
     public PageInfo<Purchasebill> getPurchasebill(@RequestParam(value = "pageSize") int pageSize,
                                                   @RequestParam(value = "page") int page,
-                                                  @RequestParam("sbid") String pbid,
-                                                  @RequestParam("billcode") String billcode,
-                                                  @RequestParam("lessMoney") Double lessMoney,
-                                                  @RequestParam("greaterMoney") Double greaterMoney,
-                                                  @RequestParam("lessBilldate") String lessBilldate,
-                                                  @RequestParam("greaterBilldate") String greaterBilldate,
-                                                  @RequestParam("operator") String operator,
-                                                  @RequestParam("isActive") Integer isActive,
-                                                  @RequestParam("account") String account,
-                                                  @RequestParam("spare") String spare);
+                                                  @RequestParam(value = "pbid",required = false) String pbid,
+                                                  @RequestParam(value = "billcode",required = false) String billcode,
+                                                  @RequestParam(value = "lessMoney",required = false) Double lessMoney,
+                                                  @RequestParam(value = "greaterMoney",required = false) Double greaterMoney,
+                                                  @RequestParam(value = "lessBilldate",required = false) String lessBilldate,
+                                                  @RequestParam(value = "greaterBilldate",required = false) String greaterBilldate,
+                                                  @RequestParam(value = "operator",required = false) String operator,
+                                                  @RequestParam(value = "isActive",required = false) Integer isActive,
+                                                  @RequestParam(value = "account",required = false) String account,
+                                                  @RequestParam(value = "spare",required = false) String spare);
 
     /**
      * 删除/封锁购买单据
@@ -116,6 +116,15 @@ public interface PayCenterService {
      * @param pbid 交易号
      * @return 成功返回true，失败返回false
      */
-    @DeleteMapping("purchasebil1/{pbid}")
+    @DeleteMapping("purchasebill/{pbid}")
     public boolean deletePurchasebill(@PathVariable("pbid") String pbid);
+
+
+    @GetMapping("ablepb/{pbid}")
+    public boolean abPb(@PathVariable("pbid") String pbid);
+
+
+    @GetMapping("ablesb/{sbid}")
+    public boolean abSb(@PathVariable("sbid") String sbid);
+
 }

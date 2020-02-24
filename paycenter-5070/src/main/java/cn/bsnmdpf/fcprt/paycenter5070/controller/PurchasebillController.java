@@ -28,7 +28,7 @@ public class PurchasebillController {
     @InitBinder
     public void initBinder(WebDataBinder binder, WebRequest request) {
         //转换日期 注意这里的转化要和传进来的字符串的格式一直 如2015-9-9 就应该为yyyy-MM-dd
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));// CustomDateEditor为自定义日期编辑器
     }
 
@@ -41,7 +41,7 @@ public class PurchasebillController {
      * @param operator     操作人
      * @return 成功返回true，失败返回false
      */
-    @PostMapping("purchasebil1")
+    @PostMapping("purchasebill")
     public boolean addPurchasebill(@RequestParam("trade_no") String trade_no,
                                @RequestParam("out_trade_no") String out_trade_no,
                                @RequestParam("money") Double money,
@@ -68,19 +68,19 @@ public class PurchasebillController {
      * @param spare           备用
      * @return 符合条件得购买单据列表
      */
-    @GetMapping("purchasebil1")
+    @GetMapping("purchasebill")
     public PageInfo<Purchasebill> getPurchasebill(@RequestParam(value = "pageSize") int pageSize,
-                                              @RequestParam(value = "page") int page,
-                                              @RequestParam("sbid") String pbid,
-                                              @RequestParam("billcode") String billcode,
-                                              @RequestParam("lessMoney") Double lessMoney,
-                                              @RequestParam("greaterMoney") Double greaterMoney,
-                                              @RequestParam("lessBilldate") Date lessBilldate,
-                                              @RequestParam("greaterBilldate") Date greaterBilldate,
-                                              @RequestParam("operator") String operator,
-                                              @RequestParam("isActive") Integer isActive,
-                                              @RequestParam("account") String account,
-                                              @RequestParam("spare") String spare) {
+                                                  @RequestParam(value = "page") int page,
+                                                  @RequestParam(value = "pbid",required = false) String pbid,
+                                                  @RequestParam(value = "billcode",required = false) String billcode,
+                                                  @RequestParam(value = "lessMoney",required = false) Double lessMoney,
+                                                  @RequestParam(value = "greaterMoney",required = false) Double greaterMoney,
+                                                  @RequestParam(value = "lessBilldate",required = false) Date lessBilldate,
+                                                  @RequestParam(value = "greaterBilldate",required = false) Date greaterBilldate,
+                                                  @RequestParam(value = "operator",required = false) String operator,
+                                                  @RequestParam(value = "isActive",required = false) Integer isActive,
+                                                  @RequestParam(value = "account",required = false) String account,
+                                                  @RequestParam(value = "spare",required = false) String spare) {
         PageHelper.startPage(page, pageSize);
         List<Purchasebill> purchasebills = purchasebil1Service.getPurchasebills(pbid, billcode, lessMoney, greaterMoney, lessBilldate, greaterBilldate,
                 operator, isActive, account, spare);
@@ -95,9 +95,15 @@ public class PurchasebillController {
      * @param pbid 交易号
      * @return 成功返回true，失败返回false
      */
-    @DeleteMapping("purchasebil1/{pbid}")
+    @DeleteMapping("purchasebill/{pbid}")
     public boolean deletePurchasebill(@PathVariable("pbid") String pbid) {
         boolean b = purchasebil1Service.unablePurchasebills(pbid);
+        return b;
+    }
+
+    @GetMapping("ablepb/{pbid}")
+    public boolean abPb(@PathVariable("pbid") String pbid){
+        boolean b = purchasebil1Service.ablePurchasebills(pbid);
         return b;
     }
 }

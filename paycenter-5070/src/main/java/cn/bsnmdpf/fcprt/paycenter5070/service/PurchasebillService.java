@@ -90,4 +90,19 @@ public class PurchasebillService {
             throw new RuntimeException("无法删除，请检查销售单据主键");
         }
     }
+
+    @Transactional
+    public boolean ablePurchasebills(String pbid) throws RuntimeException{
+        Purchasebill purchasebill = new Purchasebill();
+        purchasebill.setIsactive(1);
+        PurchasebillExample purchasebillExample = new PurchasebillExample();
+        PurchasebillExample.Criteria criteria = purchasebillExample.createCriteria();
+        criteria.andPbidEqualTo(pbid);
+        int i = purchasebillMapper.updateByExampleSelective(purchasebill, purchasebillExample);
+        if(i==1){
+            return true;
+        }else{
+            throw new RuntimeException("无法恢复，请检查销售单据主键");
+        }
+    }
 }

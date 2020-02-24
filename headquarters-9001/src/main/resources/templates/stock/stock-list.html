@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="x-admin-sm">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.2</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" href="/headquarters/css/font.css">
+    <link rel="stylesheet" href="/headquarters/css/xadmin.css">
+    <script src="/headquarters/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/headquarters/js/xadmin.js"></script>
+</head>
+
+<body>
+<div class="x-nav">
+          <span class="layui-breadcrumb">
+            <a href="">食品公司本部</a>
+            <a href="">库存中心</a>
+            <a>
+              <cite>仓库列表</cite></a>
+          </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       onclick="location.reload()" title="刷新">
+        <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
+    </a>
+</div>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body ">
+                    <div class="layui-collapse" lay-filter="test">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">条件筛选<i class="layui-icon layui-colla-icon"></i></h2>
+                            <div class="layui-colla-content">
+                                <form class="layui-form" action="stock">
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">仓库主键</label>
+                                            <div class="layui-input-inline" style="width: 200px;">
+                                                <input type="text" id="sid" name="sid" placeholder="sid"
+                                                       autocomplete="off"
+                                                       class="layui-input">
+                                            </div>
+                                            <label class="layui-form-label">仓库名称</label>
+                                            <div class="layui-input-inline" style="width: 200px;">
+                                                <input type="text" id="stockname" name="stockname" placeholder="stockname"
+                                                       autocomplete="off"
+                                                       class="layui-input">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">容量</label>
+                                            <div class="layui-input-inline" style="width: 200px;">
+                                                <input type="text" id="lessVolumn" name="lessVolumn" placeholder="最小值"
+                                                       autocomplete="off"
+                                                       class="layui-input">
+                                            </div>
+                                            <div class="layui-form-mid">-</div>
+                                            <div class="layui-input-inline" style="width: 200px;">
+                                                <input type="text" id="greaterVolumn" name="greaterVolumn" placeholder="最大值"
+                                                       autocomplete="off"
+                                                       class="layui-input">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">地址</label>
+                                            <div class="layui-input-inline" style="width: 200px;">
+                                                <input type="text" id="adress" name="adress" placeholder="adress"
+                                                       autocomplete="off"
+                                                       class="layui-input">
+                                            </div>
+                                            <label class="layui-form-label">订单状态</label>
+                                            <div class="layui-input-inline">
+                                                <select id="level" name="isActive" lay-search="">
+                                                    <option value="">无条件</option>
+                                                    <option value="0">停用</option>
+                                                    <option value="1">启用</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-form-item">
+                                        <div class="layui-input-block">
+                                            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交
+                                            </button>
+                                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-card-body ">
+                    <table class="layui-table layui-form">
+                        <thead>
+                        <tr>
+                            <th>仓库主键</th>
+                            <th>仓库名称</th>
+                            <th>最大容量</th>
+                            <th>已用容量</th>
+                            <th>地址</th>
+                            <th>仓位数量</th>
+                            <th>创建人</th>
+                            <th>创建时间</th>
+                            <th>修改人</th>
+                            <th>修改时间</th>
+                            <th>使用状态</th>
+                        </tr>
+                        </thead>
+                        <tbody th:each="stock:${stocks}">
+                        <tr>
+                            <td>[[${stock.sid}]]</td>
+                            <td th:text="${stock.stockname}">.10</td>
+                            <td th:text="${stock.volumn}"></td>
+                            <!--<td th:text="${order.mid}"></td>-->
+                            <td th:text="${stock.usedvolumn}"></td>
+                            <td th:text="${stock.address}"></td>
+                            <td th:text="${stock.whnum}"></td>
+                            <td th:text="${stock.creator}"></td>
+                            <td th:text="${#dates.format(stock.createtime, 'yyyy-MM-dd')}"></td>
+                            <td th:text="${stock.modifier}"></td>
+                            <td th:text="${#dates.format(stock.modifytime, 'yyyy-MM-dd')}"></td>
+                            <td th:if="${stock.isactive}==0">停用</td>
+                            <td th:if="${stock.isactive}==1">启用</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="layui-card-body ">
+                    <div class="page">
+                        <div>
+                            <span><a class="prev" href="" th:href="@{'./stock?flag=2&page='+${prePage}}">&lt;&lt;</a></span>
+                            <span th:each="num:${nums}" th:class="${num}==${nowPage}?'current':'even'">
+                                <a th:href="@{'./stock?flag=2&page='+${num}}" th:text="${num}"></a>
+                            </span>
+                            <span><a class="next" href="" th:href="@{'./stock?flag=2&page='+${nextPage}}">&gt;&gt;</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    layui.use(['laydate', 'form'], function () {
+        var laydate = layui.laydate;
+        var form = layui.form;
+
+
+        // 监听全选
+        form.on('checkbox(checkall)', function (data) {
+
+            if (data.elem.checked) {
+                $('tbody input').prop('checked', true);
+            } else {
+                $('tbody input').prop('checked', false);
+            }
+            form.render('checkbox');
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#end' //指定元素
+        });
+
+
+    });
+
+
+    /*用户-停用*/
+    function member_stop(obj, soid, nowState) {
+        layer.confirm('确认要更改订单状态吗？', function (index) {
+//alert(id);
+            // 异步对象
+            $.ajax({
+                url: "instockbill/" + soid + "?nowState=" + nowState,
+                type: "delete",
+                dataType: "json",
+                success: function (data) {
+                }
+            })
+            if ($(obj).attr('title') == '启用') {
+                layer.msg('已恢复!', {icon: 1, time: 1000});
+            } else {
+                layer.msg('已封锁!', {icon: 5, time: 1000});
+            }
+            setTimeout(function () {
+                window.location.reload();
+            }, 1500);
+
+        });
+    }
+
+</script>
+
+</html>

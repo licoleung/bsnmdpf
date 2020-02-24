@@ -1,9 +1,6 @@
 package cn.bsnmdpf.fcprt.headquarters9001.controller;
 
-import cn.bsnmdpf.fcprt.api.pojo.Instockbill;
-import cn.bsnmdpf.fcprt.api.pojo.OnHand;
-import cn.bsnmdpf.fcprt.api.pojo.Outstockbill;
-import cn.bsnmdpf.fcprt.api.pojo.Purchaseorder;
+import cn.bsnmdpf.fcprt.api.pojo.*;
 import cn.bsnmdpf.fcprt.api.service.StockCenterService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -351,5 +348,141 @@ public class StockBaseController {
         model.addAttribute("nums", nums);
         model.addAttribute("onhands", pageInfo.getList());
         return "stock/onhand-list";
+    }
+
+    @GetMapping("stock")
+    public String getStocks(@RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
+                            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                            @RequestParam(value = "sid", required = false) Integer sid,
+                            @RequestParam(value = "stockname", required = false) String stockname,
+                            @RequestParam(value = "lessVolumn", required = false) Double lessVolumn,
+                            @RequestParam(value = "greaterVolumn", required = false) Double greaterVolumn,
+                            @RequestParam(value = "lessUsedVolumn", required = false) Double lessUsedVolumn,
+                            @RequestParam(value = "greaterUsedVolumn", required = false) Double greaterUsedVolumn,
+                            @RequestParam(value = "address", required = false) String address,
+                            @RequestParam(value = "lessWhnum", required = false) Integer lessWhnum,
+                            @RequestParam(value = "greaterWhnum", required = false) Integer greaterWhnum,
+                            @RequestParam(value = "creator", required = false) String creator,
+                            @RequestParam(value = "lessCreateTime", required = false) String lessCreateTime,
+                            @RequestParam(value = "greaterCreateTime", required = false) String greaterCreateTime,
+                            @RequestParam(value = "modifier", required = false) String modifier,
+                            @RequestParam(value = "lessModifyTime", required = false) String lessModifyTime,
+                            @RequestParam(value = "greaterModifyTime", required = false) String greaterModifiyTime,
+                            @RequestParam(value = "isActive", required = false) Integer isActive,
+                            @RequestParam(value = "flag", defaultValue = "1", required = false) int flag,
+                            Model model,
+                            HttpSession httpSession) {
+        PageInfo<Stock> pageInfo = null;
+        if (flag == 1) {
+            pageInfo = stockCenterService.getStocks(pageSize, page, sid, stockname, lessVolumn, greaterVolumn,
+                    lessUsedVolumn, greaterUsedVolumn, address, lessWhnum, greaterWhnum, creator, lessCreateTime,
+                    greaterCreateTime, modifier, lessModifyTime, greaterModifiyTime, isActive);
+            httpSession.setAttribute("sid", sid);
+            httpSession.setAttribute("stockname", stockname);
+            httpSession.setAttribute("lessVolumn", lessVolumn);
+            httpSession.setAttribute("greaterVolumn", greaterVolumn);
+            httpSession.setAttribute("address", address);
+            httpSession.setAttribute("isActive", isActive);
+        } else {
+            sid = (Integer) httpSession.getAttribute("sid");
+            stockname = (String) httpSession.getAttribute("stockname");
+            lessVolumn = (Double) httpSession.getAttribute("lessVolumn");
+            greaterVolumn = (Double) httpSession.getAttribute("greaterVolumn");
+            address = (String) httpSession.getAttribute("address");
+            isActive = (Integer) httpSession.getAttribute("isActive");
+            pageInfo = stockCenterService.getStocks(pageSize, page, sid, stockname, lessVolumn, greaterVolumn,
+                    lessUsedVolumn, greaterUsedVolumn, address, lessWhnum, greaterWhnum, creator, lessCreateTime,
+                    greaterCreateTime, modifier, lessModifyTime, greaterModifiyTime, isActive);
+        }
+        int nowPage = pageInfo.getPageNum();//当前页面
+        int[] nums = pageInfo.getNavigatepageNums();
+
+        //previous page
+        if (pageInfo.isIsFirstPage()) {
+            model.addAttribute("prePage", nowPage);
+        } else {
+            model.addAttribute("prePage", nowPage - 1);
+        }
+
+        //next page
+        if (pageInfo.isIsLastPage()) {
+            model.addAttribute("nextPage", nowPage);
+        } else {
+            model.addAttribute("nextPage", nowPage + 1);
+        }
+        model.addAttribute("nowPage", nowPage);
+        model.addAttribute("nums", nums);
+        model.addAttribute("stocks", pageInfo.getList());
+        return "stock/stock-list";
+    }
+
+    @GetMapping("warehouse")
+    public String getWarehouses(@RequestParam(value = "pageSize",required = false,defaultValue = "10") int pageSize,
+                                @RequestParam(value = "page",defaultValue = "1",required = false) int page,
+                                @RequestParam(value = "whid", required = false) Integer whid,
+                                @RequestParam(value = "sid", required = false) Integer sid,
+                                @RequestParam(value = "warehousename", required = false) String warehousename,
+                                @RequestParam(value = "lessVolumn", required = false) Double lessVolumn,
+                                @RequestParam(value = "greaterVolumn", required = false) Double greaterVolumn,
+                                @RequestParam(value = "lessUsedVolumn", required = false) Double lessUsedVolumn,
+                                @RequestParam(value = "greaterUsedVolumn", required = false) Double greaterUsedVolumn,
+                                @RequestParam(value = "address", required = false) String address,
+                                @RequestParam(value = "charge", required = false) String charge,
+                                @RequestParam(value = "chargePhone", required = false) String chargePhone,
+                                @RequestParam(value = "whtype", required = false) String whtype,
+                                @RequestParam(value = "creator", required = false) String creator,
+                                @RequestParam(value = "lessCreateTime", required = false) String lessCreateTime,
+                                @RequestParam(value = "greaterCreateTime", required = false) String greaterCreateTime,
+                                @RequestParam(value = "modifier", required = false) String modifier,
+                                @RequestParam(value = "lessModifyTime", required = false) String lessModifyTime,
+                                @RequestParam(value = "greaterModifyTime", required = false) String greaterModifiyTime,
+                                @RequestParam(value = "isActive", required = false) Integer isActive,
+                                @RequestParam(value = "flag", defaultValue = "1", required = false) int flag,
+                                Model model,
+                                HttpSession httpSession){
+        PageInfo<Warehouse> pageInfo = null;
+        if(flag==1){
+            pageInfo = stockCenterService.getWarehouse(pageSize,page,whid, sid, warehousename, lessVolumn, greaterVolumn,
+                    lessUsedVolumn, greaterUsedVolumn, address, charge, chargePhone, whtype, creator, lessCreateTime,
+                    greaterCreateTime, modifier, lessModifyTime, greaterModifiyTime, isActive);
+            httpSession.setAttribute("sid", sid);
+            httpSession.setAttribute("whid", whid);
+            httpSession.setAttribute("warehousename", warehousename);
+            httpSession.setAttribute("lessVolumn", lessVolumn);
+            httpSession.setAttribute("greaterVolumn", greaterVolumn);
+            httpSession.setAttribute("address", address);
+            httpSession.setAttribute("isActive", isActive);
+        }else{
+            whid = (Integer) httpSession.getAttribute("whid");
+            sid = (Integer) httpSession.getAttribute("sid");
+            warehousename = (String) httpSession.getAttribute("warehousename");
+            lessVolumn = (Double) httpSession.getAttribute("lessVolumn");
+            greaterVolumn = (Double) httpSession.getAttribute("greaterVolumn");
+            address = (String) httpSession.getAttribute("address");
+            isActive = (Integer) httpSession.getAttribute("isActive");
+            pageInfo = stockCenterService.getWarehouse(pageSize,page,whid, sid, warehousename, lessVolumn, greaterVolumn,
+                    lessUsedVolumn, greaterUsedVolumn, address, charge, chargePhone, whtype, creator, lessCreateTime,
+                    greaterCreateTime, modifier, lessModifyTime, greaterModifiyTime, isActive);
+        }
+        int nowPage = pageInfo.getPageNum();//当前页面
+        int[] nums = pageInfo.getNavigatepageNums();
+
+        //previous page
+        if (pageInfo.isIsFirstPage()) {
+            model.addAttribute("prePage", nowPage);
+        } else {
+            model.addAttribute("prePage", nowPage - 1);
+        }
+
+        //next page
+        if (pageInfo.isIsLastPage()) {
+            model.addAttribute("nextPage", nowPage);
+        } else {
+            model.addAttribute("nextPage", nowPage + 1);
+        }
+        model.addAttribute("nowPage", nowPage);
+        model.addAttribute("nums", nums);
+        model.addAttribute("warehouses", pageInfo.getList());
+        return "stock/warehouse-list";
     }
 }

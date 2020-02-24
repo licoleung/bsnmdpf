@@ -90,4 +90,19 @@ public class SalebillService {
             throw new RuntimeException("无法删除，请检查销售单据主键");
         }
     }
+
+    @Transactional
+    public boolean ableSalebills(String sbid) throws RuntimeException{
+        Salebill salebill = new Salebill();
+        salebill.setIsactive(1);
+        SalebillExample salebillExample = new SalebillExample();
+        SalebillExample.Criteria criteria = salebillExample.createCriteria();
+        criteria.andSbidEqualTo(sbid);
+        int i = salebillMapper.updateByExampleSelective(salebill, salebillExample);
+        if(i==1){
+            return true;
+        }else{
+            throw new RuntimeException("无法恢复，请检查销售单据主键");
+        }
+    }
 }
