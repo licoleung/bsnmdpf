@@ -29,8 +29,8 @@ micro-spring-server:
 ribbon:
   eureka:
     enabled: true
-  ConnectTimeout: 10000
-  ReadTimeout: 10000
+  ConnectTimeout: 9999
+  ReadTimeout: 9999
 
 # 微服务关于信息的描述
 info:
