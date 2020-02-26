@@ -4,6 +4,7 @@ import cn.bsnmdpf.fcprt.api.pojo.Coupon;
 import cn.bsnmdpf.fcprt.api.pojo.CouponExample;
 import cn.bsnmdpf.fcprt.salecenter5060.mapper.CouponMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.List;
  * @author LicoLeung
  * @create 2020-02-12 12:27
  */
-@Transactional
+@Service
 public class CouponService {
 
     @Autowired
