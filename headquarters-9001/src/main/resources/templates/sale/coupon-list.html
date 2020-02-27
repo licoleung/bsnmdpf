@@ -35,41 +35,18 @@
                         <div class="layui-colla-item">
                             <h2 class="layui-colla-title">条件筛选<i class="layui-icon layui-colla-icon"></i></h2>
                             <div class="layui-colla-content">
-                                <form class="layui-form" action="activity">
+                                <form class="layui-form" action="coupon">
                                     <div class="layui-form-item">
                                         <div class="layui-inline">
-                                            <label class="layui-form-label">活动主键</label>
+                                            <label class="layui-form-label">优惠券主键</label>
                                             <div class="layui-input-inline" style="width: 200px;">
-                                                <input type="text" id="aid" name="aid" placeholder="aid"
+                                                <input type="text" id="cpid" name="cpid" placeholder="cpid"
                                                        autocomplete="off"
                                                        class="layui-input">
                                             </div>
-                                            <label class="layui-form-label">活动名称</label>
+                                            <label class="layui-form-label">优惠券名称</label>
                                             <div class="layui-input-inline" style="width: 200px;">
-                                                <input type="text" id="activityname" name="activityname" placeholder="activityname"
-                                                       autocomplete="off"
-                                                       class="layui-input">
-                                            </div>
-                                            <label class="layui-form-label">活动类型</label>
-                                            <div class="layui-input-inline" style="width: 200px;">
-                                                <input type="text" id="atype" name="atype" placeholder="atype"
-                                                       autocomplete="off"
-                                                       class="layui-input">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <div class="layui-inline">
-                                            <label class="layui-form-label">负责人</label>
-                                            <div class="layui-input-inline" style="width: 200px;">
-                                                <input type="text" id="operator" name="operator" placeholder="operator"
-                                                       autocomplete="off"
-                                                       class="layui-input">
-                                            </div>
-                                            <label class="layui-form-label">负责人电话</label>
-                                            <div class="layui-input-inline" style="width: 200px;">
-                                                <input type="text" id="operatorPhone" name="operatorPhone"
-                                                       placeholder="operatorPhone"
+                                                <input type="text" id="couponname" name="couponname" placeholder="couponname"
                                                        autocomplete="off"
                                                        class="layui-input">
                                             </div>
@@ -126,18 +103,13 @@
 
                                     <div class="layui-form-item">
                                         <div class="layui-inline">
-                                            <label class="layui-form-label">最低VIP等级</label>
-                                            <div class="layui-input-inline" style="width: 200px;">
-                                                <input type="text" id="minVipLevel" name="minVipLevel" placeholder="minVipLevel"
-                                                       autocomplete="off"
-                                                       class="layui-input">
-                                            </div>
-                                            <label class="layui-form-label">最高VIP等级</label>
-                                            <div class="layui-input-inline" style="width: 200px;">
-                                                <input type="text" id="maxVipLevel" name="maxVipLevel"
-                                                       placeholder="maxVipLevel"
-                                                       autocomplete="off"
-                                                       class="layui-input">
+                                            <label class="layui-form-label">订单状态</label>
+                                            <div class="layui-input-inline">
+                                                <select id="level" name="isActive" lay-search="">
+                                                    <option value="">无条件</option>
+                                                    <option value="0">停用</option>
+                                                    <option value="1">启用</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -155,7 +127,7 @@
                     </div>
                 </div>
                 <div class="layui-card-header">
-                    <button class="layui-btn" onclick="xadmin.open('添加','addAcpage')">
+                    <button class="layui-btn" onclick="xadmin.open('添加','tocppage')">
                         <i class="layui-icon"></i>添加
                     </button>
                 </div>
@@ -163,39 +135,49 @@
                     <table class="layui-table layui-form">
                         <thead>
                         <tr>
-                            <th>活动主键</th>
-                            <th>活动名称</th>
-                            <th>活动类型</th>
-                            <th>负责人</th>
-                            <th>负责人电话</th>
-                            <th>创建时间</th>
+                            <th>优惠券主键</th>
+                            <th>优惠券名称</th>
                             <th>活动开始时间</th>
                             <th>活动结束时间</th>
+                            <th>参与活动物料主键</th>
                             <th>参与活动物料名称</th>
                             <th>参与活动物料标签</th>
+                            <th>限定数量</th>
+                            <th>优惠金额</th>
+                            <th>最低消费金额</th>
+                            <th>状态</th>
+                            <th>创建人</th>
+                            <th>创建时间</th>
                             <th>操作</th>
                         </tr>
                         </thead>
-                        <tbody th:each="activity:${atvt}">
+                        <tbody th:each="coupon:${coupons}">
                         <tr>
-                            <td>[[${activity.aid}]]</td>
-                            <td th:text="${activity.activityname}">.10</td>
-                            <td th:text="${activity.atype}">.10</td>
-                            <td th:text="${activity.operator}">.10</td>
-                            <td th:text="${activity.operatorphone}"></td>
-                            <td th:text="${#dates.format(activity.createtime, 'yyyy-MM-dd')}"></td>
-                            <td th:text="${#dates.format(activity.begintime, 'yyyy-MM-dd')}"></td>
-                            <td th:text="${#dates.format(activity.endtime, 'yyyy-MM-dd')}"></td>
-                            <td th:text="${activity.mname}"></td>
-                            <td th:text="${activity.mtag}">--17 :22</td>
+                            <td>[[${coupon.cpid}]]</td>
+                            <td th:text="${coupon.couponname}">.10</td>
+                            <td th:text="${#dates.format(coupon.begintime, 'yyyy-MM-dd')}"></td>
+                            <td th:text="${#dates.format(coupon.endtime, 'yyyy-MM-dd')}"></td>
+                            <td th:text="${coupon.mid}"></td>
+                            <td th:text="${coupon.mname}"></td>
+                            <td th:text="${coupon.mtag}">--17 :22</td>
+                            <td th:text="${coupon.nnum}"></td>
+                            <td th:text="${coupon.descmoney}"></td>
+                            <td th:text="${coupon.needmoney}"></td>
+                            <td th:if="${coupon.isactive}==0">未启用</td>
+                            <td th:if="${coupon.isactive}==1">已启用</td>
+                            <td th:text="${coupon.creator}">--17 :22</td>
+                            <td th:text="${#dates.format(coupon.createtime, 'yyyy-MM-dd')}"></td>
                             <td class="td-manage">
-                                <a title="查看" th:onclick="'xadmin.open(\'编辑\',\'oneActivity?aid='+${activity.aid}+'\')'"
-                                   href="javascript:;">
-                                    <i class="layui-icon">&#xe63c;</i>
-                                </a>
-                                <a th:onclick="'javascript:member_stop(this,\''+${activity.aid}+'\',\'1\')'" title="停用">
+                                <span th:if="${coupon.isactive}==1">
+                                <a th:onclick="'javascript:member_stop(this,\''+${coupon.cpid}+'\',\'1\')'" title="停用">
                                     <i class="layui-icon">&#xe640;</i>
                                 </a>
+                                </span>
+                                <span th:if="${coupon.isactive}==0">
+                                <a th:onclick="'javascript:member_stop(this,\''+${coupon.cpid}+'\',\'0\')'" title="启用">
+                                    <i class="layui-icon">&#xe669;</i>
+                                </a>
+                                </span>
                             </td>
                         </tr>
                         </tbody>
@@ -205,12 +187,12 @@
                     <div class="page">
                         <div>
                             <span><a class="prev" href=""
-                                     th:href="@{'./saleorder?flag=2&page='+${prePage}}">&lt;&lt;</a></span>
+                                     th:href="@{'./coupon?flag=2&page='+${prePage}}">&lt;&lt;</a></span>
                             <span th:each="num:${nums}" th:class="${num}==${nowPage}?'current':'even'">
-                                <a th:href="@{'./saleorder?flag=2&page='+${num}}" th:text="${num}"></a>
+                                <a th:href="@{'./coupon?flag=2&page='+${num}}" th:text="${num}"></a>
                             </span>
                             <span><a class="next" href=""
-                                     th:href="@{'./saleorder?flag=2&page='+${nextPage}}">&gt;&gt;</a></span>
+                                     th:href="@{'./coupon?flag=2&page='+${nextPage}}">&gt;&gt;</a></span>
                         </div>
                     </div>
                 </div>
@@ -260,10 +242,10 @@
 
     /*用户-停用*/
     function member_stop(obj, soid, nowState) {
-        layer.confirm('确认要更改活动状态吗？', function (index) {
+        layer.confirm('确认要更改优惠券状态吗？', function (index) {
             // 异步对象
             $.ajax({
-                url: "activity/" + soid + "?nowState=" + nowState,
+                url: "coupon/" + soid + "?nowState=" + nowState,
                 type: "delete",
                 dataType: "json",
                 success: function (data) {

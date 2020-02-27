@@ -59,17 +59,17 @@ public class CouponController {
     }
 
     @PostMapping("coupon")
-    public boolean addCoupon(@RequestParam("cpid") Integer cpid,
+    public boolean addCoupon(@RequestParam(value = "cpid",required = false) Integer cpid,
                              @RequestParam("couponname") String couponname,
-                             @RequestParam("mid") Integer mid,
+                             @RequestParam(value = "mid",required = false) Integer mid,
                              @RequestParam(value = "mname",required = false) String mname,
                              @RequestParam(value = "mtag",required = false) String mtag,
                              @RequestParam(value = "nnum",required = false) Integer nnum,
-                             @RequestParam("descMonet") Double descMoney,
+                             @RequestParam("descMoney") Double descMoney,
                              @RequestParam("needMoney") Double needMoney,
                              @RequestParam("beginTime") Date beginTime,
                              @RequestParam("endTime") Date endTime,
-                             @RequestParam("isActive") Integer isActive,
+                             @RequestParam(value = "isActive",defaultValue = "1") Integer isActive,
                              @RequestParam("creator") String creator){
         boolean b = couponService.addCoupon(cpid, couponname, mid, mname, mtag, nnum, descMoney, needMoney, beginTime, endTime, isActive, creator);
         return b;
@@ -82,7 +82,7 @@ public class CouponController {
                                 @RequestParam(value = "mname",required = false) String mname,
                                 @RequestParam(value = "mtag",required = false) String mtag,
                                 @RequestParam(value = "nnum",required = false) Integer nnum,
-                                @RequestParam(value = "descMonet",required = false) Double descMoney,
+                                @RequestParam(value = "descMoney",required = false) Double descMoney,
                                 @RequestParam(value = "needMoney",required = false) Double needMoney,
                                 @RequestParam(value = "beginTime",required = false) Date beginTime,
                                 @RequestParam(value = "endTime",required = false) Date endTime,
