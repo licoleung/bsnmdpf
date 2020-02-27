@@ -12,6 +12,7 @@
 <h4>3.echarts展示数据</h4>
 <hr>
 <h3>版本信息</h3>
+V15.0<br> 2020年2月27日 22点45分<br> ·修改了多个中心的pom,修改了user和role,准备加入spring security<br><br>
 V14.1<br> 2020年2月27日 19点16分<br> ·完成优惠券的页面<br><br>
 V14.0<br> 2020年2月26日 23点11分<br> ·完成活动的页面<br>·解决了网关跳转问题<br><br>
 V13.1<br> 2020年2月25日 23点02分<br> ·完善了goodCenter以及相关页面<br>·修改了zuul网关配置（页面跳转有问题，需要进一步处理）<br><br>
@@ -33,7 +34,7 @@ V7.1<br> 2020年2月7日 23点13分<br> ·修改了purchaseorder中money的小bu
 V7.0<br> 2020年2月7日 22点50分<br> ·修改了OrderCenter的pojo<br><br>
 V6.1<br> 2020年2月7日 20点14分<br> ·完成GoodCenter<br><br>
 V6.0<br>  2020年2月6日 23点57分<br>  ·Material的修改及MaterialService的编写<br><br>
-V5.6.1<br> 2020年2月6日 16点05分<br> ·修改了事务管理的小bug<br><br>
+V5.6.1<br> 2020年2月6日 16点05分<br> ·修改了事务管 理的小bug<br><br>
 V5.6<br>  2020年2月6日 15点51分<br> ·优化了VIPCenter及UserCenter的事务管理<br><br>
 V5.5<br>  2020年2月6日 15点32分<br> ·完成StockCenter，含事务管理<br>·完成VIPCenter日期的处理<br><br>
 V5.4<br>  2020年2月5日 23点18分<br> ·完成stockcenter大部分<br><br>
