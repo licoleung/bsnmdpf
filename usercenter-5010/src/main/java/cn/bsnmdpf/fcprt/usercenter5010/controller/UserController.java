@@ -4,6 +4,7 @@ import cn.bsnmdpf.fcprt.api.pojo.User;
 import cn.bsnmdpf.fcprt.usercenter5010.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -88,5 +89,12 @@ public class UserController {
         user.setSpare(spare);
         boolean b = userService.updateUser(user);
         return b;
+    }
+
+    @RequestMapping("loadUserByUsername")
+    public User loadUserByUsername(@RequestParam("username") String username){
+        System.out.println("at user controller un="+username);
+        User user = userService.loadUserByUsername(username);
+        return user;
     }
 }

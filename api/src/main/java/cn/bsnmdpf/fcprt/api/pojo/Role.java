@@ -90,4 +90,18 @@ public class Role implements GrantedAuthority {
     public String getAuthority() {
         return rolename;
     }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "rid=" + rid +
+                ", rolename='" + rolename + '\'' +
+                ", creator='" + creator + '\'' +
+                ", modifier='" + modifier + '\'' +
+                ", createtime=" + createtime +
+                ", modifytime=" + modifytime +
+                ", isactive=" + isactive +
+                ", spare='" + spare + '\'' +
+                '}';
+    }
 }

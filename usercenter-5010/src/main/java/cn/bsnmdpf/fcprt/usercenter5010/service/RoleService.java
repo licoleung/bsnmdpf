@@ -3,6 +3,7 @@ package cn.bsnmdpf.fcprt.usercenter5010.service;
 import cn.bsnmdpf.fcprt.api.pojo.Role;
 import cn.bsnmdpf.fcprt.api.pojo.RoleExample;
 import cn.bsnmdpf.fcprt.usercenter5010.mapper.RoleMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -133,5 +134,10 @@ public class RoleService {
         } else {
             throw new RuntimeException("未知错误，无法更新，或可能找不到对应rid的role");
         }
+    }
+
+    public List<Role> getRolesByUserId(@Param("uid") Integer uid){
+        List<Role> rolesByUserId = roleMapper.getRolesByUserId(uid);
+        return rolesByUserId;
     }
 }

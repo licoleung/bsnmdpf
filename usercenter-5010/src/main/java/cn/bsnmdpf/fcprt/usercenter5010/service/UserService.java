@@ -3,6 +3,7 @@ package cn.bsnmdpf.fcprt.usercenter5010.service;
 import cn.bsnmdpf.fcprt.api.pojo.User;
 import cn.bsnmdpf.fcprt.api.pojo.UserExample;
 import cn.bsnmdpf.fcprt.usercenter5010.mapper.UserMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -136,6 +137,11 @@ public class UserService {
         } else {
             throw new RuntimeException("未知错误，无法更新，或可能找不到对应uid的user");
         }
+    }
+
+    public User loadUserByUsername(String username){
+        User user = userMapper.loadUserByUsername(username);
+        return user;
     }
 
 }

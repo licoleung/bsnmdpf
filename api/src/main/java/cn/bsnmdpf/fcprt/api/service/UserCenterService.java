@@ -1,10 +1,9 @@
 package cn.bsnmdpf.fcprt.api.service;
 
-import cn.bsnmdpf.fcprt.api.pojo.Company;
-import cn.bsnmdpf.fcprt.api.pojo.Department;
-import cn.bsnmdpf.fcprt.api.pojo.Role;
-import cn.bsnmdpf.fcprt.api.pojo.User;
+import cn.bsnmdpf.fcprt.api.config.FeignConfig;
+import cn.bsnmdpf.fcprt.api.pojo.*;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +17,15 @@ import java.util.List;
 public interface UserCenterService {
 
     //UserController
+
+    @RequestMapping("loadUserByUsername")
+    public User loadUserByUsername(@RequestParam("username") String username);
+
+    @RequestMapping("getRolesByUserId")
+    public List<Role> getRolesByUserId(@RequestParam("uid") Integer uid);
+
+    @RequestMapping("getRolePermissions")
+    public List<Permission> getRolePermissions();
 
     /**
      * 根据参数查询用户列表

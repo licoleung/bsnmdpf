@@ -1,6 +1,10 @@
 spring:
   application:
     name: headquarters-9001
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    cache: false
 eureka:
   client:
     service-url:

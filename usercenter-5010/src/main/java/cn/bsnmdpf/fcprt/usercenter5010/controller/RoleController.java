@@ -4,6 +4,7 @@ import cn.bsnmdpf.fcprt.api.pojo.Role;
 import cn.bsnmdpf.fcprt.usercenter5010.service.RoleService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -91,5 +92,11 @@ public class RoleController {
         role.setSpare(spare);
         boolean b = roleService.updateRole(role);
         return b;
+    }
+
+    @RequestMapping("getRolesByUserId")
+    public List<Role> getRolesByUserId(@RequestParam("uid") Integer uid){
+    List<Role> rolesByUserId = roleService.getRolesByUserId(uid);
+    return rolesByUserId;
     }
 }

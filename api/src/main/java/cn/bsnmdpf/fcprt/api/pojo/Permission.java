@@ -50,4 +50,15 @@ public class Permission {
     public void setSpare(String spare) {
         this.spare = spare == null ? null : spare.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Permission{" +
+                "pid=" + pid +
+                ", url='" + url + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", spare='" + spare + '\'' +
+                '}';
+    }
 }
