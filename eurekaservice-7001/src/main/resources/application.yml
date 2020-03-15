@@ -8,8 +8,3 @@ eureka:
     fetch-registry: false
     service-url:
       defaultZone: http://localhost:7002/eureka/
-security:
-  basic:
-    enabled: ${security.basic.enabled}
-  user:
-    name: ${security.user.name}
