@@ -166,6 +166,17 @@ public class InstockbillController {
         Warehouse wHbyWhid = warehouseService.getWHbyWhid(whid);
         Integer sid = wHbyWhid.getSid();
 
+        //更新仓库信息
+        boolean b2 = stockService.increaseVolumn(sid, volumn);
+        if(b2==false){
+            return false;
+        }
+        //更新仓位信息
+        boolean b1 = warehouseService.increaseVolumn(whid, volumn);
+        if(b1==false){
+            return false;
+        }
+
         //根据mid，whid，sid获取原现存量信息
         List<OnHand> onHands = onHandService.getOnHands(null, mid, null, whid, null, sid, null, null, null, null, null, null, null);
         boolean update = false;
@@ -199,12 +210,6 @@ public class InstockbillController {
             onHand.setStockname(stockname);
             update = onHandService.addOnHand(onHand);
         }
-
-        //更新仓位信息
-        boolean b1 = warehouseService.increaseVolumn(whid, volumn);
-
-        //更新仓库信息
-        boolean b2 = stockService.increaseVolumn(sid, volumn);
 
         //添加入库单
         boolean b = instockbillService.addInstockbill(instockbill);
