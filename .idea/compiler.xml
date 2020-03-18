@@ -18,6 +18,7 @@
         <module name="stockcenter-5050" />
         <module name="usercenter-5010" />
         <module name="vipcenter-5040" />
+        <module name="vipshop-9002" />
         <module name="zuul-8001" />
       </profile>
     </annotationProcessing>
@@ -37,6 +38,7 @@
       <module name="usercenter-5010" target="1.8" />
       <module name="vipcenter" target="1.8" />
       <module name="vipcenter-5040" target="1.8" />
+      <module name="vipshop-9002" target="1.8" />
       <module name="zuul-8001" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -57,6 +59,7 @@
       <module name="usercenter-5010" options="-parameters" />
       <module name="vipcenter" options="-parameters" />
       <module name="vipcenter-5040" options="-parameters" />
+      <module name="vipshop-9002" options="-parameters" />
       <module name="zuul-8001" options="-parameters" />
     </option>
   </component>

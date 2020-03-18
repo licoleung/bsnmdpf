@@ -16,6 +16,7 @@
         <option value="$PROJECT_DIR$/api/pom.xml" />
         <option value="$PROJECT_DIR$/headquarters-9001/pom.xml" />
         <option value="$PROJECT_DIR$/zuul-8001/pom.xml" />
+        <option value="$PROJECT_DIR$/vipshop-9002/pom.xml" />
       </list>
     </option>
   </component>

@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: vipshop-9002
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    cache: false
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+# 微服务关于信息的描述
+info:
+  app.name: bsnmdpf
+  company.name: www.bsnmdpf.fcprt.cn
+  build.artifactId: $project.artifactId$ # 或者${xxx}
+  build.version: $project.version$
