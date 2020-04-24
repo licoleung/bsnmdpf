@@ -59,6 +59,9 @@ public class AliPayController {
         String trade_no = request.getParameter("trade_no");
         String total_amount = request.getParameter("total_amount");
         Double money = Double.parseDouble(total_amount);
+        System.out.println("out:  "+out_trade_no);
+        System.out.println("tra   "+trade_no);
+        System.out.println("money  "+money);
         boolean b = payCenterService.addSalebill(trade_no,out_trade_no,money,null);
         return "index";
     }

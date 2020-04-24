@@ -141,30 +141,25 @@
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="管理员管理">&#xe726;</i>
-                    <cite>管理员中心</cite>
+                    <i class="iconfont left-nav-li" lay-tips="用户管理">&#xe726;</i>
+                    <cite>用户中心</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('管理员列表','admin-list.html')">
+                        <a onclick="xadmin.add_tab('用户列表','user')">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>管理员列表</cite></a>
+                            <cite>用户列表</cite></a>
                     </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('角色管理','admin-role.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>角色管理</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('权限分类','admin-cate.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限分类</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('权限管理','admin-rule.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限管理</cite></a>
-                    </li>
+                    <!--<li>-->
+                        <!--<a onclick="xadmin.add_tab('角色管理','admin-role.html')">-->
+                            <!--<i class="iconfont">&#xe6a7;</i>-->
+                            <!--<cite>角色管理</cite></a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a onclick="xadmin.add_tab('权限管理','admin-rule.html')">-->
+                            <!--<i class="iconfont">&#xe6a7;</i>-->
+                            <!--<cite>权限管理</cite></a>-->
+                    <!--</li>-->
                 </ul>
             </li>
             <li>
@@ -207,7 +202,7 @@
         </div>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='./welcome.html' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe src='welcome' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
         </div>
         <div id="tab_show"></div>

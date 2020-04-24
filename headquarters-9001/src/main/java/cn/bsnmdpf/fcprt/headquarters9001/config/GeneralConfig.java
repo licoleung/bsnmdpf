@@ -17,6 +17,7 @@ public class GeneralConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/payPage").setViewName("payPage");
+        registry.addViewController("/welcome").setViewName("welcome");
     }
 
 }

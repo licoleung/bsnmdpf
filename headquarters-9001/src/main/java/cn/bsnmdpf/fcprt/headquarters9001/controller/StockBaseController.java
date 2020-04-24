@@ -131,8 +131,8 @@ public class StockBaseController {
         return "stock/inbill-add";
     }
 
-    @PostMapping("instockbill")
     @ResponseBody
+    @PostMapping("instockbill")
     public String addInstockbill(@RequestParam(value = "inid", required = false) Integer inid,
                                  @RequestParam(value = "inbillcode") String inbillcode,
                                  @RequestParam(value = "whid") Integer whid,
@@ -146,6 +146,7 @@ public class StockBaseController {
                                  @RequestParam(value = "nnum") Integer nnum,
                                  @RequestParam(value = "volumn") Double volumn,
                                  @RequestParam(value = "weight") Double weight) {
+        System.out.println("addInstockbill at headquarters");
         boolean b = stockCenterService.addInstockbill(inid, inbillcode, whid, mid, mname, inTime, inType, poid, creator, isActive, nnum, volumn, weight);
         return "添加成功";
     }

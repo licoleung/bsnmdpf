@@ -58,17 +58,18 @@
 
     /*用户-停用*/
     function member_del(obj, vipid, nowState) {
-        layer.confirm('确认要更改订单状态吗？', function (index) {
-//alert(id);
+        layer.confirm('确认要更改物料状态吗？', function (index) {
+           // alert(vipid);
+           // alert(nowState);
             // 异步对象
             $.ajax({
-                url: "good/" + vipid + "?nowState=" + nowState,
+                url: "delgood/" + vipid + "?nowState=" + nowState,
                 type: "delete",
                 dataType: "json",
                 success: function (data) {
                 }
             })
-            if ($(obj).attr('title') == '启用') {
+            if ($(obj).attr('title') == '已启用') {
                 layer.msg('已恢复!', {icon: 1, time: 1000});
             } else {
                 layer.msg('已封锁!', {icon: 5, time: 1000});

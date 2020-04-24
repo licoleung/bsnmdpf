@@ -80,7 +80,13 @@ public interface UserCenterService {
      * @return 成功返回true，失败返回false
      */
     @PutMapping("user/{uid}")
-    public boolean updateUser(@RequestParam(value = "username", required = false) String username, @RequestParam(value = "modifier", required = false) String modifier, @RequestParam(value = "isActive", required = false) Integer isActive, @RequestParam(value = "did", required = false) Integer did, @PathVariable("uid") Integer uid, @RequestParam(value = "password",required = false) String password, @RequestParam(value = "spare", required = false) String spare);
+    public boolean updateUser(@RequestParam(value = "username", required = false) String username,
+                              @RequestParam(value = "modifier", required = false) String modifier,
+                              @RequestParam(value = "isActive", required = false) Integer isActive,
+                              @RequestParam(value = "did", required = false) Integer did,
+                              @PathVariable("uid") Integer uid,
+                              @RequestParam(value = "password",required = false) String password,
+                              @RequestParam(value = "spare", required = false) String spare);
 
     //CompanyController
 

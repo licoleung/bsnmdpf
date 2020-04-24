@@ -2,6 +2,7 @@ package cn.bsnmdpf.fcprt.usercenter5010.service;
 
 import cn.bsnmdpf.fcprt.api.pojo.Permission;
 import cn.bsnmdpf.fcprt.usercenter5010.mapper.PermissionMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +21,11 @@ public class PermissionService {
     public List<Permission> getRolePermissions(){
         List<Permission> rolePermissions = permissionMapper.getRolePermissions();
         return rolePermissions;
+    }
+
+
+    public boolean addrolePermission(Integer rid,Integer pid){
+        boolean b = permissionMapper.addrolePermission(rid, pid);
+        return b;
     }
 }

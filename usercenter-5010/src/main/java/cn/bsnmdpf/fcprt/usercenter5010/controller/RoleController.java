@@ -21,6 +21,11 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
+    @RequestMapping("roleUser")
+    boolean addRolesInUserByUserId(@RequestParam("uid")Integer uid,@RequestParam("rid")Integer rid){
+        boolean b = roleService.addRoleUser(uid, rid);
+        return b;
+    }
     /**
      * 根据参数获取角色列表
      *

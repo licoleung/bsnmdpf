@@ -124,7 +124,6 @@ public class InstockbillController {
      * @return 成功返回true，失败返回false
      */
     @PostMapping("instockbill")
-    @Transactional
     public boolean addInstockbill(@RequestParam(value = "inid", required = false) Integer inid,
                                   @RequestParam(value = "inbillcode") String inbillcode,
                                   @RequestParam(value = "whid") Integer whid,
@@ -138,6 +137,7 @@ public class InstockbillController {
                                   @RequestParam(value = "nnum") Integer nnum,
                                   @RequestParam(value = "volumn") Double volumn,
                                   @RequestParam(value = "weight") Double weight) throws RuntimeException{
+        System.out.println("addInstockbill at stockcenter");
         Instockbill instockbill = new Instockbill();
         if (inid != null) {
             instockbill.setInid(inid);
@@ -165,17 +165,6 @@ public class InstockbillController {
         //根据仓位id获取仓库id
         Warehouse wHbyWhid = warehouseService.getWHbyWhid(whid);
         Integer sid = wHbyWhid.getSid();
-
-        //更新仓库信息
-        boolean b2 = stockService.increaseVolumn(sid, volumn);
-        if(b2==false){
-            return false;
-        }
-        //更新仓位信息
-        boolean b1 = warehouseService.increaseVolumn(whid, volumn);
-        if(b1==false){
-            return false;
-        }
 
         //根据mid，whid，sid获取原现存量信息
         List<OnHand> onHands = onHandService.getOnHands(null, mid, null, whid, null, sid, null, null, null, null, null, null, null);
@@ -209,6 +198,17 @@ public class InstockbillController {
             String stockname = stockList.get(0).getStockname();
             onHand.setStockname(stockname);
             update = onHandService.addOnHand(onHand);
+        }
+
+        //更新仓库信息
+        boolean b2 = stockService.increaseVolumn(sid, volumn);
+        if(b2==false){
+            return false;
+        }
+        //更新仓位信息
+        boolean b1 = warehouseService.increaseVolumn(whid, volumn);
+        if(b1==false){
+            return false;
         }
 
         //添加入库单

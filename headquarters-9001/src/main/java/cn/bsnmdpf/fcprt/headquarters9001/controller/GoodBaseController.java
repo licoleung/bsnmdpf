@@ -167,8 +167,9 @@ public class GoodBaseController {
         return "添加成功";
     }
 
-    @DeleteMapping("good/{mid}")
+    @DeleteMapping("delgood/{mid}")
     public String delGood(@PathVariable("mid") Integer mid, @RequestParam("nowState") Integer nowState) {
+        System.out.println("拉手动阀手动阀手动阀");
         if (nowState == 1) {
             goodCenterService.deleteMaterial(mid);
         } else {

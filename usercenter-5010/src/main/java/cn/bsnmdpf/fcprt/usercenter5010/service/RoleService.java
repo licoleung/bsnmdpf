@@ -20,6 +20,12 @@ public class RoleService {
     @Autowired
     private RoleMapper roleMapper;
 
+
+    public boolean addRoleUser(Integer uid,Integer rid){
+        boolean b = roleMapper.addRolesInUserByUserId(uid, rid);
+        return b;
+    }
+
     /**
      * 根据条件查询角色列表
      *
