@@ -7,7 +7,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="api" />
-        <module name="bsnmdpf" />
         <module name="eurekaservice-7001" />
         <module name="eurekaservice-7002" />
         <module name="goodcenter-5030" />

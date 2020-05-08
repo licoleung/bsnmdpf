@@ -13,8 +13,14 @@ import org.springframework.web.bind.annotation.*;
  * @author LicoLeung
  * @create 2020-02-09 16:39
  */
-@FeignClient(value = "ordercenter-5020")
+@FeignClient(value = "ordercenter-5020",fallback = OrderCenterService.OrderFallBack.class)
 public interface OrderCenterService {
+
+    static class OrderFallBack{
+        public String sendMessage(){
+            return "服务器开小差了";
+        }
+    }
 
     //PurchaseorderController
 
