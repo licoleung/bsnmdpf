@@ -9,7 +9,7 @@ spring:
     driver-class-name: org.gjt.mm.mysql.Driver
     url: jdbc:mysql://120.79.228.2:3306/stockcenter?useUnicode=true&characterEncoding=UTF8
     username: root
-    password: a971204b
+    password: ********
     dbcp2:
       min-idle: 5
       initial-size: 5
